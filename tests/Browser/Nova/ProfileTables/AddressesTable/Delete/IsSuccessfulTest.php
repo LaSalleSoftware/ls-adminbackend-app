@@ -1,0 +1,117 @@
+<?php
+
+/**
+ * This file is part of the Lasalle Software library (lasallesoftware/library)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright  (c) 2019 The South LaSalle Trading Corporation
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @author     Bob Bloom
+ * @email      bob.bloom@lasallesoftware.ca
+ * @link       https://lasallesoftware.ca \Lookup_address_type;log, Podcast, Docs
+ * @link       https://packagist.org/packages/lasallesoftware/library Packagist
+ * @link       https://github.com/lasallesoftware/library GitHub
+ *
+ */
+
+namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Delete;
+
+// Laravel Dusk
+use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
+
+// Laravel class
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+class IsSuccessfulTest extends DuskTestCase
+{
+    use DatabaseMigrations;
+
+    protected $personTryingToLogin;
+    protected $newData;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('lslibrary:customseed');
+
+        $this->personTryingToLogin = [
+            'email'    => 'bob.bloom@lasallesoftware.ca',
+            'password' => 'secret',
+        ];
+
+        $this->newData = [
+            'address_line_1'         => '22 South LaSalle Street',
+            'city'                   => 'Chicago',
+            'province'               => 'IL',
+            'country'                => 'US',
+            'postal_code'            => '60696',
+            'lookup_address_type_id' => 1,
+            'description'            => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim metus',
+            'comments'               => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        ];
+    }
+
+    /**
+     * Test that a deletion is successful
+     *
+     * @group nova
+     * @group novaaddress
+     * @group novaaddressdeleteissuccessful
+     */
+    public function testDeleteIsSuccessful()
+    {
+        echo "\n**Now testing Tests\Browser\Nova\ProfileTables\AddressesTable\Delete\IsSuccessfulTest**";
+
+        $personTryingToLogin = $this->personTryingToLogin;
+        $newData = $this->newData;
+
+        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+            $browser->visit('/login')
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
+                ->press('Login')
+                ->pause(500)
+                ->assertPathIs('/nova')
+                ->assertSee('Dashboard')
+                ->clickLink('Addresses')
+                ->waitFor('@1-row')
+                ->assertVisible('@1-row')
+                ->click('@create-button')
+                ->pause(5000)
+                ->assertSee('New Address')
+                ->assertSelectHasOptions('@lookup_address_type', [1,2,3,4,5,6])
+                ->type('@address_line_1', $newData['address_line_1'])
+                ->pause(2000)
+                ->keys('@address_line_1', '{enter}')
+                ->pause(2000)
+                ->select('@lookup_address_type', $newData['lookup_address_type_id'])
+                ->type('@description', $newData['description'])
+                ->type('@comments', $newData['comments'])
+                ->click('@create-button')
+                ->pause(2000)
+                ->assertSee('Address Details')
+
+                ->clickLink('Addresses')
+                ->waitFor('@1-row')
+
+                ->assertMissing('@1-delete-button')
+                ->assertVisible('@2-delete-button')
+
+                ->click('@2-delete-button')
+                ->pause(500)
+                ->click('#confirm-delete-button')
+                ->pause(500)
+            ;
+        });
+
+        $this->assertDatabaseMissing('addresses', ['address_calculated' => '22 South LaSalle Street, Chicago, IL, US  60696']);
+    }
+}

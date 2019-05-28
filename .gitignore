@@ -1,0 +1,25 @@
+# A gitignore file specifies intentionally untracked files that Git should ignore
+# https://git-scm.com/docs/gitignore
+
+/node_modules
+/public/hot
+/public/storage
+/public/vendor/nova
+/storage/*.key
+/vendor
+/.idea
+npm-debug.log
+yarn-error.log
+.env
+.env.dusk.local
+.env.backup
+phpunit.xml
+phpunit.dusk.xml
+.phpunit.result.cache
+
+composer.lock
+
+.DS_Store
+Thumbs.db
+
+

@@ -1,0 +1,24 @@
+(May 08, 2019)
+
+Dusk failed today. The chrome driver used is out of date. Huh??
+
+Ultimately, I updated the chrome driver that Dusk uses manually.
+
+* cd vendor/laravel/dusk/bin/
+
+* download the latest chrome driver for MacOS at 
+  https://chromedriver.storage.googleapis.com/index.html?path=74.0.3729.6/
+  ** got this link via http://chromedriver.chromium.org/
+  
+* delete chromedriver-mac
+
+* unzip chromedriver_mac64.zip that was just downloaded
+
+* rename chromedriver to chromedriver-mac
+
+That ought to do it. 
+
+I did not use the command line to unzip and stuff. Sorry CLI purists.
+
+There's a new artisan command for this, but the download failed (I'm sure it's a permissions thing). 
+Here's the PR: https://github.com/laravel/dusk/pull/644  

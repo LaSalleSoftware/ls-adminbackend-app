@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * This file is part of the Lasalle Software library (lasallesoftware/library)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright  (c) 2019 The South LaSalle Trading Corporation
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @author     Bob Bloom
+ * @email      bob.bloom@lasallesoftware.ca
+ * @link       https://lasallesoftware.ca \Lookup_address_type;log, Podcast, Docs
+ * @link       https://packagist.org/packages/lasallesoftware/library Packagist
+ * @link       https://github.com/lasallesoftware/library GitHub
+ *
+ */
+
+namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
+
+// LaSalle Software classes
+use Lasallesoftware\Library\Profiles\Models\Email;
+use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
+
+// Laravel Dusk
+use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
+
+// Laravel class
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+class CreationUniqueValidationPassesTest extends DuskTestCase
+{
+    use DatabaseMigrations;
+
+    protected $personTryingToLogin;
+    protected $newData;
+    protected $updatedData;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('lslibrary:customseed');
+
+        $this->personTryingToLogin = [
+            'email'    => 'bob.bloom@lasallesoftware.ca',
+            'password' => 'secret',
+        ];
+
+        $this->testPassesData = [
+            'address_line_1'         => 'South LaSalle Street',
+            'city'                   => 'Chicago',
+            'province'               => 'IL',
+            'country'                => 'US',
+            'postal_code'            => '60696',
+            'lookup_address_type_id' => 1,
+        ];
+
+        $this->testFailsData = [
+            'address_line_1'         => '328 North Dearborn Street',
+            'city'                   => 'Chicago',
+            'province'               => 'IL',
+            'country'                => 'US',
+            'postal_code'            => '60654',
+            'lookup_address_type_id' => 6,
+        ];
+    }
+
+    /**
+     * Test that a creation succeeds when the address_calculated field is unique
+     *
+     * @group nova
+     * @group novaaddress
+     * @group novaaddresscalculatedfield
+     */
+    public function testCreationUniqueValidationPasses()
+    {
+        echo "\n**Now testing Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField\CreationUniqueValidationPassesTest**";
+
+        $personTryingToLogin = $this->personTryingToLogin;
+        $testPassesData      = $this->testPassesData;
+
+        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testPassesData) {
+            $browser->visit('/login')
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
+                ->press('Login')
+                ->pause(500)
+                ->assertPathIs('/nova')
+                ->assertSee('Dashboard')
+                ->clickLink('Addresses')
+                ->waitFor('@1-row')
+                ->click('@create-button')
+                ->pause(5000)
+                ->assertSee('New Address')
+                ->type('@address_line_1', $testPassesData['address_line_1'])
+                ->pause(2000)
+                ->keys('@address_line_1', '{enter}')
+                ->pause(500)
+                ->select('@lookup_address_type', $testPassesData['lookup_address_type_id'])
+                ->click('@create-button')
+                ->pause(2000)
+                ->assertSee('Address Details')
+            ;
+        });
+    }
+}

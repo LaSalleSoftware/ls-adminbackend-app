@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Lasalle Software library (lasallesoftware/library)
+ * This file is part of the LaSalle Software Administrative Back-end application.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,9 +14,9 @@
  * @license    http://opensource.org/licenses/MIT MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
- * @link       https://lasallesoftware.ca Blog, Podcast, Docs
- * @link       https://packagist.org/packages/lasallesoftware/library Packagist
- * @link       https://github.com/lasallesoftware/library GitHub
+ * @link       https://lasallesoftware.ca
+ * @link       https://packagist.org/packages/lasallesoftware/lsv2-basicfrontend-app
+ * @link       https://github.com/LaSalleSoftware/lsv2-adminbackend-app
  *
  */
 

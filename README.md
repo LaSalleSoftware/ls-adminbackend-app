@@ -6,7 +6,7 @@
 <a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-v5.8-brightgreen.svg?style=flat-square" alt="Laravel v5.8"></a> 
 </p>
 
-Library package for my LaSalle Software Version 2.
+Admin Back-end package for my LaSalle Software Version 2.
 
 ## Security
 
@@ -22,4 +22,4 @@ You need to buy [Laravel Nova](https://nova.laravel.com/), first first-party Lar
 * [Code of Conduct](#)
 * [Installation](#)
 * [MIT License File](LICENSE.md)
-* [Dusk readme](DUSK_README.md)
+* [Dusk Readme](DUSK_README.md)

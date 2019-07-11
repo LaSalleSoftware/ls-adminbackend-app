@@ -23,30 +23,19 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationPassesTest extends DuskTestCase
+class UpdateUniqueValidationPassesTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
     protected $updatedData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -89,6 +78,7 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
      * Test that can edit a person record when that name is unchanged
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncalculatedfield
      * @group novapersoncalculatedfieldupdatepasses
@@ -101,25 +91,25 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
         $testPassesData      = $this->testPassesData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testPassesData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testPassesData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
                 ->waitFor('@sort-id')
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->waitFor('@4-row')
                 ->assertVisible('@4-edit-button')
                 ->click('@4-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Person')
+                ->assertSee('Update Person')
                 //->type('@first_name', $testPassesData['first_name'])
                 //->type('@middle_name', $testPassesData['middle_name'])
                 //->type('@surname', $testPassesData['surname'])
@@ -127,7 +117,7 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
                 ->type('@description', $testPassesData['description'])
                 ->type('@comments', $testPassesData['comments'])
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Person Details')
             ;
         });

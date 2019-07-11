@@ -23,30 +23,19 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreationUniqueValidationPassesTest extends DuskTestCase
+class CreationUniqueValidationPassesTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
     protected $updatedData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -89,6 +78,7 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
      * Test that a creation succeeds when the name_calculated field is unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncalculatedfield
      * @group novapersoncalculatedfieldcreationpasses
@@ -101,20 +91,20 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
         $testPassesData      = $this->testPassesData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testPassesData, $pause ) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testPassesData, $pause ) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Person')
+                ->pause($pause['medium'])
+                ->assertSee('Create Person')
                 ->type('@first_name', $testPassesData['first_name'])
                 ->type('@middle_name', $testPassesData['middle_name'])
                 ->type('@surname', $testPassesData['surname'])
@@ -122,7 +112,7 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
                 ->type('@description', $testPassesData['description'])
                 ->type('@comments', $testPassesData['comments'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Person Details')
             ;
         });

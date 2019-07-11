@@ -22,25 +22,23 @@
 
 namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Delete;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+// Laravel facade
+use Illuminate\Support\Facades\DB;
+
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
+
 
     public function setUp(): void
     {
@@ -58,6 +56,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that a deletion is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novacompany
      * @group novacompanydelete
      * @group novacompanydeleteissuccessful
@@ -69,12 +68,16 @@ class IsSuccessfulTest extends DuskTestCase
         $personTryingToLogin = $this->personTryingToLogin;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $pause) {
+        // There's an address in the company_address pivot table. This will prevent the company from being deleted.
+        // So, let's zap this record.
+        DB::table('company_address')->delete();
+
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Companies')
@@ -84,9 +87,9 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertVisible('@1-delete-button')
 
                 ->click('@1-delete-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->click('#confirm-delete-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
             ;
         });
 

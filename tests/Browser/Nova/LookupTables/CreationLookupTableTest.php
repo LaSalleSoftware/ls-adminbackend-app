@@ -23,16 +23,14 @@
 namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreationLookupTableTest extends DuskTestCase
+class CreationLookupTableTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -61,6 +59,7 @@ class CreationLookupTableTest extends DuskTestCase
      * Test that the lookup table record creation is successful
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testInsertNewRecordToLookupTableSuccessful()
     {
@@ -68,25 +67,26 @@ class CreationLookupTableTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newLookupTableData  = $this->newLookupTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newLookupTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newLookupTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Lookup Address Types')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('Create Lookup Address Type')
                 ->clickLink('Create Lookup Address Type')
-                ->pause(500)
-                ->assertSee('New Lookup Address Type')
+                ->pause($pause['medium'])
+                ->assertSee('Create Lookup Address Type')
                 ->type('@title', $newLookupTableData['title'])
                 ->type('@description', $newLookupTableData['description'])
                 ->click('@create-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
             ;
 
             $lookup_address_type = Lookup_address_type::orderBy('id', 'desc')->first();
@@ -105,29 +105,30 @@ class CreationLookupTableTest extends DuskTestCase
      * Test that the lookup table record creation fails due to the title field not being filled in
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testInsertNewRecordToLookupTableExpectRequireValidationToFail()
     {
         $personTryingToLogin = $this->personTryingToLogin;
-        $newLookupTableData  = $this->newLookupTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newLookupTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Lookup Address Types')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('Create Lookup Address Type')
                 ->clickLink('Create Lookup Address Type')
-                ->pause(500)
-                ->assertSee('New Lookup Address Type')
-                ->pause(500)
+                ->pause($pause['shortest'])
+                ->assertSee('Create Lookup Address Type')
+                ->pause($pause['shortest'])
                 ->click('@create-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('The title field is required.')
             ;
         });
@@ -137,30 +138,32 @@ class CreationLookupTableTest extends DuskTestCase
      * Test that the lookup table record creation fails due to the description exceeding 255 characters
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testInsertNewRecordToLookupTableExpectDescriptionValidationToFail()
     {
         $personTryingToLogin = $this->personTryingToLogin;
         $newLookupTableData  = $this->newLookupTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newLookupTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newLookupTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Lookup Address Types')
-                ->pause(500)
+                ->pause($pause['short'])
                 ->assertSee('Create Lookup Address Type')
                 ->clickLink('Create Lookup Address Type')
-                ->pause(1000)
-                ->assertSee('New Lookup Address Type')
+                ->pause($pause['short'])
+                ->assertSee('Create Lookup Address Type')
                 ->type('@title', $newLookupTableData['title'])
                 ->type('@description', $newLookupTableData['toolongdescription'])
                 ->click('@create-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('The description may not be greater than 255 characters.')
             ;
         });
@@ -171,6 +174,7 @@ class CreationLookupTableTest extends DuskTestCase
      * not having the owner role
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testInsertNewRecordToLookupTableExpectNoCreationButtonDueToNotHavingOwnerRole()
     {
@@ -178,18 +182,19 @@ class CreationLookupTableTest extends DuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertDontSee('Create Lookup Address Type')
             ;
         });

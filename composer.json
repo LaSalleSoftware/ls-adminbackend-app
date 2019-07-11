@@ -19,6 +19,20 @@
     ],
     "repositories": [
         {
+            "type": "path",
+            "url": "../packages/lsv2-library-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-blogbackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
@@ -30,7 +44,9 @@
         "laravel/tinker": "^1.0",
         "guzzlehttp/guzzle": "^6.0",
         "laravel/nova": "~2.0",
-        "lasallesoftware/lsv2-library-pkg": "~1.9.1"
+        "tymon/jwt-auth": "~1.0",
+        "lasallesoftware/lsv2-library-pkg": "dev-master",
+        "lasallesoftware/lsv2-blogbackend-pkg": "dev-master"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -42,6 +58,10 @@
         "laravel/dusk": "^5.0"
     },
     "autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
         "psr-4": {
             "App\\": "app/"
         }

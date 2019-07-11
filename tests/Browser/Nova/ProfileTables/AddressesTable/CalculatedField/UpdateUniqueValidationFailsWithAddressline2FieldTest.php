@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationFailsWithAddressline2FieldTest extends DuskTestCase
+class UpdateUniqueValidationFailsWithAddressline2FieldTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -76,6 +72,7 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends DuskTestCase
      * that currently exists. This should cause the new address to be unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscalculatedfield
      */
@@ -88,13 +85,14 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends DuskTestCase
         // going to use the data in the "testFails" var,
         // and then enter a value in the formerly null "address_line_2" field
         $testFailsData = $this->testFailsData;
+        $pause         = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testFailsData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testFailsData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
@@ -102,15 +100,16 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends DuskTestCase
                 ->click('@1-edit-button')
                 ->waitFor('@update-button')
                 ->type('@address_line_1', $testFailsData['address_line_1'])
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
                 // enter a value in the currently null "address_line_2" field
                 // which makes this address a completely new address; ie, *not* unique
                 ->type('@address_line_2', 'in the loop')
-                ->pause(500)
+                ->pause($pause['short'])
                 ->click('@update-button')
-                ->pause(5000)
-                ->assertSee('Address Details');
+                ->pause($pause['short'])
+                ->assertSee('Address Details')
+            ;
         });
 
         // the database should have this value in the database
@@ -121,6 +120,7 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends DuskTestCase
         // so the address_calculated field was just overwritten (well, supposed to be overwritten!)
         $address_calculated_should_not_be_in_the_database = '328 North Dearborn Street, Chicago, IL, US  60654';
         $this->assertDatabaseMissing('addresses',
-            ['address_calculated' => $address_calculated_should_not_be_in_the_database]);
+            ['address_calculated' => $address_calculated_should_not_be_in_the_database]
+        );
     }
 }

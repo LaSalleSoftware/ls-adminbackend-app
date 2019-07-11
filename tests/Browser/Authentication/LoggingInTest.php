@@ -54,7 +54,8 @@ class LoggingInTest extends DuskTestCase
     /**
      * Test that the correct credentials result in a successful login
      *
-     * @group login
+     * @group authentication
+     * @group authenticationLogin
      */
     public function testLoginShouldBeSuccessful()
     {

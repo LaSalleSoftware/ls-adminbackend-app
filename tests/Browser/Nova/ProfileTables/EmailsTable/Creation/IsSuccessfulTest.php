@@ -24,16 +24,13 @@ namespace Tests\Browser\Nova\ProfileTables\EmailsTable\Creation;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -65,6 +62,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the email creation is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaemail
      * @group novaemailcreationissuccessful
      */
@@ -74,33 +72,34 @@ class IsSuccessfulTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newEmailTableData   = $this->newEmailTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newEmailTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Email Addresses')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('Create Email Address')
                 ->clickLink('Create Email Address')
-                ->pause(2000)
-                ->assertSee('New Email Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Email Address')
                 ->assertSelectHasOptions('@lookup_email_type', [1,2,3,4])
                 ->type('@email_address', $newEmailTableData['email_address'])
                 ->select('@lookup_email_type', $newEmailTableData['lookup_email_type_id'])
                 ->type('@description', $newEmailTableData['description'])
                 ->type('@comments', $newEmailTableData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Email Address Details')
             ;
 
             $email = Email::orderBy('id', 'desc')->first();
-            $uuid  =  Uuid::orderby('id', 'desc')->first();
+            $uuid  = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/emails/'.$email->id);
             $this->assertEquals($newEmailTableData['email_address'],        $email->email_address);

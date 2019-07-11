@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\SocialsTable\Details;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -51,6 +51,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the details view is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novasocial
      * @group novasocialdetailsissuccessful
      */
@@ -59,13 +60,14 @@ class IsSuccessfulTest extends DuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\SocialsTable\Details\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Social Sites')
@@ -74,7 +76,7 @@ class IsSuccessfulTest extends DuskTestCase
 
                 ->assertVisible('@1-view-button')
                 ->click('@1-view-button')
-                ->pause(2500)
+                ->pause($pause['medium'])
                 ->assertSee('Social Site Details')
                 ->assertPathIs('/nova/resources/socials/1')
                 ->assertSee('https://www.allaboutbluesmusic.com/delta-blues/')

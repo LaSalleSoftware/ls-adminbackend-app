@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Creation;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class RequiredValidationFailsTest extends DuskTestCase
+class RequiredValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -67,6 +63,7 @@ class RequiredValidationFailsTest extends DuskTestCase
      * Test that the creation fails when the address_line_1 field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscreationrequiredvalidationfails
      */
@@ -76,27 +73,28 @@ class RequiredValidationFailsTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Address')
                 ->assertSelectHasOptions('@lookup_address_type', [1,2,3,4,5,6])
                 ->select('@lookup_address_type', $newData['lookup_address_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('The address line 1 field is required')
             ;
         });
@@ -106,6 +104,7 @@ class RequiredValidationFailsTest extends DuskTestCase
      * Test that the creation fails when the address type field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscreationrequiredvalidationfails
      */
@@ -115,30 +114,31 @@ class RequiredValidationFailsTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Address')
                 ->assertSelectHasOptions('@lookup_address_type', [1,2,3,4,5,6])
                 ->type('@address_line_1', $newData['address_line_1'])
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
                 //->select('@lookup_address_type', $newData['lookup_address_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('The lookup address type field is required')
             ;
         });

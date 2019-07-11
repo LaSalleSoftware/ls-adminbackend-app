@@ -46,6 +46,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      *
      * This gate determines who can access Nova in non-local environments.
      *
+     * INCLUDING THE "testing" ENVIRONMENT!
+     * see Laravel\Nova\AuthorizesRequests trait, used in Laravel\Nova\Nova
+     *
      * @return void
      */
     protected function gate()
@@ -55,6 +58,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 'bob.bloom@lasallesoftware.ca',
                 'bbking@kingofblues.com',
                 'srv@doubletrouble.com',
+                'sidney.bechet@blogtest.ca',
+                'robert.johnson@blogtest.ca',
             ]);
         });
     }

@@ -28,7 +28,7 @@ use Lasallesoftware\Library\Profiles\Models\Person;
 use Lasallesoftware\Library\Profiles\Models\Email;
 use Lasallesoftware\Library\Profiles\Models\Person_email;
 use Lasallesoftware\Library\Authentication\Models\Personbydomain;
-use Lasallesoftware\Library\Profiles\Models\Lookup_domain;
+use Lasallesoftware\Library\Profiles\Models\Installed_domain;
 use Lasallesoftware\Library\Authentication\Models\Login;
 
 // Laravel Dusk
@@ -72,7 +72,8 @@ class RegisterTest extends DuskTestCase
      *  ** email is unique
      *  ** password is ok
      *
-     * @group register
+     * @group authentication
+     * @group authenticationRegister
      */
     public function testRegisterNewPersonBasicScenarioShouldBeSuccessful()
     {
@@ -83,13 +84,13 @@ class RegisterTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($personTryingToRegister) {
             $browser->visit('/register')
                 ->assertSee('Register')
-                ->type('first_name',    $personTryingToRegister['first_name'])
-                ->type('surname',    $personTryingToRegister['surname'])
-                ->type('email',    $personTryingToRegister['email'])
-                ->type('password', $personTryingToRegister['password'])
+                ->type('first_name',            $personTryingToRegister['first_name'])
+                ->type('surname',               $personTryingToRegister['surname'])
+                ->type('email',                 $personTryingToRegister['email'])
+                ->type('password',              $personTryingToRegister['password'])
                 ->type('password_confirmation', $personTryingToRegister['password'])
                 ->press('Register')
-                ->pause(5000)
+                ->pause(1500)
                 ->assertPathIs('/home')
                 ->assertSee('You are logged in!')
             ;
@@ -101,9 +102,10 @@ class RegisterTest extends DuskTestCase
 
         // EMAILS database table
         $email = Email::orderBy('created_at', 'desc')->first();
+        //var_dump($email);
 
-        $this->assertTrue($email->id == 4,'***The id is wrong***');
-        $this->assertTrue($email->email_type_id == 1,'***The email_type_id is wrong***');
+        $this->assertTrue($email->id == 5,'***The id is wrong***');
+        $this->assertTrue($email->lookup_email_type_id == 1,'***The lookup_email_type_id is wrong***');
         $this->assertTrue($email->email_address == $personTryingToRegister['email'],'***The email_address is wrong***');
         $this->assertTrue($email->description == 'Created by the Register Form.','***The descripotion is wrong***');
         $this->assertTrue($email->comments == 'Created by the Register Form.','***The comments is wrong***');
@@ -115,7 +117,7 @@ class RegisterTest extends DuskTestCase
         // PERSONS database table
         $person = Person::orderBy('created_at', 'desc')->first();
 
-        $this->assertTrue($person->id == 5,'***The id is wrong***');
+        $this->assertTrue($person->id == 305,'***The id is wrong***');
         $this->assertTrue($person->first_name == $personTryingToRegister['first_name'],'***The first_name is wrong***');
         $this->assertTrue($person->surname == $personTryingToRegister['surname'],'***The surname is wrong***');
         $this->assertTrue($person->description == 'Created by the Register Form.','***The description is wrong***');
@@ -129,12 +131,12 @@ class RegisterTest extends DuskTestCase
         $person_email = Person_email::find(4);
 
         $this->assertTrue($person_email->id == 4,'***The id is wrong***');
-        $this->assertTrue($person_email->person_id == 5,'***The person_id is wrong***');
-        $this->assertTrue($person_email->email_id == 4,'***The email_id is wrong***');
+        $this->assertTrue($person_email->person_id == 305,'***The person_id is wrong***');
+        $this->assertTrue($person_email->email_id == 5,'***The email_id is wrong***');
 
 
         // PERSONBYDOMAINS database table
-        $lookup_domain = Lookup_domain::find(1)->first();
+        $lookup_domain = Installed_domain::find(1)->first();
         $personbydomain = Personbydomain::orderBy('created_at', 'desc')->first();
 
         $this->assertTrue($personbydomain->id == 4,'***The id is wrong***');
@@ -143,8 +145,8 @@ class RegisterTest extends DuskTestCase
         $this->assertTrue($personbydomain->person_surname == $person->surname,'***The surname is wrong***');
         $this->assertTrue($personbydomain->email == $email->email_address,'***The email address is wrong***');
         $this->assertTrue($personbydomain->password <> null,'***The password is wrong***');
-        $this->assertTrue($personbydomain->lookup_domain_id == $lookup_domain->id, '***The lookup domain id is wrong***');
-        $this->assertTrue($personbydomain->lookup_domain_title == $lookup_domain->title, '***The lookup domain title is wrong***');
+        $this->assertTrue($personbydomain->installed_domain_id == $lookup_domain->id, '***The lookup domain id is wrong***');
+        $this->assertTrue($personbydomain->installed_domain_title == $lookup_domain->title, '***The lookup domain title is wrong***');
         $this->assertTrue($personbydomain->uuid == $uuid->uuid,'***The uuid is wrong***');
         $this->assertTrue($personbydomain->created_at <> null,'***The created_at is wrong***');
         $this->assertTrue($personbydomain->created_by == 1,'***The created_by is wrong***');

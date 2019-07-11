@@ -23,29 +23,20 @@
 namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Creation;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Company;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UniqueValidationFailsTest extends DuskTestCase
+class UniqueValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newNew;
 
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
+
 
     public function setUp(): void
     {
@@ -67,6 +58,7 @@ class UniqueValidationFailsTest extends DuskTestCase
      * Test that the creation fails when the primary field is not unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novacompany
      * @group novacompanycreation
      * @group novacompanycreationuniqueval
@@ -79,22 +71,22 @@ class UniqueValidationFailsTest extends DuskTestCase
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Companies')
                 ->waitFor('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Company')
+                ->pause($pause['medium'])
+                ->assertSee('Create Company')
                 ->type('@name', $newData['name'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('The name has already been taken')
             ;
         });

@@ -24,16 +24,13 @@ namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Creation;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Address;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -67,6 +64,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the creation is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscreationissuccessful
      */
@@ -76,35 +74,36 @@ class IsSuccessfulTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Address')
                 ->assertSelectHasOptions('@lookup_address_type', [1,2,3,4,5,6])
                 ->type('@address_line_1', $newData['address_line_1'])
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
                 ->select('@lookup_address_type', $newData['lookup_address_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
             ;
 
             $address = Address::orderBy('id', 'desc')->first();
-            $uuid    =    Uuid::orderby('id', 'desc')->first();
+            $uuid    = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/addresses/'.$address->id);
             $this->assertEquals($newData['address_line_1'],         $address->address_line_1);

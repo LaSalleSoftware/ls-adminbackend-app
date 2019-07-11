@@ -23,30 +23,19 @@
 namespace Tests\Browser\Nova\ProfileTables\EmailsTable\Update;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DescriptionTooLongValidationFailsTest extends DuskTestCase
+class DescriptionTooLongValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newEmailTableData;
     protected $updatedEmailTableData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -82,6 +71,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the email update fails when the description is too long
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaemail
      * @group novaemailupdatedescval
      */
@@ -93,12 +83,12 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
         $updatedEmailTableData = $this->updatedEmailTableData;
         $pause                 = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $updatedEmailTableData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedEmailTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Email Addresses')
@@ -106,11 +96,11 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->assertSee('Email Address')
                 ->assertVisible('@4-edit-button')
                 ->click('@4-edit-button')
-                ->pause($pause)
-                ->assertSee('Edit Email Address')
+                ->pause($pause['medium'])
+                ->assertSee('Update Email Address')
                 ->type('@description', $updatedEmailTableData['description'])
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

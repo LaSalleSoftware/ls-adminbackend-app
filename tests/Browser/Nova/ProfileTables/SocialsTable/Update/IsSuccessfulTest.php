@@ -24,17 +24,14 @@ namespace Tests\Browser\Nova\ProfileTables\SocialsTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Social;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -78,6 +75,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that an update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novasocial
      * @group novasocialeditsuccessful
      */
@@ -86,15 +84,16 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\SocialsTable\Update\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $newData            = $this->newData;
+        $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Social Sites')
@@ -103,17 +102,17 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->click('@2-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Social Site')
+                ->assertSee('Update Social Site')
                 ->type('@description',    $newData['description'])
                 ->type('@comments',       $newData['comments'])
                 ->select('@lookup_social_type', $newData['lookup_social_type_id'])
                 ->click('@update-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Social Site Details')
             ;
 
             $social = Social::orderBy('id', 'desc')->first();
-            $uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid   = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/socials/'.$social->id);
             $this->assertEquals($newData['lookup_social_type_id'], $social->lookup_social_type_id);

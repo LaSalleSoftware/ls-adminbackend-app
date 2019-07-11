@@ -22,25 +22,18 @@
 
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Index;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1000;
 
     public function setUp(): void
     {
@@ -58,6 +51,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the index view is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersonindexissuccessful
      */
@@ -69,12 +63,12 @@ class IsSuccessfulTest extends DuskTestCase
 
         $pause = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
@@ -85,26 +79,26 @@ class IsSuccessfulTest extends DuskTestCase
 
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause)
+                ->pause($pause['medium'])
 
 
                 /* keeping this code for reference! I couldn't figure out how to select "per page" to
                    be "100", so I just next-ed through the pagination. Ugh, until it dawned on me
                    that I could click the "sort-id". Doh!
 
-                ->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
-                ->click('@next')->pause($pause)
+                ->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
+                ->click('@next')->pause($pause['medium'])
 
                 */
 

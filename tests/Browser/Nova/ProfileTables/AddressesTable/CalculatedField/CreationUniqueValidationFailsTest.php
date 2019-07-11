@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Tests\Browser\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreationUniqueValidationFailsTest extends DuskTestCase
+class CreationUniqueValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -46,7 +42,6 @@ class CreationUniqueValidationFailsTest extends DuskTestCase
      *
      * @var int
      */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -82,6 +77,7 @@ class CreationUniqueValidationFailsTest extends DuskTestCase
      * Test that a creation fails when the address_calculated field is not unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscalculatedfield
      * @group novaaddresscalculatedfieldcreationuniquevalidationfails
@@ -94,28 +90,28 @@ class CreationUniqueValidationFailsTest extends DuskTestCase
         $testFailsData       = $this->testFailsData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testFailsData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testFailsData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Address')
+                ->pause($pause['medium'])
+                ->assertSee('Create Address')
                 ->type('@address_line_1', $testFailsData['address_line_1'])
-                ->pause($pause)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
                 ->select('@lookup_address_type', $testFailsData['lookup_address_type_id'])
-                ->pause($pause)
+                ->pause($pause['short'])
                 ->click('@create-button')
-                ->pause($pause)
-                ->pause($pause)
-                ->assertSee('This address already exists');
+                ->pause($pause['medium'])
+                ->assertSee('This address already exists')
+            ;
         });
     }
 }

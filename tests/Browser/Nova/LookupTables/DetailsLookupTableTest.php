@@ -23,16 +23,13 @@
 namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Tests\Browser\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DetailsLookupTableTest extends DuskTestCase
+class DetailsLookupTableTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -55,23 +52,25 @@ class DetailsLookupTableTest extends DuskTestCase
      * Test that can see the lookup table's details view
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testSeeTheLookupTableDetailsView()
     {
         echo "\n**Now testing Tests\Browser\Nova\LookupTables\DetailsLookupTableTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->visit('/nova/resources/lookup_address_types/5')
-                ->pause(1000)
+                ->pause($pause['medium'])
                 ->assertSee('Work')
             ;
         });
@@ -82,6 +81,7 @@ class DetailsLookupTableTest extends DuskTestCase
      * not having the owner role
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testSeeTheLookupTableDetailsViewExpectNoViewDueToNotHavingOwnerRole()
     {
@@ -89,18 +89,19 @@ class DetailsLookupTableTest extends DuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/6')
-                ->pause(500)
+                ->pause($pause['medium'])
                 ->assertDontSee('Lookup Address Type Details')
             ;
         });

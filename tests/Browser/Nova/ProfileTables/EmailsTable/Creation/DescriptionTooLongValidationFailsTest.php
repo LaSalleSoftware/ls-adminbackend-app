@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\EmailsTable\Creation;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DescriptionTooLongValidationFailsTest extends DuskTestCase
+class DescriptionTooLongValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -74,6 +74,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the email creation fails when the description is too long
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaemail
      * @group novaemailcreationdescval
      */
@@ -83,27 +84,28 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newEmailTableData   = $this->newEmailTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newEmailTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Email Addresses')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('Create Email Address')
                 ->clickLink('Create Email Address')
-                ->pause(2000)
-                ->assertSee('New Email Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Email Address')
                 ->assertSelectHasOptions('@lookup_email_type', [1,2,3,4])
                 ->type('@email_address', $newEmailTableData['email_address'])
                 ->select('@lookup_email_type', $newEmailTableData['lookup_email_type_id'])
                 ->type('@description', $newEmailTableData['description'])
                 ->click('@create-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

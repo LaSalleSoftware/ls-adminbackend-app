@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Update;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// Laravel Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DescriptionTooLongValidationFailsTest extends DuskTestCase
+class DescriptionTooLongValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -70,6 +70,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the update fails when the description is too long
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddressupdatedesriptioncvalidation
      */
@@ -79,13 +80,14 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $updatedData         = $this->updatedData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $updatedData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
@@ -97,10 +99,10 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->click('@1-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Address')
+                ->assertSee('Update Address')
                 ->type('@description', $updatedData['description'])
                 ->click('@update-button')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

@@ -23,17 +23,14 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Delete;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Address;
 use Lasallesoftware\Library\Profiles\Models\Person;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -58,6 +55,7 @@ class IsSuccessfulTest extends DuskTestCase
      * (person policy at Lasallesoftware\Library\Policies\PersonPolicy)
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersondeletesucceeds
      */
@@ -75,13 +73,14 @@ class IsSuccessfulTest extends DuskTestCase
         $person = Person::orderBy('id', 'desc')->first();
 
         $personTryingToLogin = $this->personTryingToLogin;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $person) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $person, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
@@ -91,9 +90,9 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertVisible('@' . $person->id . '-row')
                 ->assertVisible('@' . $person->id . '-delete-button')
                 ->click('@' . $person->id . '-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->click('#confirm-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
              ;
         });
 

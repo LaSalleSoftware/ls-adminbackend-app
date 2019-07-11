@@ -23,17 +23,14 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Delete;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Telephone;
 use Lasallesoftware\Library\Profiles\Models\Person;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DeletionFailsDueToAssociatedTelephoneTest extends DuskTestCase
+class DeletionFailsDueToAssociatedTelephoneTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -58,6 +55,7 @@ class DeletionFailsDueToAssociatedTelephoneTest extends DuskTestCase
      * we should not even see the delete icon (suppressed by the policy at Lasallesoftware\Library\Policies\PersonPolicy).
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersondeletefailsassociatedtelephone
      */
@@ -78,13 +76,14 @@ class DeletionFailsDueToAssociatedTelephoneTest extends DuskTestCase
         $person = Person::orderBy('id', 'desc')->first();
 
         $personTryingToLogin = $this->personTryingToLogin;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $person) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $person, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')

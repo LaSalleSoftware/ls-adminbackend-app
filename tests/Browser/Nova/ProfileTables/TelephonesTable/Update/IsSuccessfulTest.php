@@ -24,29 +24,21 @@ namespace Tests\Browser\Nova\ProfileTables\TelephonesTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Telephone;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
 
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
+
 
     public function setUp(): void
     {
@@ -85,6 +77,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that an update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novatelephone
      * @group novatelephoneupdate
      * @group novatelephoneupdateissuccessful
@@ -97,13 +90,13 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Telephone Numbers')
@@ -112,19 +105,19 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->click('@2-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Telephone Number')
+                ->assertSee('Update Telephone Number')
                 ->type('@extension',               $newData['extension'])
                 ->select('@lookup_telephone_type', $newData['lookup_telephone_type_id'])
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Telephone Number Details')
             ;
 
             $telephone = Telephone::orderBy('id', 'desc')->first();
-            $uuid      =      Uuid::orderby('id', 'desc')->first();
+            $uuid      = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/telephones/'.$telephone->id);
             $this->assertEquals($newData['extension'],                $telephone->extension);

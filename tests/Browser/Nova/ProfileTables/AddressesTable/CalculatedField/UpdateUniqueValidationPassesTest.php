@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationPassesTest extends DuskTestCase
+class UpdateUniqueValidationPassesTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -75,6 +71,7 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
      * Test that an update succeeds when the address_calculated field is unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscalculatedfield
      */
@@ -83,14 +80,15 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField\UpdateUniqueValidationPassesTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $testPassesData = $this->testPassesData;
+        $testPassesData      = $this->testPassesData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testPassesData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testPassesData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
@@ -98,10 +96,10 @@ class UpdateUniqueValidationPassesTest extends DuskTestCase
                 ->click('@1-edit-button')
                 ->waitFor('@update-button')
                 ->type('@address_line_1', $testPassesData['address_line_1'])
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->keys('@address_line_1', '{enter}')
                 ->click('@update-button')
-                ->pause(2000)
+                ->pause($pause['medium'])
                 ->assertSee('Address Details');
         });
     }

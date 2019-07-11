@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\EmailsTable\Creation;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UniqueValidationFailsTest extends DuskTestCase
+class UniqueValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -64,6 +60,7 @@ class UniqueValidationFailsTest extends DuskTestCase
      * Test that the email creation fails when the email address is not unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaemail
      * @group novaemailcreationuniqueval
      */
@@ -73,26 +70,27 @@ class UniqueValidationFailsTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newEmailTableData   = $this->newEmailTableData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newEmailTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Email Addresses')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('Create Email Address')
                 ->clickLink('Create Email Address')
-                ->pause(2000)
-                ->assertSee('New Email Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Email Address')
                 ->assertSelectHasOptions('@lookup_email_type', [1,2,3,4])
                 ->type('@email_address', $newEmailTableData['email_address'])
                 ->select('@lookup_email_type', $newEmailTableData['lookup_email_type_id'])
                 ->click('@create-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertSee('The email address has already been taken')
             ;
         });

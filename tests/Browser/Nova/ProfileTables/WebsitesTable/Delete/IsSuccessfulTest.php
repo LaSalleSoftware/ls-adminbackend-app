@@ -22,26 +22,21 @@
 
 namespace Tests\Browser\Nova\ProfileTables\WebsitesTable\Delete;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
 
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
+
 
     public function setUp(): void
     {
@@ -59,6 +54,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that a deletion is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaswebsite
      * @group novaswebsitedeleteissuccessful
      */
@@ -70,12 +66,12 @@ class IsSuccessfulTest extends DuskTestCase
         $newData = $this->newData;
         $pause   = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Websites')
@@ -85,12 +81,12 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertMissing('@1-delete-button')
                 ->assertVisible('@2-delete-button')
 
-                ->pause(2500)
+                ->pause($pause['medium'])
 
                 ->click('@2-delete-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->click('#confirm-delete-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
 
                 ->pause(3000)
             ;

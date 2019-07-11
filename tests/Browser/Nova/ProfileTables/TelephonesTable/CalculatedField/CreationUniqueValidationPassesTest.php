@@ -23,30 +23,19 @@
 namespace Tests\Browser\Nova\ProfileTables\TelephonesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Telephone;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreationUniqueValidationPassesTest extends DuskTestCase
+class CreationUniqueValidationPassesTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
     protected $updatedData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -74,6 +63,7 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
      * Test that a creation succeeds when the telephone_calculated field is unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novatelephone
      * @group novatelephonecalculatedfield
      * @group novatelephonecalculatedfieldcreationuniquevalidationpasses
@@ -86,20 +76,20 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause ) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause ) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Telephone Numbers')
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Telephone Number')
+                ->pause($pause['medium'])
+                ->assertSee('Create Telephone Number')
                 //->type('@country_code',            $newData['country_code'])  **commented out because the default should be 1**
                 ->type('@area_code',               $newData['area_code'])
                 ->type('@telephone_number',        $newData['telephone_number'])
@@ -108,7 +98,7 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Telephone Number Details')
             ;
         });

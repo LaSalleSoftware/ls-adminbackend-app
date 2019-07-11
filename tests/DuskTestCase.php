@@ -2,6 +2,12 @@
 
 namespace Tests;
 
+// Use my custom trait for my solution to text trix input fields
+use Lasallesoftware\Library\Dusk\LaSalleProvidesBrowser;
+
+// Use my custom trait for stuff that might be helpful for any of my Dusk tests
+use Lasallesoftware\Library\Dusk\LaSalleHelpfulStuffForDusk;
+
 use Laravel\Dusk\TestCase as BaseTestCase;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -9,7 +15,7 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use CreatesApplication, LaSalleProvidesBrowser, LaSalleHelpfulStuffForDusk;
 
     /**
      * Prepare for Dusk test execution.
@@ -33,6 +39,7 @@ abstract class DuskTestCase extends BaseTestCase
             '--disable-gpu',
             '--headless',
             '--window-size=1920,1080',
+            //'--window-size=1080,608',
             '--no-sandbox',
             '--verbose'
         ]);

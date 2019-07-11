@@ -24,17 +24,14 @@ namespace Tests\Browser\Nova\ProfileTables\EmailsTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -65,6 +62,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the emails table record update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaemail
      * @group novaemaileditsuccessful
      */
@@ -74,14 +72,15 @@ class IsSuccessfulTest extends DuskTestCase
 
         $personTryingToLogin   = $this->personTryingToLogin;
         $updatedEmailTableData = $this->updatedEmailTableData;
+        $pause                 = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $updatedEmailTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedEmailTableData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Email Addresses')
@@ -89,19 +88,19 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertSee('Email Address')
                 ->assertVisible('@4-edit-button')
                 ->click('@4-edit-button')
-                ->pause(5000)
-                ->assertSee('Edit Email Address')
+                ->pause($pause['short'])
+                ->assertSee('Update Email Address')
                 ->type('@email_address', $updatedEmailTableData['email_address'])
                 ->select('@lookup_email_type', $updatedEmailTableData['lookup_email_type_id'])
                 ->type('@description', $updatedEmailTableData['description'])
                 ->type('@comments', $updatedEmailTableData['comments'])
                 ->click('@update-button')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertSee('Email Address Details')
             ;
 
             $email = Email::orderBy('id', 'desc')->first();
-            $uuid  =  Uuid::orderby('id', 'desc')->first();
+            $uuid  = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/emails/'.$email->id);
             $this->assertEquals($updatedEmailTableData['email_address'],    $email->email_address);

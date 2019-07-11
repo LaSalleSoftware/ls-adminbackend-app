@@ -23,16 +23,14 @@
 namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateLookupTableTest extends DuskTestCase
+class UpdateLookupTableTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -60,29 +58,31 @@ class UpdateLookupTableTest extends DuskTestCase
      * Test that the lookup table record update is successful
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testUpdateRecordToLookupTableSuccessful()
     {
         echo "\n**Now testing Tests\Browser\Nova\LookupTables\UpdateLookupTableTest**";
 
-        $personTryingToLogin = $this->personTryingToLogin;
+        $personTryingToLogin    = $this->personTryingToLogin;
         $updatedLookupTableData = $this->updatedLookupTableData;
+        $pause                  = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $updatedLookupTableData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedLookupTableData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->visit('/nova/resources/lookup_address_types/6/edit')
-                ->pause(500)
-                ->assertSee('Edit Lookup Address Type')
+                ->pause($pause['medium'])
+                ->assertSee('Update Lookup Address Type')
                 ->type('@title', $updatedLookupTableData['title'])
                 ->type('@description', $updatedLookupTableData['description'])
                 ->click('@update-button')
-                ->pause(500)
+                ->pause($pause['medium'])
             ;
 
             $lookup_address_type = Lookup_address_type::find(6);
@@ -101,6 +101,7 @@ class UpdateLookupTableTest extends DuskTestCase
      * not having the owner role
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testUpdateRecordToLookupTableExpectNoUpdateDueToNotHavingOwnerRole()
     {
@@ -108,18 +109,19 @@ class UpdateLookupTableTest extends DuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/6/edit?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause(500)
+                ->pause($pause['medium'])
                 ->assertDontSee('Edit Lookup Address Type')
             ;
         });

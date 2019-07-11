@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends DuskTestCase
+class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -76,6 +72,7 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends DuskTest
      * and a value is then entered for a currently null address_line_3 field
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscalculatedfield
      */
@@ -87,14 +84,16 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends DuskTest
 
         // going to use the data in the "testFails" var,
         // and then enter values in the formerly null "address_line_2" and "address_line_3" fields
-        $testFailsData       = $this->testFailsData;
+        //$testFailsData       = $this->testFailsData;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testFailsData) {
+        $pause               = $this->pause;
+
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
@@ -107,20 +106,20 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends DuskTest
                 // enter a value in the currently null "address_line_2" field
                 // which makes this address a completely new address; ie, *not* unique
                 ->type('@address_line_2', 'in the loop')
-                ->pause(500)
+                ->pause($pause['short'])
 
                 ->click('@update-button')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
 
                 // ok, now update again with a new value for the address_line_3 field
                 ->click('@edit-resource-button')
                 ->waitFor('@update-button')
                 ->type('@address_line_3', 'in the loop')
-                ->pause(500)
+                ->pause($pause['short'])
 
                 ->click('@update-button')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
             ;
         });

@@ -24,28 +24,18 @@ namespace Tests\Browser\Nova\ProfileTables\TelephonesTable\Creation;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Telephone;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -87,6 +77,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novatelephone
      * @group novatelephonecreation
      * @group novatelephonecreationissuccessful
@@ -99,20 +90,20 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Telephone Numbers')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Telephone Number')
+                ->pause($pause['medium'])
+                ->assertSee('Create Telephone Number')
                 ->assertSelectHasOptions('@lookup_telephone_type', [1,2,3,4])
                 //->type('@country_code',            $newData['country_code'])  **commented out because the default should be 1**
                 ->type('@area_code',               $newData['area_code'])
@@ -122,12 +113,12 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Telephone Number Details')
             ;
 
             $telephone = Telephone::orderBy('id', 'desc')->first();
-            $uuid      =      Uuid::orderby('id', 'desc')->first();
+            $uuid      = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/telephones/'.$telephone->id);
             //$this->assertEquals($newData['country_code'],             '1');        // inputted a null, should wash as '1'

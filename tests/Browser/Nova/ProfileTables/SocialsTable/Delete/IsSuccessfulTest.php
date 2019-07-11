@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\SocialsTable\Delete;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -52,6 +52,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that a deletion is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novasocial
      * @group novasocialdeleteissuccessful
      */
@@ -60,14 +61,14 @@ class IsSuccessfulTest extends DuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\SocialsTable\Delete\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $newData = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Social Sites')
@@ -78,9 +79,9 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertVisible('@2-delete-button')
 
                 ->click('@2-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->click('#confirm-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
             ;
         });
 

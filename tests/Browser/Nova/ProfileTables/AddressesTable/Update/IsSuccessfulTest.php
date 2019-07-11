@@ -24,17 +24,14 @@ namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Address;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -70,6 +67,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that an update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresseditsuccessful
      */
@@ -79,14 +77,15 @@ class IsSuccessfulTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $updatedData         = $this->updatedData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $updatedData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
@@ -97,7 +96,7 @@ class IsSuccessfulTest extends DuskTestCase
                 ->click('@1-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Address')
+                ->assertSee('Update Address')
                 ->type('@address_line_1', $updatedData['address_line_1'])
                 ->type('@address_line_2', $updatedData['address_line_2'])
                 ->type('@address_line_3', $updatedData['address_line_3'])
@@ -109,12 +108,14 @@ class IsSuccessfulTest extends DuskTestCase
                 ->type('@comments',       $updatedData['comments'])
                 ->select('@lookup_address_type', $updatedData['lookup_address_type_id'])
                 ->click('@update-button')
-                ->pause(5000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
             ;
 
             $address = Address::orderBy('id', 'desc')->first();
-            $uuid    =    Uuid::orderby('id', 'desc')->first();
+
+            //$uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/addresses/'.$address->id);
             $this->assertEquals($updatedData['address_line_1'],         $address->address_line_1);

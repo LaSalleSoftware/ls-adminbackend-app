@@ -24,17 +24,14 @@ namespace Tests\Browser\Nova\ProfileTables\WebsitesTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Website;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -64,6 +61,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that an update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaswebsite
      * @group novawebsiteupdate
      * @group novaswebsiteupdatesuccessful
@@ -74,14 +72,15 @@ class IsSuccessfulTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData            = $this->newData;
+        $pause              = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Websites')
@@ -90,17 +89,17 @@ class IsSuccessfulTest extends DuskTestCase
                 ->click('@2-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Website')
+                ->assertSee('Update Website')
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->select('@lookup_website_type', $newData['lookup_website_type_id'])
                 ->click('@update-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Website Details')
             ;
 
             $website = Website::orderBy('id', 'desc')->first();
-            $uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid    = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/websites/'.$website->id);
             $this->assertEquals($newData['lookup_website_type_id'], $website->lookup_website_type_id);

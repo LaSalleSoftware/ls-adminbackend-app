@@ -22,26 +22,19 @@
 
 namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Creation;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class DescriptionTooLongValidationFailsTest extends DuskTestCase
+class DescriptionTooLongValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -80,6 +73,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation fails when the description is too long
      *
      * @group nova
+     * @group novaprofiletables
      * @group novacompany
      * @group novacompanycreation
      * @group novacompanycreationdescription
@@ -92,23 +86,23 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Companies')
                 ->waitFor('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Company')
+                ->pause($pause['medium'])
+                ->assertSee('Create Company')
                 ->type('@name', $newData['name'])
                 ->type('@description', $newData['description'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

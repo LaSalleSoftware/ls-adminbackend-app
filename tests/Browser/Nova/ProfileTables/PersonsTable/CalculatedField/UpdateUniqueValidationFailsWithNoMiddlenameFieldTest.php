@@ -24,29 +24,19 @@ namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
+class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
     protected $updatedData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -76,6 +66,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
      * Test that an update SUCCEEDS when a middle_name is nulled-out. See the steps below.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncalculatedfield
      * @group novapersoncalculatedfieldupdatenomiddlenamefieldfails
@@ -88,12 +79,12 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
         $testNameWithMiddleNameData = $this->testNameWithMiddleNameData;
         $pause                      = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testNameWithMiddleNameData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testNameWithMiddleNameData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
@@ -102,15 +93,15 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
                 // STEP 1: Create the new person with no middle_name
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Person')
+                ->pause($pause['medium'])
+                ->assertSee('Create Person')
                 ->type('@first_name',  $testNameWithMiddleNameData['first_name'])
                 ->type('@surname',     $testNameWithMiddleNameData['surname'])
                 ->type('@position',    $testNameWithMiddleNameData['position'])
                 ->type('@description', $testNameWithMiddleNameData['description'])
                 ->type('@comments',    $testNameWithMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Person Details')
 
                 // STEP 2: Create a new person with the the same first_name and surname, and with a middle_name
@@ -118,9 +109,9 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->pause($pause)
-                ->assertSee('New Person')
+                ->pause($pause['medium'])
+                ->pause($pause['medium'])
+                ->assertSee('Create Person')
                 ->type('@first_name',  $testNameWithMiddleNameData['first_name'])
                 ->type('@middle_name', $testNameWithMiddleNameData['middle_name'])
                 ->type('@surname',     $testNameWithMiddleNameData['surname'])
@@ -128,7 +119,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
                 ->type('@description', $testNameWithMiddleNameData['description'])
                 ->type('@comments',    $testNameWithMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Person Details')
             ;
         });
@@ -137,7 +128,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
         //         Just so happens, this middle_name causes a unique error -- how 'bout that!
         $person = Person::orderby('id', 'desc')->first();
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $person, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $person, $pause) {
             $browser
                 ->clickLink('People')
                 ->waitFor('@create-button')
@@ -147,14 +138,11 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldTest extends DuskTestCase
                 ->click('@' . $person->id . '-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Person')
+                ->assertSee('Update Person')
                 ->type('@middle_name', '  ')
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('This person already exists')
-
-             //   ->pause(5000)
-             //   ->pause(5000)
             ;
         });
     }

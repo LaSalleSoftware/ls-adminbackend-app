@@ -24,16 +24,13 @@ namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Creation;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -82,6 +79,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncreationissuccessful
      */
@@ -91,21 +89,22 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause(1500)
-                ->assertSee('New Person')
+                ->pause($pause['short'])
+                ->assertSee('Create Person')
                 ->type('@first_name', $newData['first_name'])
                 ->type('@middle_name', $newData['middle_name'])
                 ->type('@surname', $newData['surname'])
@@ -113,12 +112,12 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(1500)
+                ->pause($pause['short'])
                 ->assertSee('Person Details')
             ;
 
             $person = Person::orderBy('id', 'desc')->first();
-            $uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid   = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/people/'.$person->id);
             $this->assertEquals($newData['first_name'],  $person->first_name);

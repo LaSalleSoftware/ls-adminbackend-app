@@ -23,29 +23,19 @@
 namespace Tests\Browser\Nova\ProfileTables\TelephonesTable\CalculatedField;
 
 // LaSalle Software class
-use Lasallesoftware\Library\Profiles\Models\Telephone;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class UpdateUniqueValidationFailsTest extends DuskTestCase
+class UpdateUniqueValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
     protected $updatedData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -73,6 +63,7 @@ class UpdateUniqueValidationFailsTest extends DuskTestCase
      * Test that a creation fails when the telephone_calculated field is not unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novatelephone
      * @group novatelephonecalculatedfield
      * @group novatelephonecalculatedfieldupdateuniquevalidationfails
@@ -85,12 +76,12 @@ class UpdateUniqueValidationFailsTest extends DuskTestCase
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Telephone Numbers')
@@ -99,7 +90,7 @@ class UpdateUniqueValidationFailsTest extends DuskTestCase
                 ->click('@2-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Telephone Number')
+                ->assertSee('Update Telephone Number')
                 ->type('@country_code',            $newData['country_code'])
                 ->type('@area_code',               $newData['area_code'])
                 ->type('@telephone_number',        $newData['telephone_number'])
@@ -108,7 +99,7 @@ class UpdateUniqueValidationFailsTest extends DuskTestCase
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('This telephone number already exists')
             ;
         });

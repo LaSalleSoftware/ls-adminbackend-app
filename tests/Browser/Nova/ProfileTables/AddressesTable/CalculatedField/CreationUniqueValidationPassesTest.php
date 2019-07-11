@@ -23,17 +23,13 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\CalculatedField;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreationUniqueValidationPassesTest extends DuskTestCase
+class CreationUniqueValidationPassesTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -75,8 +71,10 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
      * Test that a creation succeeds when the address_calculated field is unique
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddresscalculatedfield
+     * @group novaaddresscalculatedfieldCreationuniquevalidationipasses
      */
     public function testCreationUniqueValidationPasses()
     {
@@ -84,27 +82,28 @@ class CreationUniqueValidationPassesTest extends DuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $testPassesData      = $this->testPassesData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $testPassesData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testPassesData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Address')
                 ->type('@address_line_1', $testPassesData['address_line_1'])
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->select('@lookup_address_type', $testPassesData['lookup_address_type_id'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
             ;
         });

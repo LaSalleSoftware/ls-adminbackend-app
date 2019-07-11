@@ -24,29 +24,19 @@ namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -76,6 +66,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that an update is successful.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersonupdatesuccessful
      */
@@ -87,13 +78,13 @@ class IsSuccessfulTest extends DuskTestCase
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
 
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
@@ -101,14 +92,14 @@ class IsSuccessfulTest extends DuskTestCase
                 ->waitFor('@sort-id')
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause)
+                ->pause($pause['medium'])
 
                 ->waitFor('@4-row')
                 ->assertVisible('@4-edit-button')
                 ->click('@4-edit-button')
                 ->waitFor('@update-button')
                 ->assertVisible('@update-button')
-                ->assertSee('Edit Person')
+                ->assertSee('Update Person')
                 ->type('@first_name', $newData['first_name'])
                 ->type('@middle_name', $newData['middle_name'])
                 ->type('@surname', $newData['surname'])
@@ -116,12 +107,12 @@ class IsSuccessfulTest extends DuskTestCase
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@update-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Person Details')
             ;
 
             $person = Person::find(4);
-            $uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid   = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/people/'.$person->id);
             $this->assertEquals($newData['first_name'],  $person->first_name);

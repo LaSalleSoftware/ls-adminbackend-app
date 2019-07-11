@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Delete;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software classes
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -63,6 +63,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that a deletion is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaaddress
      * @group novaaddressdeleteissuccessful
      */
@@ -71,32 +72,33 @@ class IsSuccessfulTest extends DuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\AddressesTable\Delete\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $newData = $this->newData;
+        $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Addresses')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Address')
+                ->pause($pause['short'])
+                ->assertSee('Create Address')
                 ->assertSelectHasOptions('@lookup_address_type', [1,2,3,4,5,6])
                 ->type('@address_line_1', $newData['address_line_1'])
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->keys('@address_line_1', '{enter}')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->select('@lookup_address_type', $newData['lookup_address_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('Address Details')
 
                 ->clickLink('Addresses')
@@ -106,9 +108,9 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertVisible('@2-delete-button')
 
                 ->click('@2-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->click('#confirm-delete-button')
-                ->pause(500)
+                ->pause($pause['shortest'])
             ;
         });
 

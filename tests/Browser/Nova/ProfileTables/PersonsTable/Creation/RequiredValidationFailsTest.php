@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Creation;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class RequiredValidationFailsTest extends DuskTestCase
+class RequiredValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -78,6 +78,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation fails when the first name field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncreationrequiredvalidationfails
      */
@@ -87,28 +88,29 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause(1500)
-                ->assertSee('New Person')
+                ->pause($pause['short'])
+                ->assertSee('Create Person')
                 ->type('@middle_name', $newData['middle_name'])
                 ->type('@surname', $newData['surname'])
                 ->type('@position', $newData['position'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(1500)
+                ->pause($pause['short'])
                 ->assertSee('The first name field is required')
             ;
         });
@@ -118,6 +120,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation fails when the surname field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersoncreationrequiredvalidationfails
      */
@@ -125,28 +128,29 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
     {
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
                 ->waitFor('@create-button')
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause(1500)
-                ->assertSee('New Person')
+                ->pause($pause['short'])
+                ->assertSee('Create Person')
                 ->type('@first_name', $newData['first_name'])
                 ->type('@middle_name', $newData['middle_name'])
                 ->type('@position', $newData['position'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(1500)
+                ->pause($pause['short'])
                 ->assertSee('The surname field is required')
             ;
         });

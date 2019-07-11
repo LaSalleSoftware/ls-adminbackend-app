@@ -22,4 +22,7 @@ composer.lock
 .DS_Store
 Thumbs.db
 
+/tests/Browser/console
+/tests/Browser/screenshots
+
 

@@ -71,8 +71,10 @@ class LasalleGuardTest extends TestCase
      *
      * method: createFullCredentials($partialCredentials)
      *
-     * @group login
-     * @group lasalleguard
+     * @group authentication
+     * @group loginlogout
+     * @group loginlogoutLasalleguard
+     * @group loginlogoutLasalleguardEqualemail
      *
      * @return void
      */
@@ -99,9 +101,9 @@ class LasalleGuardTest extends TestCase
         $fullCredentials = $lasalleguard->createFullCredentials($partialCredentials);
 
         // Assert
-        $this->assertArrayHasKey('email', $fullCredentials);
-        $this->assertArrayHasKey('lookup_domain_title',   $fullCredentials);
-        $this->assertArrayHasKey('password',              $fullCredentials);
+        $this->assertArrayHasKey('email',                  $fullCredentials);
+        $this->assertArrayHasKey('installed_domain_title', $fullCredentials);
+        $this->assertArrayHasKey('password',               $fullCredentials);
     }
 
     /**
@@ -109,8 +111,10 @@ class LasalleGuardTest extends TestCase
      *
      * Similar to the test above.
      *
-     * @group login
-     * @group lasalleguard
+     * @group authentication
+     * @group loginlogout
+     * @group loginlogoutLasalleguard
+     * @group loginlogoutLasalleguardPrimaryemail
      *
      * @return void
      */
@@ -125,17 +129,17 @@ class LasalleGuardTest extends TestCase
 
         // *** key = "email" ***
         $partialCredentials = [
-            'email' => 'bob.bloom@lasallesoftware.ca',
-            'password'              => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+            'email'    => 'bob.bloom@lasallesoftware.ca',
+            'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         ];
 
         // Act
         $fullCredentials = $lasalleguard->createFullCredentials($partialCredentials);
 
         // Assert
-        $this->assertArrayHasKey('email', $fullCredentials);
-        $this->assertArrayHasKey('lookup_domain_title',   $fullCredentials);
-        $this->assertArrayHasKey('password',              $fullCredentials);
+        $this->assertArrayHasKey('email',                  $fullCredentials);
+        $this->assertArrayHasKey('installed_domain_title', $fullCredentials);
+        $this->assertArrayHasKey('password',               $fullCredentials);
     }
 
     /**

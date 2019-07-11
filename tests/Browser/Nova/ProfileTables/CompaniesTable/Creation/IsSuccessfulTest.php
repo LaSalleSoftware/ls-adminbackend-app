@@ -24,28 +24,18 @@ namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Creation;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Company;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
     protected $newData;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -70,6 +60,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the creation is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novacompany
      * @group novacompanycreation
      * @group novacompanycreationissuccessful
@@ -82,30 +73,32 @@ class IsSuccessfulTest extends DuskTestCase
         $newData             = $this->newData;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Companies')
                 ->waitFor('@create-button')
                 ->click('@create-button')
-                ->pause($pause)
-                ->assertSee('New Company')
+                ->pause($pause['medium'])
+                ->assertSee('Create Company')
                 ->type('@name',        $newData['name'])
                 ->type('@description', $newData['description'])
                 ->type('@comments',    $newData['comments'])
                 ->type('@profile',     $newData['profile'])
                 ->click('@create-button')
-                ->pause($pause)
+                ->pause($pause['medium'])
                 ->assertSee('Company Details')
             ;
 
             $company = Company::orderBy('id', 'desc')->first();
-            $uuid    =    Uuid::orderby('id', 'desc')->first();
+
+            //$uuid   =   Uuid::orderby('id', 'desc')->first();
+            $uuid = $this->getSecondLastUuidId();
 
             $browser->assertPathIs('/nova/resources/companies/'.$company->id);
             $this->assertEquals($newData['name'],        $company->name);

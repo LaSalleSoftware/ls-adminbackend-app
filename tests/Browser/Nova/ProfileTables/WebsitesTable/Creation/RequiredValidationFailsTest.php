@@ -22,14 +22,14 @@
 
 namespace Tests\Browser\Nova\ProfileTables\WebsitesTable\Creation;
 
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+// LaSalle Software
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class RequiredValidationFailsTest extends DuskTestCase
+class RequiredValidationFailsTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -73,6 +73,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation fails when the address_line_1 field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaswebsite
      * @group novaswebsitecreationrequiredvalidationfails
      */
@@ -82,28 +83,29 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Websites')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Website')
+                ->pause($pause['short'])
+                ->assertSee('Create Website')
                 ->assertSelectHasOptions('@lookup_website_type', [1,2,3,4,5,6])
                 //->type('@url', $newData['url'])
                 ->select('@lookup_website_type', $newData['lookup_website_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('The url field is required')
             ;
         });
@@ -113,6 +115,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      * Test that the creation fails when the address type field is not specified.
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaswebsite
      * @group novaswebsitecreationrequiredvalidationfails
      */
@@ -122,28 +125,29 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $newData) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Websites')
                 ->waitFor('@1-row')
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause(5000)
-                ->assertSee('New Website')
+                ->pause($pause['short'])
+                ->assertSee('Create Website')
                 ->assertSelectHasOptions('@lookup_website_type', [1,2,3,4,5,6])
                 ->type('@url', $newData['url'])
                 //->select('@lookup_website_type', $newData['lookup_website_type_id'])
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@create-button')
-                ->pause(2000)
+                ->pause($pause['short'])
                 ->assertSee('The lookup website type field is required')
             ;
         });

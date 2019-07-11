@@ -23,16 +23,13 @@
 namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Tests\Browser\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IndexLookupTableTest extends DuskTestCase
+class IndexLookupTableTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -55,23 +52,25 @@ class IndexLookupTableTest extends DuskTestCase
      * Test that can see the lookup table's index view
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testSeeTheLookupTableIndexView()
     {
         echo "\n**Now testing Tests\Browser\Nova\LookupTables\IndexLookupTableTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Lookup Address Types')
-                ->pause(1000)
+                ->pause($pause['medium'])
                 ->assertVisible('@1-row')
                 ->assertVisible('@2-row')
                 ->assertVisible('@3-row')
@@ -86,6 +85,7 @@ class IndexLookupTableTest extends DuskTestCase
      * not having the owner role
      *
      * @group nova
+     * @group novalookuptables
      */
     public function testSeeTheLookupTableIndexViewExpectNoNavLinkDueToNotHavingOwnerRole()
     {
@@ -93,13 +93,14 @@ class IndexLookupTableTest extends DuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
+        $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause(500)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->assertDontSeeLink('Lookup Address Types')

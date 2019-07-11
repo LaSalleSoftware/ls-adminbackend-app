@@ -23,28 +23,17 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Details;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-
-// Laravel Dusk
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
+use Tests\Browser\LaSalleDuskTestCase;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class IsSuccessfulTest extends DuskTestCase
+class IsSuccessfulTest extends LaSalleDuskTestCase
 {
     use DatabaseMigrations;
 
     protected $personTryingToLogin;
-
-    /*
-     * Dusk will pause its browser traversal by this value, in ms
-     *
-     * @var int
-     */
-    protected $pause = 1500;
 
     public function setUp(): void
     {
@@ -62,6 +51,7 @@ class IsSuccessfulTest extends DuskTestCase
      * Test that the details view is successful
      *
      * @group nova
+     * @group novaprofiletables
      * @group novaperson
      * @group novapersondetailsissuccessful
      */
@@ -72,12 +62,12 @@ class IsSuccessfulTest extends DuskTestCase
         $personTryingToLogin = $this->personTryingToLogin;
         $pause               = $this->pause;
 
-        $this->browse(function (Browser $browser) use ($personTryingToLogin, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause)
+                ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('People')
@@ -88,7 +78,7 @@ class IsSuccessfulTest extends DuskTestCase
                 ->assertVisible('@3-row')
                 ->assertVisible('@3-view-button')
                 ->click('@3-view-button')
-                ->pause($pause)
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
                 ->assertPathIs('/nova/resources/people/3')
                 ->assertSee('Blues Boy')

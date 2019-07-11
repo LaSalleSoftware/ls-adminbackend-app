@@ -25,4 +25,5 @@ Thumbs.db
 /tests/Browser/console
 /tests/Browser/screenshots
 
-
+composer.local.json
+composer.production.json

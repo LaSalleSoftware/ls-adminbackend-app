@@ -1,5 +1,5 @@
 {
-    "name": "lasallesoftware/lsv2-basicfrontend-app",
+    "name": "lasallesoftware/lsv2-adminbackend-app",
     "description": "LaSalle Software v2 Administrative Back-end Application.",
     "keywords": [
         "lasalle software",
@@ -19,20 +19,6 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "../packages/lsv2-library-pkg",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "../packages/lsv2-blogbackend-pkg",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
@@ -45,8 +31,8 @@
         "guzzlehttp/guzzle": "^6.0",
         "laravel/nova": "~2.0",
         "tymon/jwt-auth": "~1.0",
-        "lasallesoftware/lsv2-library-pkg": "dev-master",
-        "lasallesoftware/lsv2-blogbackend-pkg": "dev-master"
+        "lasallesoftware/lsv2-library-pkg": "1.9.*",
+        "lasallesoftware/lsv2-blogbackend-pkg": "1.9.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

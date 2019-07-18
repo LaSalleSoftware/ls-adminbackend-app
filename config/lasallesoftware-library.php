@@ -39,7 +39,7 @@ return [
     | Set in the .env file.
     |
     */
-    'lasalle_app_name' => env('LASALLE_APP_NAM'),
+    'lasalle_app_name' => env('LASALLE_APP_NAME'),
 
     /*
     |--------------------------------------------------------------------------

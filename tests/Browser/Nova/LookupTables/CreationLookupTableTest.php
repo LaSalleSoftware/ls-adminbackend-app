@@ -106,6 +106,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
      *
      * @group nova
      * @group novalookuptables
+     * @group novalookuptablesInsertNewRecordToLookupTableExpectRequireValidationToFail
      */
     public function testInsertNewRecordToLookupTableExpectRequireValidationToFail()
     {
@@ -121,14 +122,14 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->clickLink('Lookup Address Types')
-                ->pause($pause['shortest'])
+                ->pause($pause['short'])
                 ->assertSee('Create Lookup Address Type')
                 ->clickLink('Create Lookup Address Type')
                 ->pause($pause['shortest'])
                 ->assertSee('Create Lookup Address Type')
-                ->pause($pause['shortest'])
+                ->pause($pause['short'])
                 ->click('@create-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['short'])
                 ->assertSee('The title field is required.')
             ;
         });

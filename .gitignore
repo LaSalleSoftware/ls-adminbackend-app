@@ -13,8 +13,6 @@ yarn-error.log
 .env
 .env.dusk.local
 .env.backup
-phpunit.xml
-phpunit.dusk.xml
 .phpunit.result.cache
 
 composer.lock
@@ -24,6 +22,3 @@ Thumbs.db
 
 /tests/Browser/console
 /tests/Browser/screenshots
-
-composer.local.json
-composer.production.json

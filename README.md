@@ -20,5 +20,6 @@ You need to buy [Laravel Nova](https://nova.laravel.com/), first first-party Lar
 
 * [Change Log](CHANGELOG.md)
 * [Installation](INSTALLATION.md)
-* [MIT License File](LICENSE.md)
 * [Dusk Readme](DUSK_README.md)
+* [MIT License File](LICENSE.md)
+

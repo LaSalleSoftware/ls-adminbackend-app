@@ -17,15 +17,26 @@ Come on out to [The York Region PHP Meet-up](https://www.meetup.com/York-Region-
 
 I am assuming that you have set up a local site with your favourite OS/server/etc. 
 
+IMPORTANT NOTE: You need to buy the [Laravel Nova package](https://nova.laravel.com)
+
 - go to your local set-up
-- run following command, which will create a "lasalleadmin" folder, and not install the "require-dev" packages:
+- run following command, which will create a "lsv2-adminbackup-app" folder, and install the LaSalle Software's admin app:
 
 ```php
-composer create-project lasallesoftware/lsv2-adminbackend-app lasalleadmin --no-dev
+composer create-project lasallesoftware/lsv2-adminbackend-app lsv2-adminbackup-app 
 ```
 
+then ```cd lsv2-adminbackup-app ``` 
 
-composer create-project lasallesoftware/lsv2-adminbackend-app hackintosh.lsv2-southlasalle.com --no-dev
+Now, make sure you have a database set-up, and update your .env with your database info.
+
+In your .env set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=false```
+
+In App\Providers\NovaServiceProvider, in gate(), delete all the email address except for "bob.bloom@lasallesoftware.ca".
+
+Now run ```php artisan lslibrary:lasalleinstall```
+
+Now, make this folder a git repo. Then, set up a repository of this folder in GitHub.com (or similar), so that Forge can install/update from this repo.
 
 ## Laravel Forge
 
@@ -38,6 +49,8 @@ I assume that you use [Laravel Forge](https://forge.laravel.com).
 - you should see your new site listed in Active Sites
 - click your new site
 - you should be in "Site Details"
-- 
+- set up your Let's Encrypt SSL
+- set up your database, and update your .env with your db info
+- ssh into your server and run ```php artisan lslibrary:lasalleinstall```
 
 

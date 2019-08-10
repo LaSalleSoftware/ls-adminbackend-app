@@ -20,17 +20,16 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
-
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Create;
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -44,38 +43,38 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin can view.
+     * Test that the a super admin can create.
      *
      * @group nova
-     * @group novalookuptables
-     * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesView
-     * @group novaLookuptablesPoliciesLookuprolesViewSuperadmins
+     * @group novaPersonbydomain
+     * @group novaPersonbydomainPolicies
+     * @group novaPersonbydomainPoliciesCreate
+     * @group novaPersonbydomainPoliciesCreateSuperadmins
      */
-    public function testIndexListingListsSuperadmins()
+    public function testSuperadmins()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\View\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Create\TestSuperadmins**";
 
-        $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $personTryingToLogin  = $this->loginSuperadminDomain1;
+        $pause                = $this->pause;
 
-        $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
-                ->type('email', $login['email'])
-                ->type('password', $login['password'])
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
+                ->assertSee('Personbydomains')
+                ->clickLink('Personbydomain')
                 ->waitFor('@1-row')
-
-                ->assertVisible('@1-view-button')
-                ->assertVisible('@2-view-button')
-                ->assertVisible('@3-view-button')
+                ->pause($pause['shortest'])
+                ->assertSee('Create Personbydomain')
+                ->clickLink('Create Personbydomain')
+                ->pause($pause['medium'])
+                ->assertSee('Create Personbydomain')
             ;
         });
     }

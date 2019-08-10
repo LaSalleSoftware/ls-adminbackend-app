@@ -72,7 +72,7 @@ class AdminsTest extends LookupTablesBaseDuskTestCase
                 ->assertMissing('Lookup User Roles')
                 ->visit('/nova/resources/Lookup_roles/5')
                 ->pause($pause['short'])
-                ->assertDontSee('Details')    // In lieu of getting Laravel's 403/404 page
+                ->assertPathIs('/nova/404')
             ;
         });
     }

@@ -20,20 +20,16 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\Menu;
-
-
-// ** WELL, THIS IS NOT ACTUALLY TESTING POLICIES, BUT THE NOVA RESOURCE SETTING. BUT THIS TEST IS STAYING IN THIS FOLDER ANYWAYS! **
-
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Delete;
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class MenuItemSuppressedForSuperadminsTest extends LookupTablesBaseDuskTestCase
+class OwnersTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -50,29 +46,35 @@ class MenuItemSuppressedForSuperadminsTest extends LookupTablesBaseDuskTestCase
      * Test that the creation is successful
      *
      * @group nova
-     * @group novalookuptables
-     * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesMenu
-     * @group novaLookuptablesPoliciesLookuprolesMenuitemsuppressedforowners
+     * @group novaPersonbydomain
+     * @group novaPersonbydomainPolicies
+     * @group novaPersonbydomainPoliciesDelete
+     * @group novaPersonbydomainPoliciesDeleteOwners
      */
-    public function testMenuItemExposedForSuperadminsIsSuccessful()
+    public function testOwners()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\Menu\TestMenuItemExposedForSuperadminsIsSuccessful**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Delete\TestOwners**";
 
-        $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $personTryingToLogin  = $this->loginOwnerBobBloom;
+        $pause                = $this->pause;
 
-        $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
-                ->type('email', $login['email'])
-                ->type('password', $login['password'])
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertDontSee('Lookup User Roles')
+                ->assertSee('Personbydomains')
+                ->clickLink('Personbydomains')
+                ->waitFor('@1-row')
+                ->assertMissing('@1-delete-button')
+                ->assertVisible('@2-delete-button')
+                ->assertVisible('@3-delete-button')
+                ->assertVisible('@4-delete-button')
+                ->assertVisible('@5-delete-button')
             ;
         });
     }

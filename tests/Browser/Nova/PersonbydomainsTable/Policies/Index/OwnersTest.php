@@ -20,17 +20,20 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\Index;
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Index;
+
+
+// ** WELL, THIS IS NOT ACTUALLY TESTING POLICIES, BUT THE NOVA RESOURCE SETTING. BUT THIS TEST IS STAYING IN THIS FOLDER ANYWAYS! **
 
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class OwnersTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -44,40 +47,45 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin cannot see Lookup_roles.
-     *
-     * Please note that the index listing is controlled by the resource's indexQuery() method!
+     * Test that the index listing displays the proper records.
      *
      * @group nova
-     * @group novalookuptables
-     * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesIndex
-     * @group novaLookuptablesPoliciesLookuprolesIndexSuperadmins
+     * @group novaPersonbydomain
+     * @group novaPersonbydomainPolicies
+     * @group novaPersonbydomainPoliciesIndex
+     * @group novaPersonbydomainPoliciesIndexOwners
      */
-    public function testIndexListingListsSuperadmins()
+    public function testOwners()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\Index\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Index\TestOwners**";
 
-        $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        // Arrange
+        $this->updateInstalleddomainid();
 
-        $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
+        $personTryingToLogin  = $this->loginOwnerBobBloom;
+        $pause                = $this->pause;
+
+        // Act, Assert
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
-                ->type('email', $login['email'])
-                ->type('password', $login['password'])
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
+                ->assertSee('Personbydomains')
+                ->clickLink('Personbydomains')
                 ->waitFor('@1-row')
-
                 ->assertVisible('@1-row')
                 ->assertVisible('@2-row')
                 ->assertVisible('@3-row')
+                ->assertVisible('@4-row')
+                ->assertVisible('@5-row')
+                ->assertSee('pretendfrontend.com')
+                ->assertSee('anotherpretendfrontend.com')
+                ->assertSee('hackintosh.lsv2-adminbackend-app.com')
             ;
         });
     }

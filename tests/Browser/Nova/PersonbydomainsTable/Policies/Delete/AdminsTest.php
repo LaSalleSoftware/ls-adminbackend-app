@@ -20,17 +20,16 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
-
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Delete;
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class AdminsTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -44,38 +43,34 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin can view.
+     * Test that admins cannot delete by seeing the index page. I know this is a repeat of another test!
      *
      * @group nova
-     * @group novalookuptables
-     * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesView
-     * @group novaLookuptablesPoliciesLookuprolesViewSuperadmins
+     * @group novaPersonbydomain
+     * @group novaPersonbydomainPolicies
+     * @group novaPersonbydomainPoliciesDelete
+     * @group novaPersonbydomainPoliciesDeleteAdmins
      */
-    public function testIndexListingListsSuperadmins()
+    public function testAdmins()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\View\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Delete\TestAdmins**";
 
-        $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $personTryingToLogin  = $this->loginAdminDomain1;
+        $pause                = $this->pause;
 
-        $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
-                ->type('email', $login['email'])
-                ->type('password', $login['password'])
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
-                ->waitFor('@1-row')
-
-                ->assertVisible('@1-view-button')
-                ->assertVisible('@2-view-button')
-                ->assertVisible('@3-view-button')
+                ->assertDontSee('Personbydomains')
+                ->visit('/nova/resources/peoplebydomains')
+                ->pause($pause['medium'])
+                ->assertPathIs('/nova/404')
             ;
         });
     }

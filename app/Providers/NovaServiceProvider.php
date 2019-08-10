@@ -53,15 +53,30 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     protected function gate()
     {
-        Gate::define('viewNova', function ($user) {
-            return in_array($user->email, [
-                'bob.bloom@lasallesoftware.ca',
-                'bbking@kingofblues.com',
-                'srv@doubletrouble.com',
-                'sidney.bechet@blogtest.ca',
-                'robert.johnson@blogtest.ca',
-            ]);
-        });
+        if (env('APP_ENV') == "testing") {
+
+            // These are emails that are thumbs up to access Nova in the "testing" environment
+            Gate::define('viewNova', function ($user) {
+                return in_array($user->email, [
+                    'bob.bloom@lasallesoftware.ca',
+                    'bbking@kingofblues.com',
+                    'srv@doubletrouble.com',
+                    'sidney.bechet@blogtest.ca',
+                    'robert.johnson@blogtest.ca',
+                    'satchmo@blues.com'
+                ]);
+            });
+
+        } else {
+
+            // These are the emails that are thumbs up to access Nova in all environments that are not "testing" and not "local".
+            // There are no restrictions for "local" environments
+            Gate::define('viewNova', function ($user) {
+                return in_array($user->email, [
+                    'bob.bloom@lasallesoftware.ca',
+                ]);
+            });
+        }
     }
 
     /**

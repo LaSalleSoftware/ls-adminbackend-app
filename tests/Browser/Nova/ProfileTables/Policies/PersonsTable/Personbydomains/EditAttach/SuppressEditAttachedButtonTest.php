@@ -20,17 +20,17 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
+namespace Tests\Browser\Nova\ProfileTables\Policies\PersonsTable\Personbydomains\EditAttach;
 
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\ProfileTables\ProfileTablesBaseDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class SuppressEditAttachedButtonTest extends ProfileTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -44,20 +44,20 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin can view.
+     * Suppress the attach button.
      *
      * @group nova
      * @group novalookuptables
      * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesView
-     * @group novaLookuptablesPoliciesLookuprolesViewSuperadmins
+     * @group novaprofiletablesPoliciesPersonsPersonbydomains
+     * @group novaprofiletablesPoliciesPersonsPersonbydomainsUpdate
+     * @group novaprofiletablesPoliciesPersonsPersonbydomainsUpdateSuppresseditattachedbutton
      */
-    public function testIndexListingListsSuperadmins()
+    public function testSuppressEditAttachedButton()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\View\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\Personbydomain\EditAttach\TestSuppressEditAttachedButton**";
 
-        $login = $this->loginSuperadminDomain1;
+        $login = $this->loginOwnerBobBloom;
         $pause = $this->pause;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
@@ -69,13 +69,20 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
-                ->waitFor('@1-row')
+                ->assertSee('People')
 
-                ->assertVisible('@1-view-button')
-                ->assertVisible('@2-view-button')
-                ->assertVisible('@3-view-button')
+                ->clickLink('People')
+                ->waitFor('@306-row')
+                ->assertSee('Create Person')
+                ->assertVisible('@306-view-button')
+
+                ->click('@306-view-button')
+                ->pause($pause['long'])
+                ->assertSee('Person Details')
+                ->assertSee('Personbydomains')
+                ->assertVisible('@5-row')
+                ->assertMissing('@5-edit-attached-button')
+                ->assertVisible('@5-edit-button') // THIS IS A REGULAR EDIT BUTTON, NOT AN EDIT-ATTACHED BUTTON!
             ;
         });
     }

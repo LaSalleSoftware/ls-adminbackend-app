@@ -20,17 +20,17 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
+namespace Tests\Browser\Nova\ProfileTables\Policies\PersonsTable\Personbydomains\Detach;
 
 
 // LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+use Tests\Browser\Nova\ProfileTables\ProfileTablesBaseDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class SuppressDetachButtonTest extends ProfileTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -44,20 +44,20 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin can view.
+     * Suppress the attach button.
      *
      * @group nova
      * @group novalookuptables
      * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesView
-     * @group novaLookuptablesPoliciesLookuprolesViewSuperadmins
+     * @group novaprofiletablesPoliciesPersonsPersonbydomains
+     * @group novaprofiletablesPoliciesPersonsPersonbydomainsDetach
+     * @group novaprofiletablesPoliciesPersonsPersonbydomainsDetachSuppressdetachbutton
      */
-    public function testIndexListingListsSuperadmins()
+    public function testSuppressDetachButton()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\View\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\ProfileTables\Policies\PersonsTable\Personbydomains\Detach\TestSuppressDetachButton**";
 
-        $login = $this->loginSuperadminDomain1;
+        $login = $this->loginOwnerBobBloom;
         $pause = $this->pause;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
@@ -69,13 +69,22 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
-                ->waitFor('@1-row')
+                ->assertSee('People')
 
-                ->assertVisible('@1-view-button')
-                ->assertVisible('@2-view-button')
-                ->assertVisible('@3-view-button')
+                ->clickLink('People')
+                ->waitFor('@306-row')
+                ->assertSee('Create Person')
+                ->assertVisible('@306-view-button')
+
+                ->click('@306-view-button')
+                ->pause($pause['long'])
+                ->assertSee('Person Details')
+                ->assertSee('Personbydomain')
+                ->assertVisible('@5-row')
+                //->assertMissing('@5-delete-button')
+                //  oh, the detach button and delete button have the same dusk class ;-(
+                // so this test cannot be done. I am leaving this test here anyways as a placeholder
+                // in case this test is do-able in the future.
             ;
         });
     }

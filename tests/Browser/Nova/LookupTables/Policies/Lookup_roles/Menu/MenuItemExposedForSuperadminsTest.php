@@ -20,7 +20,10 @@
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
+namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\Menu;
+
+
+// ** WELL, THIS IS NOT ACTUALLY TESTING POLICIES, BUT THE NOVA RESOURCE SETTING. BUT THIS TEST IS STAYING IN THIS FOLDER ANYWAYS! **
 
 
 // LaSalle Software
@@ -30,7 +33,7 @@ use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+class MenuItemExposedForSuperadminsTest extends LookupTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -44,18 +47,18 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the a super admin can view.
+     * Test that the creation is successful
      *
      * @group nova
      * @group novalookuptables
      * @group novaLookuptablesPolicies
      * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesView
-     * @group novaLookuptablesPoliciesLookuprolesViewSuperadmins
+     * @group novaLookuptablesPoliciesLookuprolesMenu
+     * @group novaLookuptablesPoliciesLookuprolesMenuitemexposedforowners
      */
-    public function testIndexListingListsSuperadmins()
+    public function testMenuItemExposedForSuperadminsIsSuccessful()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\View\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\Menu\TestMenuItemExposedForSuperadminsIsSuccessful**";
 
         $login = $this->loginSuperadminDomain1;
         $pause = $this->pause;
@@ -70,12 +73,6 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
                 ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
-                ->waitFor('@1-row')
-
-                ->assertVisible('@1-view-button')
-                ->assertVisible('@2-view-button')
-                ->assertVisible('@3-view-button')
             ;
         });
     }

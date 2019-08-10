@@ -14,23 +14,23 @@
  * @license    http://opensource.org/licenses/MIT MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
- * @link       https://lasallesoftware.ca
+ * @link       https://lasallesoftware.ca \Lookup_address_type;log, Podcast, Docs
  * @link       https://packagist.org/packages/lasallesoftware/library Packagist
  * @link       https://github.com/lasallesoftware/library GitHub
  *
  */
 
-namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\Index;
+namespace Tests\Browser\Nova\PersonbydomainsTable\Forms\Index;
 
-
-// LaSalle Software
-use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
+// LaSalle Software classes
+use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class SuperadminsTest extends LookupTablesBaseDuskTestCase
+
+class IsSuccessfulTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -38,46 +38,44 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
     {
         parent::setUp();
 
+        // Yes, I am using the blog seeds!
         $this->artisan('lslibrary:customseed');
-        $this->artisan('lsblogbackend:blogcustomseed');
-
+        $this->artisan('lslibrary:installeddomainseed');
     }
 
     /**
-     * Test that the a super admin cannot see Lookup_roles.
-     *
-     * Please note that the index listing is controlled by the resource's indexQuery() method!
+     * Test that a personbydomain's index is successfully viewed. Using an owner user.
      *
      * @group nova
-     * @group novalookuptables
-     * @group novaLookuptablesPolicies
-     * @group novaLookuptablesPoliciesLookuproles
-     * @group novaLookuptablesPoliciesLookuprolesIndex
-     * @group novaLookuptablesPoliciesLookuprolesIndexSuperadmins
+     * @group novaPersonbydomain
+     * @group novaPersonbydomainForms
+     * @group novaPersonbydomainFormsIndex
+     * @group novaPersonbydomainFormsIndexIssuccessful
      */
-    public function testIndexListingListsSuperadmins()
+    public function testIsSuccessful()
     {
-        echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookuproles\Index\TestSuperadmins**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Forms\Index\IsSuccessfulTest**";
 
-        $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $personTryingToLogin  = $this->loginOwnerBobBloom;
+        $pause                = $this->pause;
 
-        $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
+        $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
-                ->type('email', $login['email'])
-                ->type('password', $login['password'])
+                ->type('email', $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['shortest'])
                 ->assertPathIs('/nova')
                 ->assertSee('Dashboard')
-                ->assertSee('Lookup User Roles')
-                ->clickLink('Lookup User Roles')
+                ->assertSee('Personbydomains')
+                ->clickLink('Personbydomains')
                 ->waitFor('@1-row')
-
                 ->assertVisible('@1-row')
                 ->assertVisible('@2-row')
                 ->assertVisible('@3-row')
+                ->assertVisible('@4-row')
+                ->assertVisible('@5-row')
             ;
         });
     }

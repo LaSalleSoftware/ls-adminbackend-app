@@ -72,6 +72,19 @@ return [
 
     /*
 	|--------------------------------------------------------------------------
+	| Login activity duration in minutes
+	|--------------------------------------------------------------------------
+	|
+	| After a certain number of minutes of not doing anything, a user will be logged out automatically.
+	| How many minutes do you want to allow inactivity before logging a user out automatically?
+	| This is a completely separate feature from Laravel's session inactivity setting (see
+    | https://stackoverflow.com/questions/41983976/laravel-5-session-lifetime)
+	|
+	*/
+    'lasalle_number_of_minutes_allowed_before_deleting_the_logins_record' => '10',
+
+    /*
+	|--------------------------------------------------------------------------
 	| Excerpt Length
 	|--------------------------------------------------------------------------
 	|

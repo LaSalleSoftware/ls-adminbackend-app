@@ -55,7 +55,8 @@ class LoggingInTest extends DuskTestCase
      * Test that the correct credentials result in a successful login
      *
      * @group authentication
-     * @group authenticationLogin
+     * @group authenticationLogginIn
+     * @group authenticationLogginInLoginshouldbesuccessful
      */
     public function testLoginShouldBeSuccessful()
     {
@@ -87,7 +88,9 @@ class LoggingInTest extends DuskTestCase
     /**
      * Test that the login is unsuccessful when the wrong email is used
      *
-     * @group login
+     * @group authentication
+     * @group authenticationLogginIn
+     * @group authenticationLogginInLoginshouldfailwiththewrongemail
      */
     public function testLoginShouldFailWithTheWrongEmail()
     {
@@ -111,7 +114,9 @@ class LoggingInTest extends DuskTestCase
     /**
      * Test that the login is unsuccessful when the wrong password is used
      *
-     * @group login
+     * @group authentication
+     * @group authenticationLogginIn
+     * @group authenticationLogginInLoginshouldfailwiththewrongpassword
      */
     public function testLoginShouldFailWithTheWrongPassword()
     {

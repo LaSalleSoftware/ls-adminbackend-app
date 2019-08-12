@@ -32,6 +32,7 @@ class LoggingInTest extends TestCase
      *
      * @group login
      * @group loggingintest
+     * @group loggingintest_I_login_successfully_with_the_lasalleguard_login_method
      *
      * @return void
      */
@@ -65,9 +66,16 @@ class LoggingInTest extends TestCase
         //$this->assertTrue($record->uuid == UUIDGENERATORUUID,'***The uuid is wrong***');
         $this->assertTrue($record->created_at <> null,'***The created_at is wrong***');
         $this->assertTrue($record->created_by == 1,'***The created_by should be 1***');
+
+        // populating the updated records on login
+        // https://github.com/LaSalleSoftware/lsv2-library-pkg/issues/20
+        $this->assertTrue($record->updated_at <> null,'***The updated_at is wrong***');
+        $this->assertTrue($record->updated_by == 1,'***The updated_by should be 1***');
+
         // just because we can, see if these two fields are integers
         $this->assertTrue(is_int($record->personbydomain_id), "***The personbydomain_id must be an integer***");
         $this->assertTrue(is_int($record->created_by), "***The created_by must be an integer***");
+        $this->assertTrue(is_int($record->updated_by), "***The updated_by must be an integer***");
 
         // When I am successfully logged in, the UUID inserted into the uuids table should be the same as the UUID constant
         $uuid = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
@@ -79,6 +87,7 @@ class LoggingInTest extends TestCase
      *
      * @group login
      * @group loggingintest
+     * @group loggingintest_I_login_successfully_with_the_lasalleguard_attempt_method
      *
      * @return void
      */
@@ -115,9 +124,12 @@ class LoggingInTest extends TestCase
         //$this->assertTrue($record->uuid == UUIDGENERATORUUID,'***The uuid is wrong***');
         $this->assertTrue($record->created_at <> null,'***The created_at is wrong***');
         $this->assertTrue($record->created_by == 1,'***The created_by should be 1***');
+        $this->assertTrue($record->updated_at <> null,'***The updated_at is wrong***');
+        $this->assertTrue($record->updated_by == 1,'***The updated_by should be 1***');
         // just because we can, see if these two fields are integers
         $this->assertTrue(is_int($record->personbydomain_id), "***The personbydomain_id must be an integer***");
         $this->assertTrue(is_int($record->created_by), "***The created_by must be an integer***");
+        $this->assertTrue(is_int($record->updated_by), "***The updated_by must be an integer***");
 
         // When I am successfully logged in, the UUID inserted into the uuids table should be the same as the UUID constant
         $uuid = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
@@ -174,8 +186,8 @@ class LoggingInTest extends TestCase
     public function test_I_login_unsuccessfully_with_wrong_paswword_with_the_lasalleguard_attempt_method()
     {
         $credentials =  [
-            'email' => 'bob.bloom@lasallesoftware.ca',
-            'password'              => 'wrong_password',
+            'email'    => 'bob.bloom@lasallesoftware.ca',
+            'password' => 'wrong_password',
         ];
 
         // Simulate my logging in

@@ -25,6 +25,9 @@ namespace Tests\Browser\Nova\InstalledDomainsTable;
 // LaSalle Software
 use Tests\Browser\LaSalleDuskTestCase;
 
+// Laravel facade
+use Illuminate\Support\Facades\DB;
+
 class InstalledDomainsTableBaseDuskTestCase extends LaSalleDuskTestCase
 {
     public $loginOwnerBobBloom = [
@@ -41,4 +44,16 @@ class InstalledDomainsTableBaseDuskTestCase extends LaSalleDuskTestCase
         'email'    => 'robert.johnson@blogtest.ca',
         'password' => 'secret',
     ];
+
+
+    public function insertJWTKeys()
+    {
+        DB::table('installed_domains_jwt_keys')->insert([
+            'installed_domain_id' => 1,
+            'key'                 => 'abcdefg',
+            'enabled'             => 1,
+            'created_at'          => now(),
+            'created_by'          => 1
+        ]);
+    }
 }

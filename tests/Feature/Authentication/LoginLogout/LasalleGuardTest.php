@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Library\Authentication\LoginLogout;
+namespace Tests\Feature\Authentication\LoginLogout;
 
 // LaSalle Software
 use Lasallesoftware\Library\Testing\Concerns\Auth\InteractsWithAuthentication;

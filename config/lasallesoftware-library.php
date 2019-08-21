@@ -85,6 +85,36 @@ return [
 
     /*
 	|--------------------------------------------------------------------------
+	| Json Web Token EXP claim duration
+	|--------------------------------------------------------------------------
+	|
+    | How many seconds until a JWT expires?
+    |
+    | This EXP claim is set in the client domain.
+	|
+    | https://tools.ietf.org/html/rfc7519#section-4.1.4
+	|
+	*/
+    'lasalle_jwt_exp_claim_seconds_to_expiration' => 3600,
+
+    /*
+	|--------------------------------------------------------------------------
+	| Json Web Token IAT
+	|--------------------------------------------------------------------------
+	|
+	| How many seconds should a JWT be valid after it is issued.
+	|
+    | The IAT claim is set automatically in the client domain.
+    |
+    | This duration is used in the API (back-end) domain as a time based validation.
+    |
+    | https://tools.ietf.org/html/rfc7519#section-4.1.6
+	|
+	*/
+    'lasalle_jwt_iat_claim_valid_for_how_many_seconds' => 120,
+
+    /*
+	|--------------------------------------------------------------------------
 	| Excerpt Length
 	|--------------------------------------------------------------------------
 	|

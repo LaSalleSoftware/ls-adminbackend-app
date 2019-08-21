@@ -51,7 +51,7 @@
         "laravel/tinker": "^1.0",
         "guzzlehttp/guzzle": "^6.0",
         "laravel/nova": "~2.0",
-        "tymon/jwt-auth": "~1.0",
+        "lcobucci/jwt": "^3.3",
         "lasallesoftware/lsv2-library-pkg": "dev-master",
         "lasallesoftware/lsv2-novabackend-pkg": "dev-master",
         "lasallesoftware/lsv2-blogbackend-pkg": "dev-master"

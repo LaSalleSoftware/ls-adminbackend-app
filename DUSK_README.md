@@ -2,6 +2,9 @@
 
 ===================================================================
 (Aug2019) Before doing anything, try php artisan dusk:chrome-driver
+* https://github.com/laravel/dusk/blob/5.0/src/Console/ChromeDriverCommand.php
+* https://github.com/laravel/dusk/pull/643
+* https://github.com/laravel/dusk/issues/641
 ===================================================================
 
 Dusk failed today. The chrome driver used is out of date. Huh??

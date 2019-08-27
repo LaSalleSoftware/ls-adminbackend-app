@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Authentication\JWT;
 
+// LaSalle Software
+use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+
 // Laravel classes
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -52,19 +55,25 @@ class JWTMiddlewareTest extends TestCase
         echo "\n**Now testing Tests\Feature\Authentication\JWT\JWTMiddlewareTest**";
 
         // Arrange
+        $signer = new Sha256();
         $time   = time();
         $signer = new Sha256();
+
+        $uuidGenerator = new UuidGenerator();
+        $uuid          = $uuidGenerator->createUuid(1);
+
+        $key = DB::table('installed_domains_jwt_keys')->where('installed_domain_id', 5)->pluck('key')->first();
 
         // This is the token that is simulated to come from the client domain. Using the same key as the API domain.
         $token = (new Builder())
             ->issuedBy('hackintosh.lsv2-basicfrontend-app.com')
             ->permittedFor('hackintosh.lsv2-adminbackend-app.com')
-            ->identifiedBy('4f1g23a12aa', true)
+            ->identifiedBy($uuid, true)
             ->issuedAt($time)
             ->canOnlyBeUsedAfter($time + 60)
             ->expiresAt($time + 3600)
             ->withClaim('uid', 1)
-            ->getToken($signer, new Key('correct-key'))  // *** GENERATES AND SIGNS THE TOKEN
+            ->getToken($signer, new Key($key))  // *** GENERATES AND SIGNS THE TOKEN
         ;
 
         // Act
@@ -99,12 +108,12 @@ class JWTMiddlewareTest extends TestCase
         $token = (new Builder())
             ->issuedBy('hackintosh.lsv2-basicfrontend-app.com')
             ->permittedFor('hackintosh.lsv2-adminbackend-app.com')
-            ->identifiedBy('4f1g23a12aa', true)
+            ->identifiedBy('4f1g23a12aa', true)         // not validate due to wrong JTI claim (ie, no uuid)
             ->issuedAt($time)
             ->canOnlyBeUsedAfter($time + 60)
             ->expiresAt($time + 3600)
             ->withClaim('uid', 1)
-            ->getToken($signer, new Key('wrong-key'))  // *** GENERATES AND SIGNS THE TOKEN
+            ->getToken($signer, new Key('wrong-key'))                       // not validate because the key is wrong
         ;
 
         // Act

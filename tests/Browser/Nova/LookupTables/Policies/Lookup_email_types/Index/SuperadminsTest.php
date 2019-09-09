@@ -75,10 +75,10 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->visit('/nova/resources/Lookup_email_types')
                 ->pause($pause['long'])
                 ->assertDontSee('Create Lookup Email Type')
-                ->assertDontSee('Primary')
-                ->assertDontSee('Secondary')
+                ->assertDontSee('Main')
                 ->assertDontSee('Work')
                 ->assertDontSee('Other')
+                ->assertDontSee('Created By Nova Personbydomain Form')
             ;
         });
     }

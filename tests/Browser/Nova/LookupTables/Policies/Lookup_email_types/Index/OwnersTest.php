@@ -75,10 +75,10 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
                 ->clickLink('Lookup Email Types')
                 ->waitFor('@1-row')
                 ->assertSee('Create Lookup Email Type')
-                ->assertSee('Primary')
-                ->assertSee('Secondary')
+                ->assertSee('Main')
                 ->assertSee('Work')
                 ->assertSee('Other')
+                ->assertSee('Created By Nova Personbydomain Form')
             ;
         });
     }

@@ -73,7 +73,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->assertSee('Installed Domains')
                 ->clickLink('Installed Domains')
                 ->waitFor('@1-row')
-                ->assertSee('Hackintosh.lsv2-adminbackend-app.com')
+                ->assertSee(env('LASALLE_APP_DOMAIN_NAME'))
                 ->assertSee('Pretendfrontend.com')
                 ->assertSee('Anotherpretendfrontend.com')
             ;

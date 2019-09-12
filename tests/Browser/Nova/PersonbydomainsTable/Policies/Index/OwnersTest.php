@@ -85,7 +85,7 @@ class OwnersTest extends PersonbydomainsTableBaseDuskTest
                 ->assertVisible('@5-row')
                 ->assertSee('pretendfrontend.com')
                 ->assertSee('anotherpretendfrontend.com')
-                ->assertSee('hackintosh.lsv2-adminbackend-app.com')
+                ->assertSee(env('LASALLE_APP_DOMAIN_NAME'))
             ;
         });
     }

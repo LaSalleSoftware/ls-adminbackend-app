@@ -76,7 +76,7 @@ class AdminsDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->visit('/nova/resources/installed_domains')
                 ->pause($pause['medium'])
                 ->assertSee('Installed Domains')
-                ->assertDontSee('Hackintosh.lsv2-adminbackend-app.com')
+                ->assertDontSee(env('LASALLE_APP_DOMAIN_NAME'))
                 ->assertDontSee('Pretendfrontend.com')
                 ->assertDontSee('Anotherpretendfrontend.com')
             ;

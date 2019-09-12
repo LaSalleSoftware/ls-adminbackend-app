@@ -134,7 +134,7 @@ class PersonbydomainsTableBaseDuskTest extends LaSalleDuskTestCase
             'email'                  => $this->newEmailData['email_address'],
             'password'               => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret,
             'installed_domain_id'    => 1,
-            'installed_domain_title' => 'hackintosh.lsv2-adminbackend-app.com',
+            'installed_domain_title' => env('LASALLE_APP_DOMAIN_NAME'),
             'uuid'                   => $this->newPersonData['uuid'],
             'created_at'             => now(),
             'created_by'             => 1,

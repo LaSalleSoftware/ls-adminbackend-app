@@ -133,7 +133,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->assertVisible('@4-row')   // belongs to hackintosh.lsv2-adminbackend-app.com
                 ->assertMissing('@5-row')   // belongs to anotherpretendfrontend.com
 
-                ->assertSee('hackintosh.lsv2-adminbackend-app.com')
+                ->assertSee(env('LASALLE_APP_DOMAIN_NAME'))
                 ->assertDontSee('pretendfrontend.com')
                 ->assertDontSee('anotherpretendfrontend.com')
             ;

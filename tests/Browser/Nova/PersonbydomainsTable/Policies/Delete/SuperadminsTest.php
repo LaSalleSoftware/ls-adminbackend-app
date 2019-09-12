@@ -104,7 +104,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         $this->updateInstalleddomainid();
 
         // Change Blues Boy King (personbydomains id = 2) to an owner (first have to revert BB King back to installed_domain_id #1 --> revert 'em all!)
-        DB::table('personbydomains')->whereIn('id', [2, 3, 4, 5])->update(['installed_domain_id' => 1, 'installed_domain_title' => 'hackintosh.lsv2-adminbackend-app.com']);
+        DB::table('personbydomains')->whereIn('id', [2, 3, 4, 5])->update(['installed_domain_id' => 1, 'installed_domain_title' => env('LASALLE_APP_DOMAIN_NAME')]);
         DB::table('personbydomain_lookup_roles')->where('id', 2)->update(['lookup_role_id' => 1]);
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;

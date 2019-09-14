@@ -93,7 +93,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
 /*
         $personTryingToLogin        = $this->personTryingToLogin;
         $testNameWithMiddleNameData = $this->testNameWithMiddleNameData;
-        $pause                      = $this->pause;
+        $pause                      = $this->pause();
 
         // STEP 1: Create the new person with no middle_name
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testNameWithMiddleNameData, $pause) {

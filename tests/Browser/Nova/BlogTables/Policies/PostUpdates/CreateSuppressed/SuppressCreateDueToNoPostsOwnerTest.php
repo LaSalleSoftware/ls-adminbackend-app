@@ -62,7 +62,7 @@ class SuppressCreateDueToNoPostsOwnerTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\CreateSuppressed\TestSuppressCreateDueToNoPostsOwner**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all the records in the posts db table
         DB::table('posts')->delete();

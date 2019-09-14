@@ -57,7 +57,7 @@ class InstalledDomainDropdownHasMultipleDomainsTest extends BlogTablesBaseDuskTe
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Categories\Creation\TestInstalledDomainDropdownHasMultipleDomains**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

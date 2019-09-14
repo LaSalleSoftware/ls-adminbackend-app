@@ -72,7 +72,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newEmailTableData   = $this->newEmailTableData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailTableData, $pause) {
             $browser->visit('/login')

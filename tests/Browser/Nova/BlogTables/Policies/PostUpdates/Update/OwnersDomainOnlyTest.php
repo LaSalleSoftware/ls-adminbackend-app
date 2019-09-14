@@ -58,7 +58,7 @@ class OwnersDomainOnlyTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\Update\TestOwnersDomainOnly**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

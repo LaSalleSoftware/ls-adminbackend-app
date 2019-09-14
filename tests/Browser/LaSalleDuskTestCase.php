@@ -27,25 +27,28 @@ use Tests\DuskTestCase;
 class LaSalleDuskTestCase extends DuskTestCase
 {
     /**
-     * Amount of time Dusk should pause.
+     * Amount of time, in milliseconds, that a Dusk test should pause
      *
-     * @var array
+     * @return array
      */
-    public $pause_ORIGINAL = [
-        'shortest' => 500,
-        'short'    => 1500,
-        'medium'   => 2500,
-        'long'     => 5000,
-        'longest'  => 7500,
-        'debug'    => 10000,
-    ];
+    public function pause()
+    {
+        $base = env('LASALLE_DUSK_TEST_BASE_PAUSE_IN_MILLISECONDS');
 
-    public $pause = [
-        'shortest' => 500,
-        'short'    => 2500,
-        'medium'   => 3500,
-        'long'     => 5000,
-        'longest'  => 7500,
-        'debug'    => 10000,
-    ];
+        $shortest = $base;
+        $short    = $shortest + 1000;
+        $medium   = $short    + 1000;
+        $long     = $medium   + 2500;
+        $longest  = $long     + 2500;
+        $debug    = $longest  + 2500;
+
+        return [
+            'shortest' => $shortest,
+            'short'    => $short,
+            'medium'   => $medium,
+            'long'     => $long,
+            'longest'  => $longest,
+            'debug'    => $debug,
+        ];
+    }
 }

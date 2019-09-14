@@ -66,7 +66,7 @@ class MenuItemForOwnersTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\Menu\TestMenuItemForOwners**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser
@@ -96,7 +96,7 @@ class MenuItemForOwnersTest extends BlogTablesBaseDuskTestCase
     public function testMenuItemIsSuppressed()
     {
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all the records in the posts db table
         DB::table('posts')->delete();

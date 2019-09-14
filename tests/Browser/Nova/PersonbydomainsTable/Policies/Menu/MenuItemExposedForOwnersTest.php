@@ -56,7 +56,7 @@ class MenuItemExposedForOwnersTest extends PersonbydomainsTableBaseDuskTest
         echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Menu\TestMenuItemExposedForOwners**";
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

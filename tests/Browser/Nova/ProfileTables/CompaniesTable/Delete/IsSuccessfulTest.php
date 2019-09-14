@@ -66,7 +66,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\CompaniesTable\Delete\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         // There's an address in the company_address pivot table. This will prevent the company from being deleted.
         // So, let's zap this record.

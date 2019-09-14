@@ -58,7 +58,7 @@ class AdminsTest extends ProfileTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\Policies\Socials\View\TestAdmins**";
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

@@ -104,7 +104,7 @@ class DeleteLoginsRecordsWhenPersonbydomainsRecordIsDeletedTest extends Personby
 
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

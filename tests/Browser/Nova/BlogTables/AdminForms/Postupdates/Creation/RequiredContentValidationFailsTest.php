@@ -57,7 +57,7 @@ class RequiredContentValidationFailsTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Postupdates\Creation\TestRequiredContentValidationFails**";
 
         $login             = $this->loginOwnerBobBloom;
-        $pause             = $this->pause;
+        $pause             = $this->pause();
         $newPostupdateData = $this->newPostupdateData;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause, $newPostupdateData) {

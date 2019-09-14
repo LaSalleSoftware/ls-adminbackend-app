@@ -58,7 +58,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsTable\Policies\Create\TestOwnersDomainOnly**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser
@@ -90,7 +90,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
     public function testCannotAccessCreateFormDirectly()
     {
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

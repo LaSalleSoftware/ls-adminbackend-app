@@ -61,7 +61,7 @@ class SuperadminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
 
         $login            = $this->loginSuperadminDomain1;
         $postupdateTitles = $this->postupdateTitles;
-        $pause            = $this->pause;
+        $pause            = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $postupdateTitles, $pause) {
             $browser

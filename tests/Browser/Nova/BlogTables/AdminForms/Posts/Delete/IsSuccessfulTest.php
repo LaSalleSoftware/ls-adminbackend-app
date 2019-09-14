@@ -59,7 +59,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
         $login            = $this->loginOwnerBobBloom;
         $postTitles       = $this->postTitles;
         $postupdateTitles = $this->postupdateTitles;
-        $pause            = $this->pause;
+        $pause            = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $postTitles, $postupdateTitles, $pause) {
             $browser->visit('/login')

@@ -81,7 +81,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin   = $this->personTryingToLogin;
         $updatedEmailTableData = $this->updatedEmailTableData;
-        $pause                 = $this->pause;
+        $pause                 = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedEmailTableData, $pause) {
             $browser->visit('/login')

@@ -61,7 +61,7 @@ class MenuItemExposedForSuperadminsTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Tags\Menu\TestMenuItemExposedForSuperadminsIsSuccessful**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

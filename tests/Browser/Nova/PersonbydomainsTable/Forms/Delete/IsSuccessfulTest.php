@@ -69,7 +69,7 @@ class IsSuccessfulTest extends PersonbydomainsTableBaseDuskTest
         $personbydomainLastId = DB::table('personbydomains')->orderBy('id', 'desc')->pluck('id')->first();
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personbydomainLastId, $personTryingToLogin, $pause) {
             $browser

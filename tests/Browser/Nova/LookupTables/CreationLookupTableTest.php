@@ -67,7 +67,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newLookupTableData  = $this->newLookupTableData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newLookupTableData, $pause) {
             $browser->visit('/login')
@@ -111,7 +111,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
     public function testInsertNewRecordToLookupTableExpectRequireValidationToFail()
     {
         $personTryingToLogin = $this->personTryingToLogin;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
@@ -145,7 +145,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
     {
         $personTryingToLogin = $this->personTryingToLogin;
         $newLookupTableData  = $this->newLookupTableData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newLookupTableData, $pause) {
             $browser->visit('/login')
@@ -183,7 +183,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

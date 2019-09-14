@@ -65,7 +65,7 @@ class AttachAnyWhenNoRolesTest extends PersonbydomainsTableBaseDuskTest
         DB::table('personbydomain_lookup_roles')->where('id', 2)->delete();
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         // Act and Assert
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {

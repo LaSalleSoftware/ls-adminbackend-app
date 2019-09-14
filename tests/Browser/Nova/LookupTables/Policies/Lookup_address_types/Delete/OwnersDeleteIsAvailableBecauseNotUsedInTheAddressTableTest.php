@@ -71,7 +71,7 @@ class OwnersDeleteIsAvailableBecauseNotUsedInTheAddressTableTest extends LookupT
         // ACT and ASSERT
         // The deletion icon should display for owners
         $login        = $this->loginOwnerBobBloom;
-        $pause        = $this->pause;
+        $pause        = $this->pause();
         $lookupLastId = $this->getLookupTableLastId();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause, $lookupLastId) {

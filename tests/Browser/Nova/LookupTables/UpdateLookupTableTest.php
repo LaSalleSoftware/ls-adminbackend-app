@@ -66,7 +66,7 @@ class UpdateLookupTableTest extends LaSalleDuskTestCase
 
         $personTryingToLogin    = $this->personTryingToLogin;
         $updatedLookupTableData = $this->updatedLookupTableData;
-        $pause                  = $this->pause;
+        $pause                  = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $updatedLookupTableData, $pause) {
             $browser->visit('/login')
@@ -109,7 +109,7 @@ class UpdateLookupTableTest extends LaSalleDuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

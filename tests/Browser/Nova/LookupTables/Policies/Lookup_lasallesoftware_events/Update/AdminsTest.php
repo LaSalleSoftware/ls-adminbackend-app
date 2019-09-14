@@ -60,7 +60,7 @@ class AdminsTest extends LookupTablesBaseDuskTestCase
         $this->insertGenericLookupRecord('lookup_lasallesoftware_events');
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

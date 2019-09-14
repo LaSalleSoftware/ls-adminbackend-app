@@ -83,7 +83,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')
@@ -125,7 +125,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
 
         $personTryingToLogin = $this->personTryingToLogin;
         $newData             = $this->newData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newData, $pause) {
             $browser->visit('/login')

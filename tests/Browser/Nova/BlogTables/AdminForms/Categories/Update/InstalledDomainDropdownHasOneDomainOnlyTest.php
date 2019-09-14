@@ -57,7 +57,7 @@ class InstalledDomainDropdownHasOneDomainOnlyTest extends BlogTablesBaseDuskTest
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Categories\Update\TestInstalledDomainDropdownHasOneDomainOnly**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

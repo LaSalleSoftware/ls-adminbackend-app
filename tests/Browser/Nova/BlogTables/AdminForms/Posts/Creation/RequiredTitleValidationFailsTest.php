@@ -56,7 +56,7 @@ class RequiredTitleValidationFailsTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Posts\Creation\TestRequiredTitleValidationFails**";
 
         $login       = $this->loginOwnerBobBloom;
-        $pause       = $this->pause;
+        $pause       = $this->pause();
         $newPostData = $this->newPostData;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause, $newPostData) {

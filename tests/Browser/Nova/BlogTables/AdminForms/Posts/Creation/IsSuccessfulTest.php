@@ -61,7 +61,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Posts\Creation\TestCreateNewRecordIsSuccessful**";
 
         $login       = $this->loginOwnerBobBloom;
-        $pause       = $this->pause;
+        $pause       = $this->pause();
         $newPostData = $this->newPostData;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause, $newPostData) {

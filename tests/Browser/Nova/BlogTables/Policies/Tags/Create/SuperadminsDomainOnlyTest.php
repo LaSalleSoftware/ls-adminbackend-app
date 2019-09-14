@@ -58,7 +58,7 @@ class SuperadminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Tags\Create\TestSuperadminsDomainOnly**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

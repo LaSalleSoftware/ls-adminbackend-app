@@ -60,7 +60,7 @@ class LeavePasswordUnchangedIsSuccessfulTest extends PersonbydomainsTableBaseDus
         echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Forms\Update\Password\LeavePasswordUnchangedIsSuccessfulTest**";
 
         $personTryingToLogin = $this->loginOwnerBobBloom;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

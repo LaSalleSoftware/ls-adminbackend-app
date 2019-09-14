@@ -58,7 +58,7 @@ class SuppressDetachButtonTest extends ProfileTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\Policies\PersonsTable\Personbydomains\Detach\TestSuppressDetachButton**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

@@ -59,7 +59,7 @@ class IndexLookupTableTest extends LaSalleDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\LookupTables\IndexLookupTableTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')
@@ -93,7 +93,7 @@ class IndexLookupTableTest extends LaSalleDuskTestCase
             'email'    => 'bbking@kingofblues.com',
             'password' => 'secret',
         ];
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

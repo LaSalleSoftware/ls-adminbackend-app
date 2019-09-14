@@ -63,7 +63,7 @@ class OwnersTest extends PersonbydomainsTableBaseDuskTest
         $this->updateInstalleddomainid();
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         // Act, Assert
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {

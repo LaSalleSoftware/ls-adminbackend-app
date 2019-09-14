@@ -62,7 +62,7 @@ class SuppressCreateDueToNoPostsSuperadminTest extends BlogTablesBaseDuskTestCas
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\CreateSuppressed\TestSuppressCreateDueToNoPostsSuperadmin**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all posts that belong to the super admin's domain
         DB::table('posts')->where('installed_domain_id', 1)->delete();

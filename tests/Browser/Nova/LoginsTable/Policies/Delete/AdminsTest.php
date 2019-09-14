@@ -60,7 +60,7 @@ class AdminsTest extends LoginsTableBaseDuskTest
         $this->insertTestRecordIntoLoginsExcludeAdminLoginTable();
 
         $personTryingToLogin  = $this->loginAdminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

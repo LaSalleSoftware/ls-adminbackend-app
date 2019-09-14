@@ -65,7 +65,7 @@ class MenuItemForSuperadminsTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\Menu\TestMenuItemForSuperadmins**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser
@@ -95,7 +95,7 @@ class MenuItemForSuperadminsTest extends BlogTablesBaseDuskTestCase
     public function testMenuItemIsSuppressed()
     {
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all the records in the posts db table
         DB::table('posts')->where('installed_domain_id', 1)->delete();

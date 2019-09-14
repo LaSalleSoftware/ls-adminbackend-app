@@ -58,7 +58,7 @@ class SuperadminsTest extends ProfileTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\Policies\Addresses\Create\TestSuperadmins**";
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

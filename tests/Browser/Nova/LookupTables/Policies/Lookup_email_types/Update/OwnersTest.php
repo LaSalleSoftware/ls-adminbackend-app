@@ -60,7 +60,7 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
         $this->insertGenericLookupRecord('lookup_email_types');
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

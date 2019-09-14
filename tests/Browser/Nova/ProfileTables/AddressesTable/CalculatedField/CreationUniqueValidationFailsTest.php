@@ -88,7 +88,7 @@ class CreationUniqueValidationFailsTest extends LaSalleDuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $testFailsData       = $this->testFailsData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testFailsData, $pause) {
             $browser->visit('/login')

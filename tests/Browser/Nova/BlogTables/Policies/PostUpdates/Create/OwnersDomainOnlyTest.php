@@ -70,7 +70,7 @@ class OwnersDomainOnlyTest extends BlogTablesBaseDuskTestCase
 
         $login      = $this->loginOwnerBobBloom;
         $postTitles = $this->postTitles;
-        $pause      = $this->pause;
+        $pause      = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $postTitles, $pause) {
             $browser

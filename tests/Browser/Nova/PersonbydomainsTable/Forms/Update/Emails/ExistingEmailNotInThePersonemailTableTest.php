@@ -81,7 +81,7 @@ class ExistingEmailNotInThePersonemailTableTest extends PersonbydomainsTableBase
         // ACT AND ASSERT!
         $personTryingToLogin                 = $this->loginOwnerBobBloom;
         $newEmailListedInNovaServiceProvider = $this->newEmailListedInNovaServiceProvider;
-        $pause                               = $this->pause;
+        $pause                               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailListedInNovaServiceProvider, $pause) {
             $browser->visit('/login')

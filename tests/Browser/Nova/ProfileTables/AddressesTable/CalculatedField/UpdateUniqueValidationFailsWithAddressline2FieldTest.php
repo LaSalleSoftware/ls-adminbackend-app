@@ -85,7 +85,7 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends LaSalleDuskTe
         // going to use the data in the "testFails" var,
         // and then enter a value in the formerly null "address_line_2" field
         $testFailsData = $this->testFailsData;
-        $pause         = $this->pause;
+        $pause         = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testFailsData, $pause) {
             $browser->visit('/login')

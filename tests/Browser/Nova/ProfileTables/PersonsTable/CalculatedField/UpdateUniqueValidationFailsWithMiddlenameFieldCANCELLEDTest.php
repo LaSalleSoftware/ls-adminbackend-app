@@ -105,7 +105,7 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
         $personTryingToLogin = $this->personTryingToLogin;
         $testInitialNameWithMiddleNameData   = $this->testInitialNameWithMiddleNameData;
         $testInitialNameWithNoMiddleNameData = $this->testInitialNameWithNoMiddleNameData;
-        $pause                               = $this->pause;
+        $pause                               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin,
             $testInitialNameWithMiddleNameData,

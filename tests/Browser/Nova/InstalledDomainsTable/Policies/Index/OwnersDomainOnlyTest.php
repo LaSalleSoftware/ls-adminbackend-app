@@ -59,7 +59,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsTable\Policies\Index\TestOwnersDomainOnly**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

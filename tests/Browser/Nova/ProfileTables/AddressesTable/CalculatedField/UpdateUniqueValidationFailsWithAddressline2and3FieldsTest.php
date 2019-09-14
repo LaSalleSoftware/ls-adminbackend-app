@@ -86,7 +86,7 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends LaSalleD
         // and then enter values in the formerly null "address_line_2" and "address_line_3" fields
         //$testFailsData       = $this->testFailsData;
 
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

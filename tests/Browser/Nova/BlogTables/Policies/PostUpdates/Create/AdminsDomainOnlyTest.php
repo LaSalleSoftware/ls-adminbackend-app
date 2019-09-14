@@ -59,7 +59,7 @@ class AdminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
 
         $login      = $this->loginAdminDomain1;
         $postTitles = $this->postTitles;
-        $pause      = $this->pause;
+        $pause      = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $postTitles, $pause) {
             $browser

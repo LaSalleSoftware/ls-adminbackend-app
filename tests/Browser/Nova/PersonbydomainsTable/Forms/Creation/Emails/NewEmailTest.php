@@ -69,7 +69,7 @@ class NewEmailTest extends PersonbydomainsTableBaseDuskTest
         $personTryingToLogin = $this->loginOwnerBobBloom;
         $newEmailData        = $this->newEmailData;
         $newPersonData       = $this->newPersonData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $newEmailData, $newPersonData, $pause) {
             $browser->visit('/login')

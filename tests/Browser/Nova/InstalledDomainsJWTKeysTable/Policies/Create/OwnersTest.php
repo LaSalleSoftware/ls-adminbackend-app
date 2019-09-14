@@ -57,7 +57,7 @@ class OwnersTest extends InstalledDomainsTableBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsJWTKeysTable\Policies\Create\OwnersTest**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

@@ -62,7 +62,7 @@ class AttachAndAttachAnotherRoleExistsTest extends PersonbydomainsTableBaseDuskT
         echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Policies\Lookup_roles\Attach\TestAttachAndAttachAnotherRoleExists**";
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         // Act and Assert
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {

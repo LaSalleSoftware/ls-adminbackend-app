@@ -62,7 +62,7 @@ class SuppressCreateDueToNoPostsAdminTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\CreateSuppressed\TestSuppressCreateDueToNoPostsAdmin**";
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all posts that belong to the admin
         DB::table('posts')->where('personbydomain_id', 5)->delete();

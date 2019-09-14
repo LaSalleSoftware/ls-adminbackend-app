@@ -57,7 +57,7 @@ class AdminsTest extends InstalledDomainsTableBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsJWTKeysTable\Policies\Create\AdminsTest**";
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

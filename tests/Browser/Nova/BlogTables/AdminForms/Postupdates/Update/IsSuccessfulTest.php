@@ -58,7 +58,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Postupdates\Update\TestUpdateRecordIsSuccessful**";
 
         $login        = $this->loginOwnerBobBloom;
-        $pause        = $this->pause;
+        $pause        = $this->pause();
         $editPostData = $this->editPostData;
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause, $editPostData) {

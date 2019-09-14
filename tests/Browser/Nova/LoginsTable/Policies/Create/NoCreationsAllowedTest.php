@@ -58,7 +58,7 @@ class NoCreationsAllowedTest extends LoginsTableBaseDuskTest
         $this->insertTestRecordIntoLoginsExcludeOwnerLoginTable();
 
         $personTryingToLogin  = $this->loginOwnerBobBloom;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

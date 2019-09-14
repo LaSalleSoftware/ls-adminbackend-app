@@ -61,7 +61,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\CompaniesTable\Index\IsSuccessfulTest**";
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

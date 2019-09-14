@@ -60,7 +60,7 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\LookupTables\Policies\Lookupsocialtypes\Index\TestOwners**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

@@ -61,7 +61,7 @@ class MenuItemExposedForOwnersTest extends ProfileTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\ProfileTables\Policies\Socials\Menu\TestMenuItemExposedForOwnersIsSuccessful**";
 
         $login = $this->loginOwnerBobBloom;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

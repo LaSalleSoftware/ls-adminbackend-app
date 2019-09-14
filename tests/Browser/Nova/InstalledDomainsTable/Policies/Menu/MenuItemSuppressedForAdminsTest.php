@@ -60,7 +60,7 @@ class MenuItemExposedForAdminsTest extends InstalledDomainsTableBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsTable\Policies\Menu\TestMenuItemSuppressedForAdminsIsSuccessful**";
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

@@ -66,7 +66,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         //$this->updateInstalleddomainid();
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         // Act, Assert
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
@@ -111,7 +111,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         $this->updateInstalleddomainid();
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         // Act, Assert
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {

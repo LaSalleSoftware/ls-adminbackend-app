@@ -59,7 +59,7 @@ class AdminsTest extends InstalledDomainsTableBaseDuskTestCase
         $this->insertJWTKeys();
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

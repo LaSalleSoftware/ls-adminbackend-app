@@ -58,7 +58,7 @@ class SuperadminsTest extends LoginsTableBaseDuskTest
         $this->insertTestRecordIntoLoginsExcludeSuperadminLoginTable();
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

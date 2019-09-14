@@ -81,7 +81,7 @@ class UpdateUniqueValidationPassesTest extends LaSalleDuskTestCase
 
         $personTryingToLogin = $this->personTryingToLogin;
         $testPassesData      = $this->testPassesData;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $testPassesData, $pause) {
             $browser->visit('/login')

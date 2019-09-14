@@ -59,7 +59,7 @@ class SuperadminsTest extends InstalledDomainsTableBaseDuskTestCase
         $this->insertJWTKeys();
 
         $login = $this->loginSuperadminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser

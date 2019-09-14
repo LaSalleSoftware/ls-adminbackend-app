@@ -60,7 +60,7 @@ class UpdatePasswordIsSuccessfulTest extends PersonbydomainsTableBaseDuskTest
         echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Forms\Update\Password\UpdatePasswordIsSuccessfulTest**";
 
         $personTryingToLogin = $this->loginOwnerBobBloom;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser->visit('/login')

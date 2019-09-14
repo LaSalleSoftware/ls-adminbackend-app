@@ -64,7 +64,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         $this->updateInstalleddomainid();
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
@@ -108,7 +108,12 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         DB::table('personbydomain_lookup_roles')->where('id', 2)->update(['lookup_role_id' => 1]);
 
         $personTryingToLogin  = $this->loginSuperadminDomain1;
-        $pause                = $this->pause;
+        $pause                = $this->pause();
+
+
+        echo "\n\n pause is... ";
+        var_dump($pause);
+
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser

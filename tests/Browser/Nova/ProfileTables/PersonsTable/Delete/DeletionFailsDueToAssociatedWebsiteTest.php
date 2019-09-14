@@ -77,7 +77,7 @@ class DeletionFailsDueToAssociatedWebsiteTest extends LaSalleDuskTestCase
         $person = Person::orderBy('id', 'desc')->first();
 
         $personTryingToLogin = $this->personTryingToLogin;
-        $pause               = $this->pause;
+        $pause               = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $person, $pause) {
             $browser->visit('/login')

@@ -65,7 +65,7 @@ class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\Policies\Postupdates\Menu\TestMenuItemForAdmins**";
 
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         $this->browse(function (LaSalleBrowser $browser) use ($login, $pause) {
             $browser
@@ -95,7 +95,7 @@ class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
     public function testMenuItemIsSuppressed()
     {
         $login = $this->loginAdminDomain1;
-        $pause = $this->pause;
+        $pause = $this->pause();
 
         // Delete all the records in the posts db table
         DB::table('posts')->where('personbydomain_id', 5)->delete();

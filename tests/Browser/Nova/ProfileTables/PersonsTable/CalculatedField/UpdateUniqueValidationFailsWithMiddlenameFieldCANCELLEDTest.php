@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software class
 use Lasallesoftware\Library\Profiles\Models\Person;
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class

@@ -23,7 +23,7 @@
 namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Creation;
 
 // LaSalle Software classes
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class

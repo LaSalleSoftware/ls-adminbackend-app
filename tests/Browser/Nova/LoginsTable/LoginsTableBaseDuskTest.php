@@ -23,7 +23,7 @@
 namespace Tests\Browser\Nova\LoginsTable;
 
 // LaSalle Software
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 
 // Laravel Facade
 use Illuminate\Support\Facades\DB;

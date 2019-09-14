@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\LookupTables;
 // LaSalle Software classes
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;

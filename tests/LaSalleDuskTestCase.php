@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser;
+namespace Tests;
 
 use Tests\DuskTestCase;
 

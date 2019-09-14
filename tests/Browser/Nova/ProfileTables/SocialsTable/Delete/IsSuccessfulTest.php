@@ -23,7 +23,7 @@
 namespace Tests\Browser\Nova\ProfileTables\SocialsTable\Delete;
 
 // LaSalle Software
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class

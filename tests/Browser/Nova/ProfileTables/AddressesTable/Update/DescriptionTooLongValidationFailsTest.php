@@ -23,7 +23,7 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Update;
 
 // Laravel Software
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class

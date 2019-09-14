@@ -23,7 +23,7 @@
 namespace Tests\Browser\Nova\InstalledDomainsTable;
 
 // LaSalle Software
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 
 // Laravel facade
 use Illuminate\Support\Facades\DB;

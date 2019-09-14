@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;

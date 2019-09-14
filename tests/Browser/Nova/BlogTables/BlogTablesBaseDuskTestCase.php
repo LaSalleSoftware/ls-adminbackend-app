@@ -22,7 +22,7 @@
 
 namespace Tests\Browser\Nova\BlogTables;
 
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 
 class BlogTablesBaseDuskTestCase extends LaSalleDuskTestCase
 {

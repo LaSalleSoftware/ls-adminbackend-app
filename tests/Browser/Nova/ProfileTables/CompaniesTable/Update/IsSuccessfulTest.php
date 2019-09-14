@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\ProfileTables\CompaniesTable\Update;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Profiles\Models\Company;
-use Tests\Browser\LaSalleDuskTestCase;
+use Tests\LaSalleDuskTestCase;
 use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 
 // Laravel class

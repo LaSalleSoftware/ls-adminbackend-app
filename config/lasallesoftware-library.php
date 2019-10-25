@@ -115,6 +115,56 @@ return [
 
     /*
 	|--------------------------------------------------------------------------
+	| Filesystem Disk Where Images Are Stored
+	|--------------------------------------------------------------------------
+	|
+	| Which of the 'disks' in config\filesystems.php is used to store images? eg: 'local', 'public', 's3'.
+	|
+	| Beware that if you use the 'local' filesystem disk, then images will *not* be available to all
+    | apps -- just the app that saved the image.
+	|
+	| So, generally, 's3' (or another cloud provider) is used.
+	|
+	*/
+    'lasalle_filesystem_disk_where_images_are_stored'  => 's3',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Social Media Tag Image
+    |--------------------------------------------------------------------------
+    |
+    | When no social media image is specified, use this image.
+    |
+    | Specify the full URL!
+    |
+    | A social media tag is a Twitter card meta tag, or an Open Graph meta card, or something of that nature.
+    |
+    | According to https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup,
+    | "URL of image to use in the card. Images must be less than 5MB in size. JPG, PNG, WEBP and GIF
+    | formats are supported. Only the first frame of an animated GIF will be used. SVG is not supported."
+    |
+    */
+    'lasalle_social_media_meta_tag_default_image'  => 'https://lasallesoftware.ca/buffalo-bills.jpg',
+
+    /*
+	|--------------------------------------------------------------------------
+	| Default Featured Image
+	|--------------------------------------------------------------------------
+	|
+	| When no featured image is specified, use this image.
+	|
+	| Specify the type of image by commenting out the types that do not apply.
+    |  * "external_file" = what you want in the "src" of the IMG html tag (<img src="" >)
+    |                      such as a full URL where the image resides, or base64 code
+    |  * "code" = the entire html code encompassing the image, that will be rendered in html literally
+	|
+	*/
+    'lasalle_featured_image_default_type'  => 'external_file',
+    //'lasalle_featured_image_default_type'  => 'code',
+    'lasalle_featured_image_default_image' => '/buffalo-bills.jpg',
+
+    /*
+	|--------------------------------------------------------------------------
 	| Excerpt Length
 	|--------------------------------------------------------------------------
 	|

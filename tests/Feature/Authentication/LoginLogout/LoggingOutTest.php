@@ -38,7 +38,7 @@ class LoggingOutTest extends TestCase
      */
     public function test_I_logout_successfully_with_the_lasalleguard_logout_method()
     {
-        echo "\n**Now testing Tests\Feature\Library\Authentication\LoginLogout\LoggingOutTest**";
+        echo "\n**Now testing Tests\Feature\Authentication\LoginLogout\LoggingOutTest**";
 
         // Simulate my logging in
         $response = $this

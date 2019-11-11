@@ -140,4 +140,47 @@ return [
 	*/
     'how_many_initial_chars_of_content_field_for_excerpt' => '400',
 
+    /*
+    | ========================================================================
+    | START: MIDDLEWARE
+    | ========================================================================
+    */
+
+    /*
+	|--------------------------------------------------------------------------
+	| Do The Whitelist Check For Web Middleware
+	|--------------------------------------------------------------------------
+	|
+	| There is a whitelist middleware.
+    |
+    | This middleware allows selected IP addresses access to the site.
+	|
+	| This middleware is assigned to the "web" middleware group only.
+    |
+    | Note: this check does *not* necessarily relate to logging in. Relates to routes associated with the
+    |       "web" middleware group.
+    |
+    | Note: for "web" middleware associated routes, when *not* on whitelist then access denied! (401 Unauthorized)
+	|
+	*/
+    'web_middleware_do_whitelist_check' => env('LASALLE_WEB_MIDDLEWARE_DO_WHITELIST_CHECK', 'no'),
+
+    /*
+	|--------------------------------------------------------------------------
+	| Whitelisted IP Addresses
+	|--------------------------------------------------------------------------
+	|
+	| IP addresses allowed access to the "web" middleware group.
+    |
+    | Must be an array of IP addresses.
+	|
+	*/
+    'web_middleware_whitelist_ip_addresses' => [],
+
+    /*
+    | ========================================================================
+    | END: MIDDLEWARE
+    | ========================================================================
+    */
+
 ];

@@ -37,7 +37,7 @@ class LasalleGuardTest extends TestCase
      */
     public function test_the_user_method_returns_a_user_when_a_user_is_logged_in()
     {
-        echo "\n**Now testing Tests\Feature\Library\Authentication\LoginLogout\LasalleGuardTest**";
+        echo "\n**Now testing Tests\Feature\Authentication\LoginLogout\LasalleGuardTest**";
 
         // A user has to be logged in for lasalleguard::user() to return a user!
         $response = $this

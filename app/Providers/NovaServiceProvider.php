@@ -92,6 +92,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
+     * Get the extra dashboards that should be displayed on the Nova dashboard.
+     *
+     * @return array
+     */
+    protected function dashboards()
+    {
+        return [];
+    }
+
+    /**
      * Get the tools that should be listed in the Nova sidebar.
      *
      * @return array

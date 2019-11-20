@@ -54,8 +54,7 @@
         "lcobucci/jwt": "^3.3",
         "league/flysystem-aws-s3-v3": "^1.0",
         "lasallesoftware/lsv2-library-pkg": "dev-master",
-        "lasallesoftware/lsv2-blogfrontend-pkg": "dev-master",
-        "lasallesoftware/lsv2-lasalleui-pkg": "dev-master"
+        "lasallesoftware/lsv2-blogbackend-pkg": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

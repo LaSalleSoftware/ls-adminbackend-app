@@ -87,11 +87,11 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Addresses')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertVisible('@1-row')
                 ->assertSee('Create Address')
 
@@ -102,7 +102,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->assertSee('Update Address')
                 ->type('@description', $updatedData['description'])
                 ->click('@update-button')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

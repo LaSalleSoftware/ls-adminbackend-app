@@ -53,7 +53,7 @@ class SuperadminsTest extends LoginsTableBaseDuskTest
      * @group novaLoginPoliciesDelete
      * @group novaLoginPoliciesDeleteSuperadmins
      */
-    public function testOwners()
+    public function testSuperadmins()
     {
         echo "\n**Now testing Tests\Browser\Nova\LoginsTable\Policies\Delete\TestSuperadmins**";
 
@@ -68,9 +68,9 @@ class SuperadminsTest extends LoginsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertMissing('Logins')
             ;
         });

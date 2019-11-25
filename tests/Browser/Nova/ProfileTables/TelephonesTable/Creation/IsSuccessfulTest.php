@@ -95,14 +95,14 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Telephone Numbers')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertVisible('@1-row')
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Telephone Number')
                 ->assertSelectHasOptions('@lookup_telephone_type', [1,2,3,4])
                 //->type('@country_code',            $newData['country_code'])  **commented out because the default should be 1**
@@ -113,7 +113,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Telephone Number Details')
             ;
 

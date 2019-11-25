@@ -64,12 +64,12 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
-                ->assertDontSee('Personbydomains')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->visit('/nova/resources/peoplebydomain/new?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause($pause['medium'])
+                ->assertDontSee('Personbydomains')  // the menu item in the sidebar of this name should not be visible
+                ->pause($pause['long'])
                 ->assertPathIs('/nova/404')
             ;
         });

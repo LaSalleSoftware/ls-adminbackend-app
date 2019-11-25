@@ -72,12 +72,12 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Personbydomains')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertMissing('@1-delete-button')  // Record #1 is in the "do not delete" array
                 ->assertMissing('@2-delete-button')
                 ->assertMissing('@3-delete-button')
@@ -110,21 +110,16 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
         $personTryingToLogin  = $this->loginSuperadminDomain1;
         $pause                = $this->pause();
 
-
-        echo "\n\n pause is... ";
-        var_dump($pause);
-
-
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $pause) {
             $browser
                 ->visit('/login')
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
+                ->assertSee('Lookup User Roles')  // just an added assert that this menu item is visible in the sidebar
                 ->clickLink('Personbydomains')
                 ->waitFor('@4-row')
 

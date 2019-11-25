@@ -70,12 +70,12 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
+                ->assertSee('Lookup User Roles')  // just an added assert that this menu item is visible in the sidebar
                 ->clickLink('Personbydomains')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
 
                 ->assertMissing('@1-edit-button')  // although this is the domain the super admin belongs to,
                                                            // a super admin should not be editing an owner
@@ -113,11 +113,11 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->visit('/nova/resources/personbydomains/1/edit?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertPathIs('/nova/403')
             ;
         });

@@ -57,6 +57,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
      * @group nova
      * @group novaprofiletables
      * @group novaperson
+     * @group novapersondelete
      * @group novapersondeletesucceeds
      */
     public function testDeletionFailsDueToAssociatedAddress()
@@ -80,19 +81,21 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
                 ->waitFor('@search')
+                ->pause($pause['long'])
                 ->type('@search', $person->name_calculated)
                 ->waitFor('@' . $person->id . '-row')
+                ->pause($pause['long'])
                 ->assertVisible('@' . $person->id . '-row')
                 ->assertVisible('@' . $person->id . '-delete-button')
                 ->click('@' . $person->id . '-delete-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->click('#confirm-delete-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
              ;
         });
 

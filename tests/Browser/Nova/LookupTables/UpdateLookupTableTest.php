@@ -73,16 +73,16 @@ class UpdateLookupTableTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->visit('/nova/resources/lookup_address_types/6/edit')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Update Lookup Address Type')
                 ->type('@title', $updatedLookupTableData['title'])
                 ->type('@description', $updatedLookupTableData['description'])
                 ->click('@update-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
             ;
 
             $lookup_address_type = Lookup_address_type::find(6);
@@ -116,12 +116,12 @@ class UpdateLookupTableTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/6/edit?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertDontSee('Edit Lookup Address Type')
             ;
         });

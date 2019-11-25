@@ -93,11 +93,11 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends LaSalleD
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Addresses')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
 
                 // update to enter a value in the address_line_2 field
                 ->click('@1-edit-button')
@@ -106,20 +106,20 @@ class UpdateUniqueValidationFailsWithAddressline2and3FieldsTest extends LaSalleD
                 // enter a value in the currently null "address_line_2" field
                 // which makes this address a completely new address; ie, *not* unique
                 ->type('@address_line_2', 'in the loop')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
 
                 ->click('@update-button')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
                 ->assertSee('Address Details')
 
                 // ok, now update again with a new value for the address_line_3 field
                 ->click('@edit-resource-button')
                 ->waitFor('@update-button')
                 ->type('@address_line_3', 'in the loop')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
 
                 ->click('@update-button')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
                 ->assertSee('Address Details')
             ;
         });

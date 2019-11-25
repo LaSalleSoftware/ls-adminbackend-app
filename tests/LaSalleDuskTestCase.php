@@ -51,4 +51,16 @@ class LaSalleDuskTestCase extends DuskTestCase
             'debug'    => $debug,
         ];
     }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        // https://github.com/fzaninotto/Faker/issues/1125
+        // https://www.php.net/manual/en/function.gc-collect-cycles.php
+        // https://stackoverflow.com/questions/2461762/force-freeing-memory-in-php
+        gc_enable();
+        gc_collect_cycles();
+
+    }
 }

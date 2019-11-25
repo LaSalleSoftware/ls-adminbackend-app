@@ -66,13 +66,13 @@ class OwnersTest extends LoginsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Logins')
                 ->clickLink('Logins')
-                ->waitFor('@1-row')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
+                ->pause($pause['long'])
 
                 // All four delete buttons should be visible
                 ->assertVisible('@1-delete-button')

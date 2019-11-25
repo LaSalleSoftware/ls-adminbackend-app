@@ -69,8 +69,8 @@ class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
                 ->type('email',    $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertMissing('Create Tag')
             ;
         });

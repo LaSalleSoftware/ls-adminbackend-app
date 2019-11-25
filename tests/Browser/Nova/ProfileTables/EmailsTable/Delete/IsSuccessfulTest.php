@@ -67,11 +67,11 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Email Addresses')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
 
                 // the first three emails in the emails table are not delete-able
                 ->assertMissing('@1-delete-button')
@@ -80,9 +80,9 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->assertVisible('@4-delete-button')
 
                 ->click('@4-delete-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->click('#confirm-delete-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
             ;
         });
 

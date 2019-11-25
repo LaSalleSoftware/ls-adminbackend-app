@@ -64,10 +64,10 @@ class MenuItemExposedForSuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
+                ->assertSee('Lookup User Roles')
             ;
         });
     }

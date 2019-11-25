@@ -68,37 +68,38 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
 
-                ->waitFor('@sort-id')
+                //->waitFor('@sort-id')
+                ->pause($pause['long'])
 
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
 
 
                 /* keeping this code for reference! I couldn't figure out how to select "per page" to
                    be "100", so I just next-ed through the pagination. Ugh, until it dawned on me
                    that I could click the "sort-id". Doh!
 
-                ->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
-                ->click('@next')->pause($pause['medium'])
+                ->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
+                ->click('@next')->pause($pause['long'])
 
                 */
 

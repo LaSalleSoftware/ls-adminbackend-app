@@ -43,7 +43,7 @@ class MenuItemSuppressedForAdminsTest extends PersonbydomainsTableBaseDuskTest
     }
 
     /**
-     * Test that the creation is successful
+     * Test the menu item is suppressed for admins
      *
      * @group nova
      * @group novaPersonbydomain
@@ -64,10 +64,9 @@ class MenuItemSuppressedForAdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
-                ->assertDontSee('Personbydomains')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertDontSee('Lookup User Roles')
             ;
         });
     }

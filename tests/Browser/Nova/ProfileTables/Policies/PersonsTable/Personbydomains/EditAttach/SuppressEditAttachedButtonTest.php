@@ -66,13 +66,13 @@ class SuppressEditAttachedButtonTest extends ProfileTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('People')
 
                 ->clickLink('People')
-                ->waitFor('@306-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->assertVisible('@306-view-button')
 

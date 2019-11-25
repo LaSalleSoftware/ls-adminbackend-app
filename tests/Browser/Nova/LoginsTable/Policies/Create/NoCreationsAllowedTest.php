@@ -66,13 +66,13 @@ class NoCreationsAllowedTest extends LoginsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Logins')
                 ->clickLink('Logins')
-                ->waitFor('@1-row')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
+                ->pause($pause['long'])
 
                 // The "Create Login" button is nowhere to be found
                 ->assertMissing('Create Login')

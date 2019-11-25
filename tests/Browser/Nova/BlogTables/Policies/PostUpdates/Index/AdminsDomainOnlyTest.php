@@ -69,12 +69,12 @@ class AdminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Post Updates')
                 ->clickLink('Post Updates')
-                ->waitFor('@2-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Post Update')
 
                 // Admin should see the one post update that they authored

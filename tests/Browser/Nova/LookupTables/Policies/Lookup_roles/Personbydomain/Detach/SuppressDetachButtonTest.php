@@ -67,13 +67,13 @@ class SuppressDetachButtonTest extends LookupTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Lookup User Roles')
 
                 ->clickLink('Lookup User Roles')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Lookup User Role')
                 ->assertVisible('@2-view-button')
 

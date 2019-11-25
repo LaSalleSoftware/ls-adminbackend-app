@@ -67,11 +67,11 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Email Addresses')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
 
                 // there should be four data rows displaying
                 ->assertVisible('@1-row')

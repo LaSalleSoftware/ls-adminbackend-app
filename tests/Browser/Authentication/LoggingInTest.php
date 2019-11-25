@@ -70,8 +70,8 @@ class LoggingInTest extends DuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause(5000)
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
              ;
         });
 

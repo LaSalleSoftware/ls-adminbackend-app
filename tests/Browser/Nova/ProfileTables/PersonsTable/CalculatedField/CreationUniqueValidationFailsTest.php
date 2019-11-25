@@ -96,14 +96,14 @@ class CreationUniqueValidationFailsTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->type('@first_name', $testFailsData['first_name'])
                 ->type('@middle_name', $testFailsData['middle_name'])
@@ -112,7 +112,7 @@ class CreationUniqueValidationFailsTest extends LaSalleDuskTestCase
                 ->type('@description', $testFailsData['description'])
                 ->type('@comments', $testFailsData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('This person already exists');
             ;
         });

@@ -101,14 +101,14 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->type('@first_name',  $testNameWithMiddleNameData['first_name'])
                 ->type('@surname',     $testNameWithMiddleNameData['surname'])
@@ -116,7 +116,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
                 ->type('@description', $testNameWithMiddleNameData['description'])
                 ->type('@comments',    $testNameWithMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
             ;
         });
@@ -128,16 +128,16 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
                 ->click('@create-button')            <== DUSK CANNOT CLICK THIS!!
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->type('@first_name',  $testNameWithMiddleNameData['first_name'])
                 ->type('@middle_name', $testNameWithMiddleNameData['middle_name'])
@@ -146,7 +146,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
                 ->type('@description', $testNameWithMiddleNameData['description'])
                 ->type('@comments',    $testNameWithMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
             ;
         });
@@ -159,7 +159,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
         $this->browse(function (LaSalleBrowser $browser) use ($personTryingToLogin, $person, $pause) {
             $browser
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
 
                 ->waitFor('@' . $person->id . '-row')
                 ->assertVisible('@' . $person->id . '-edit-button')
@@ -169,7 +169,7 @@ class UpdateUniqueValidationFailsWithNoMiddlenameFieldCANCELLEDTest extends LaSa
                 ->assertSee('Update Person')
                 ->type('@middle_name', '  ')
                 ->click('@update-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('This person already exists')
             ;
         });

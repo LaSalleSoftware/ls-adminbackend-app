@@ -67,11 +67,11 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['short'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertMissing('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/5')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertDontSee('Details')   // In lieu of getting Laravel's 403/404 page
             ;
         });

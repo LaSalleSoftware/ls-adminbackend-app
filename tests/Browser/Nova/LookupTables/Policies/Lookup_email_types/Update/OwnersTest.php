@@ -68,12 +68,12 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Lookup Email Types')
                 ->clickLink('Lookup Email Types')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Lookup Email Type')
 
                 // The first 4 records are not edit-able!

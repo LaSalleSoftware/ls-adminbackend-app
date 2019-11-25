@@ -81,14 +81,14 @@ class CreationUniqueValidationPassesTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Telephone Numbers')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Telephone Number')
                 //->type('@country_code',            $newData['country_code'])  **commented out because the default should be 1**
                 ->type('@area_code',               $newData['area_code'])
@@ -98,7 +98,7 @@ class CreationUniqueValidationPassesTest extends LaSalleDuskTestCase
                 ->type('@description',             $newData['description'])
                 ->type('@comments',                $newData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Telephone Number Details')
             ;
         });

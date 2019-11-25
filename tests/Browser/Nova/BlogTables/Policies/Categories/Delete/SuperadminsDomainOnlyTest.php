@@ -66,12 +66,12 @@ class SuperadminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Categories')
                 ->clickLink('Categories')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Category')
                 ->assertMissing('@1-delete-button')   //at least one post has this category, so cannot delete
                 ->assertMissing('@2-delete-button')   //at least one post has this category, so cannot delete

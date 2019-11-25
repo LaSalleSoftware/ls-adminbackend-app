@@ -73,12 +73,12 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Lookup LaSalle Software Events')
                 ->clickLink('Lookup LaSalle Software Events')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Lookup LaSalle Software Event')
 
                 // The first 5 records are not delete-able!

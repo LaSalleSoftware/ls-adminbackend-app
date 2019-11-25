@@ -73,16 +73,16 @@ class SuppressCreateDueToNoPostsOwnerTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
 
                 // There should be no "Post Updates" menu item
                 ->assertDontSee('Post Updates')
 
                 // Well, let's go to the post updates listing anyways via direct url
                 ->visit('/nova/resources/postupdates')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Post Updates')
 
                 // The "Create Post Update" button should be missing

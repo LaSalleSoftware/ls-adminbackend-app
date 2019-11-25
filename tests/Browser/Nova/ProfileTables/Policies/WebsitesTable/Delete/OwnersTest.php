@@ -71,12 +71,12 @@ class OwnersTest extends ProfileTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Websites')
                 ->clickLink('Websites')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertSee('Create Website')
 
                 // The first record is not delete-able!

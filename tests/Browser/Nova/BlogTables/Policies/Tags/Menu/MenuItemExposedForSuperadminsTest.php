@@ -69,12 +69,12 @@ class MenuItemExposedForSuperadminsTest extends BlogTablesBaseDuskTestCase
                 ->type('email',    $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Tags')
                 ->clickLink('Tags')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->assertSee('Create Tag')
             ;
         });

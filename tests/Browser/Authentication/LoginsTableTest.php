@@ -78,21 +78,17 @@ class LoginsTableTest extends DuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause(5000)
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->pause(5000)  // THIS PAUSE IS ACTUALLY FOR THE TEST ITSELF! TO PURPOSELY CREATE ENOUGH OF
                                           //  TIME GAP THAT WE CAN OBSERVE THE TIME GAP BETWEEN created_at and UPDATED_AT
                                           //  VISUALLY -- AND TO ENSURE THAT OUR TEST WILL PASS. It's just 5 seconds, but...
-            ;
-        });
 
-        // Ok, good, we are logged in. We see the dashboard. Nice! So, now, we want to do another request, so let's
-        // go to addresses, just for the sake of going somewhere other than the dashboard, so that we can test that
-        // we got another request going
-        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
-            $browser
+                // Ok, good, we are logged in. Nice! So, now, we want to do another request, so let's go to addresses,
+                // just for the sake of initiating another request cycle, so that we can test that "updated_by"
                 ->clickLink('Addresses')
-                ->waitFor('@1-row')
+                //->waitFor('@1-row')
+                ->pause(5000)
                 ->assertSee('Create Address')
             ;
         });

@@ -67,14 +67,14 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Post Updates')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->assertSee('Create Post Update')
                 ->clickLink('Create Post Update')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->assertSee('Create Post Update')
 
 
@@ -84,7 +84,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
                 ->click('[dusk="posts-search-input"]')
                 ->pause(100)
                 ->type('[dusk="posts-search-input"] input', $newPostupdateData['post_title'])
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->keys('[dusk="posts-search-input"] input', ['{enter}'])
 
 
@@ -92,7 +92,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
                 ->type('@title',           $newPostupdateData['title'])
                 ->typeTrix('trix-content', $newPostupdateData['content'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Post Update Details')
             ;
 

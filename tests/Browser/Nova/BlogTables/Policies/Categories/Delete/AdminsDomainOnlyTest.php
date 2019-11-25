@@ -66,9 +66,9 @@ class AdminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertDontSee('Categories')     // Admins are not supposed to see the "Categories" menu item!
                 ->visit('/nova/resources/categories')
                 ->pause($pause['long'])

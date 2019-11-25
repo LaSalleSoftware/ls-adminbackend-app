@@ -65,12 +65,12 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Posts')
-                ->pause($pause['shortest'])
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
+                ->pause($pause['long'])
                 ->assertVisible('@1-row')
             ;
         });

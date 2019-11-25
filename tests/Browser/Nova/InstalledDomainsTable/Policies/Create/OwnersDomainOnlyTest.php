@@ -66,12 +66,12 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Installed Domains')
                 ->clickLink('Installed Domains')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertDontSee('Create Installed Domain')
             ;
         });
@@ -98,12 +98,12 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Installed Domains')
                 ->visit('nova/resources/installed_domains/new?viaResource=&viaResourceId=&viaRelationship')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->assertSee('403')
             ;
         });

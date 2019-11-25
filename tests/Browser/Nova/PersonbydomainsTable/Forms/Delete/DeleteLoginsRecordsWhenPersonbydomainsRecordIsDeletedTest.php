@@ -112,17 +112,17 @@ class DeleteLoginsRecordsWhenPersonbydomainsRecordIsDeletedTest extends Personby
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Personbydomains')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->waitFor('@6-row')
                 ->click('@6-delete-button')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->click('#confirm-delete-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
             ;
         });
 

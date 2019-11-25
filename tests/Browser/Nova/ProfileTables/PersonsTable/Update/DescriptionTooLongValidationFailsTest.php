@@ -71,7 +71,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
      *
      * @group nova
      * @group novaprofiletables
-     * @group novaperson
+     * @group novap1`erson
      * @group novapersonupdatedesriptioncvalidation
      */
     public function testDescriptionTooLongValidationFails()
@@ -87,15 +87,16 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
 
-                ->waitFor('@sort-id')
+                //->waitFor('@sort-id')
+                ->pause($pause['long'])
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
 
 
                 ->waitFor('@4-row')
@@ -106,7 +107,7 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->assertSee('Update Person')
                 ->type('@description',    $newData['description'])
                 ->click('@update-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('The description may not be greater than 255 characters')
             ;
         });

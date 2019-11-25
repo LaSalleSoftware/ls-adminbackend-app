@@ -66,15 +66,15 @@ class SuperadminsTest extends LoginsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertMissing('Logins')
 
                 // Can go to the index view via direct URL, because there is no policy to prevent it. Instead,
                 // we control what records are listed via IndexQuery
                 ->visit('/nova/resources/logins/')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertMissing('@1-row')
                 ->assertMissing('@2-row')
                 ->assertMissing('@3-row')

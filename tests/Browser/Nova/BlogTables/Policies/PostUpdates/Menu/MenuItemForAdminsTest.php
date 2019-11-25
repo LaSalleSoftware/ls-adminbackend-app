@@ -36,7 +36,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 // Laravel facade
 use Illuminate\Support\Facades\DB;
 
-class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
+class MenuItemForAdminsTest extends BlogTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 
@@ -73,9 +73,9 @@ class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Post Updates')
             ;
         });
@@ -106,9 +106,9 @@ class MenuItemSuppressedForAdminsTest extends BlogTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertDontSee('Post Updates')
             ;
         });

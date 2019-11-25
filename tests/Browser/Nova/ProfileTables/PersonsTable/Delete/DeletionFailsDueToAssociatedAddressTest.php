@@ -57,6 +57,7 @@ class DeletionFailsDueToAssociatedAddressTest extends LaSalleDuskTestCase
      * @group nova
      * @group novaprofiletables
      * @group novaperson
+     * @group novapersondelete
      * @group novapersondeletefailsassociatedaddress
      */
     public function testDeletionFailsDueToAssociatedAddress()
@@ -83,11 +84,12 @@ class DeletionFailsDueToAssociatedAddressTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@search')
+                //->waitFor('@search')
+                ->pause($pause['long'])
                 ->type('@search', $person->name_calculated)
                 ->waitFor('@' . $person->id . '-row')
                 ->assertVisible('@' . $person->id . '-row')

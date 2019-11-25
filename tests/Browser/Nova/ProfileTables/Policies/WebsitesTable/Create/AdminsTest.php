@@ -66,12 +66,12 @@ class AdminsTest extends ProfileTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertMissing('Websites')
                 ->visit('/nova/resources/websites/new?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertDontSee('Create')  // In lieu of getting Laravel's 403/404 page
             ;
         });

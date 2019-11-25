@@ -43,8 +43,6 @@ class JWTMiddlewareTest extends TestCase
     /**
      * Test a get endpoint with the JWTMiddleware invoked.
      *
-     *          *** THIS TEST USES A TEMPORARY ENDPOINT. EXPECT TO NEED IT CHANGED LATER!! ***
-     *
      * @group authentication
      * @group authenticationJwt
      * @group authenticationJwtJWTMiddleware
@@ -55,31 +53,36 @@ class JWTMiddlewareTest extends TestCase
         echo "\n**Now testing Tests\Feature\Authentication\JWT\JWTMiddlewareTest**";
 
         // Arrange
-        $signer = new Sha256();
         $time   = time();
         $signer = new Sha256();
 
         $uuidGenerator = new UuidGenerator();
         $uuid          = $uuidGenerator->createUuid(1);
 
-        $key = DB::table('installed_domains_jwt_keys')->where('installed_domain_id', 5)->pluck('key')->first();
+        $jwtKey        = DB::table('installed_domains_jwt_keys')->where('installed_domain_id', 5)->pluck('key')->first();
+        $clientDomain  = DB::table('installed_domains')->where('id', 5)->pluck('title')->first();
+        $backendDomain = DB::table('installed_domains')->where('id', 1)->pluck('title')->first();
 
         // This is the token that is simulated to come from the client domain. Using the same key as the API domain.
         $token = (new Builder())
-            ->issuedBy('hackintosh.lsv2-basicfrontend-app.com')
-            ->permittedFor('hackintosh.lsv2-adminbackend-app.com')
+            ->issuedBy($clientDomain)
+            ->permittedFor($backendDomain)
             ->identifiedBy($uuid, true)
             ->issuedAt($time)
             ->canOnlyBeUsedAfter($time + 60)
             ->expiresAt($time + 3600)
             ->withClaim('uid', 1)
-            ->getToken($signer, new Key($key))  // *** GENERATES AND SIGNS THE TOKEN
+            ->getToken($signer, new Key($jwtKey))  // *** GENERATES AND SIGNS THE TOKEN
         ;
 
         // Act
         $response = $this
-            ->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept' => 'application/json',])
-            ->get('/api/v1/testapi')
+            ->withHeaders([
+                'Authorization'    => 'Bearer ' . $token,
+                'RequestingDomain' => $backendDomain,
+                'Accept'           => 'application/json',
+                ])
+            ->get('/api/v1/allblogposts')
         ;
 
         // Assert
@@ -89,37 +92,94 @@ class JWTMiddlewareTest extends TestCase
     /**
      * Test a get endpoint with the JWTMiddleware invoked.
      *
-     *          *** THIS TEST USES A TEMPORARY ENDPOINT. EXPECT TO NEED IT CHANGED LATER!! ***
+     * Fails due to bad JWT key.
      *
      * @group authentication
      * @group authenticationJwt
      * @group authenticationJwtJWTMiddleware
-     * @group authenticationJwtJWTMiddlewareNotvalidates
+     * @group authenticationJwtJWTMiddlewareNotvalidatesduetobadjwtkey
      */
-    public function testNotValidates()
+    public function testNotValidatesDueToBadJWTKey()
     {
-        echo "\n**Now testing Tests\Feature\Authentication\JWT\JWTMiddlewareTest**";
-
         // Arrange
         $time   = time();
         $signer = new Sha256();
 
+        $uuidGenerator = new UuidGenerator();
+        $uuid          = $uuidGenerator->createUuid(1);
+
+        $jwtKey        = 'wrong-key';
+        $clientDomain  = DB::table('installed_domains')->where('id', 5)->pluck('title')->first();
+        $backendDomain = DB::table('installed_domains')->where('id', 1)->pluck('title')->first();
+
         // This is the token that is simulated to come from the client domain. Using a different key as the API domain.
         $token = (new Builder())
-            ->issuedBy('hackintosh.lsv2-basicfrontend-app.com')
-            ->permittedFor('hackintosh.lsv2-adminbackend-app.com')
-            ->identifiedBy('4f1g23a12aa', true)         // not validate due to wrong JTI claim (ie, no uuid)
+            ->issuedBy($clientDomain)
+            ->permittedFor($backendDomain)
+            ->identifiedBy($uuid, true)
             ->issuedAt($time)
             ->canOnlyBeUsedAfter($time + 60)
             ->expiresAt($time + 3600)
             ->withClaim('uid', 1)
-            ->getToken($signer, new Key('wrong-key'))                       // not validate because the key is wrong
+            ->getToken($signer, new Key($jwtKey))                       // not validate because the key is wrong
         ;
 
         // Act
         $response = $this
-            ->withHeaders(['Authorization' => 'Bearer ' . $token, 'Accept' => 'application/json',])
-            ->get('/api/v1/testapi')
+            ->withHeaders([
+                'Authorization'    => 'Bearer ' . $token,
+                'RequestingDomain' => $backendDomain,
+                'Accept'           => 'application/json',
+            ])
+            ->get('/api/v1/allblogposts')
+        ;
+
+        // Assert
+        $response->assertStatus(403);
+    }
+
+    /**
+     * Test a get endpoint with the JWTMiddleware invoked.
+     *
+     * Fails due to bad UUID in the JTI claim.
+     *
+     * @group authentication
+     * @group authenticationJwt
+     * @group authenticationJwtJWTMiddleware
+     * @group authenticationJwtJWTMiddlewareNotvalidatesduetobaduuid
+     */
+    public function testNotValidatesDueToBadUuid()
+    {
+        // Arrange
+        $time   = time();
+        $signer = new Sha256();
+
+        $uuid          = 'wrong-uuid';
+
+        $jwtKey        = DB::table('installed_domains_jwt_keys')->where('installed_domain_id', 5)->pluck('key')->first();
+        $clientDomain  = DB::table('installed_domains')->where('id', 5)->pluck('title')->first();
+        $backendDomain = DB::table('installed_domains')->where('id', 1)->pluck('title')->first();
+
+        // This is the token that is simulated to come from the client domain. Using a different key as the API domain.
+        $token = (new Builder())
+            ->issuedBy($clientDomain)
+            ->permittedFor($backendDomain)
+            ->identifiedBy($uuid, true)         // not validate due to wrong JTI claim (ie, no uuid)
+            ->issuedAt($time)
+            ->canOnlyBeUsedAfter($time + 60)
+            ->expiresAt($time + 3600)
+            ->withClaim('uid', 1)
+            ->getToken($signer, new Key($jwtKey))
+        ;
+
+        // Act
+        $response = $this
+            ->withHeaders([
+                'Authorization'    => 'Bearer ' . $token,
+                'RequestingDomain' => $backendDomain,
+                'Accept'           => 'application/json',
+            ])
+            ->get('/api/v1/allblogposts')
         ;
 
         // Assert

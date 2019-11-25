@@ -84,15 +84,16 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
 
-                ->waitFor('@sort-id')
+                //->waitFor('@sort-id')
+                ->pause($pause['long'])
                 ->assertVisible('@sort-id')
                 ->click('@sort-id')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
 
                 ->waitFor('@4-row')
                 ->assertVisible('@4-edit-button')
@@ -107,7 +108,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('@description', $newData['description'])
                 ->type('@comments', $newData['comments'])
                 ->click('@update-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
             ;
 

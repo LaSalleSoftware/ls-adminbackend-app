@@ -66,11 +66,11 @@ class SuperadminsDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->visit('nova/resources/installed_domains/1/edit?viaResource=&viaResourceId=&viaRelationship=')
-                ->pause($pause['shortest'])
+                ->pause($pause['long'])
                 ->assertSee('403')
             ;
         });

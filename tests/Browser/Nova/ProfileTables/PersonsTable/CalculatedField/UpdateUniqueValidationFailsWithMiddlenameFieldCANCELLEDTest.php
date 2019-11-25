@@ -115,16 +115,16 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
 
                 // STEP 1: Create the new person with the middle_name
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->type('@first_name',  $testInitialNameWithMiddleNameData['first_name'])
                 ->type('@middle_name', $testInitialNameWithMiddleNameData['middle_name'])
@@ -133,16 +133,16 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
                 ->type('@description', $testInitialNameWithMiddleNameData['description'])
                 ->type('@comments',    $testInitialNameWithMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
 
                 // STEP 2: Create a new person with the exact same field values except for the middle_name
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
                 ->assertVisible('@create-button')
                 ->click('@create-button')
-                ->pause($pause['medium'])
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
+                ->pause($pause['long'])
                 ->assertSee('Create Person')
                 ->type('@first_name',  $testInitialNameWithNoMiddleNameData['first_name'])
                 ->type('@middle_name', $testInitialNameWithNoMiddleNameData['middle_name'])
@@ -151,7 +151,7 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
                 ->type('@description', $testInitialNameWithNoMiddleNameData['description'])
                 ->type('@comments',    $testInitialNameWithNoMiddleNameData['comments'])
                 ->click('@create-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('Person Details')
             ;
         });
@@ -166,7 +166,7 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
             $person) {
             $browser
                 ->clickLink('People')
-                ->waitFor('@create-button')
+                ->pause($pause['long'])
 
                 ->waitFor('@' . $person->id . '-row')
                 ->assertVisible('@' . $person->id . '-edit-button')
@@ -176,7 +176,7 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
                 ->assertSee('Update Person')
                 ->type('@middle_name', $testInitialNameWithMiddleNameData['middle_name'])
                 ->click('@update-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertSee('This person already exists')
             ;
         });

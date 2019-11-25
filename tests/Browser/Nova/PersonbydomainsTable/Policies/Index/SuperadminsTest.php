@@ -75,12 +75,12 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
+                ->assertSee('Lookup User Roles')  // just an added assert that this menu item is visible in the sidebar
                 ->clickLink('Personbydomains')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertVisible('@1-row')
                 ->assertVisible('@2-row')
                 ->assertVisible('@3-row')
@@ -120,12 +120,12 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Personbydomains')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
 
                 ->assertVisible('@1-row')   // belongs to hackintosh.lsv2-adminbackend-app.com
                 ->assertMissing('@2-row')   // belongs to pretendfrontend.com

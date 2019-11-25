@@ -66,13 +66,13 @@ class SuperadminsTest extends LoginsTableBaseDuskTest
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->assertMissing('Logins')
 
                 ->visit('/nova/resources/logins/2')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->assertPathIs('/nova/403')
             ;
         });

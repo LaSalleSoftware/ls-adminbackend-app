@@ -77,19 +77,19 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('email', $personTryingToLogin['email'])
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
-                ->pause($pause['shortest'])
-                ->assertPathIs('/nova')
-                ->assertSee('Dashboard')
+                ->pause($pause['long'])
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
                 ->clickLink('Companies')
-                ->waitFor('@1-row')
+                ->pause($pause['long'])
                 ->assertVisible('@1-row')
 
                 ->assertVisible('@1-delete-button')
 
                 ->click('@1-delete-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
                 ->click('#confirm-delete-button')
-                ->pause($pause['medium'])
+                ->pause($pause['long'])
             ;
         });
 

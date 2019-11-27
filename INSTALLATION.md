@@ -11,11 +11,9 @@ So the way I do it is to set up my repository locally, then push to GitHub.com, 
 
 ## Setting Up Your Local Repository
 
-I use a Mac. On my Mac, I use [MAMP Pro](https://www.mamp.info/en/mamp-pro/). 
-
-Come on out to [The York Region PHP Meet-up](https://www.meetup.com/York-Region-PHP-User-Group/) or to the [GTA PHP User Group](https://www.meetup.com/GTA-PHP-User-Group-Toronto/) to 'splain-me why I should be using {fill-in-name-here} -- looking forward to meeting you!
-
 I am assuming that you have set up a local site with your favourite OS/server/etc. 
+
+I use a Mac. On my Mac, I use [MAMP Pro](https://www.mamp.info/en/mamp-pro/). 
 
 IMPORTANT NOTE: You need to buy the [Laravel Nova package](https://nova.laravel.com)
 

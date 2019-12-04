@@ -31,6 +31,7 @@
         "guzzlehttp/guzzle": "^6.0",
         "laravel/nova": "~2.0",
         "lcobucci/jwt": "^3.3",
+        "fzaninotto/faker": "^1.4",
         "league/flysystem-aws-s3-v3": "^1.0",
         "lasallesoftware/lsv2-library-pkg": "^2.0",
         "lasallesoftware/lsv2-novabackend-pkg": "^2.0",

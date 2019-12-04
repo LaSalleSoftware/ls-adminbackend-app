@@ -32,13 +32,15 @@ In your .env set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=false```
 
 In App\Providers\NovaServiceProvider, in gate(), delete all the email address except for "bob.bloom@lasallesoftware.ca".
 
+Now run ```php artisan key:generate``` to generate the [application key](https://laravel.com/docs/6.x#configuration)
+
 Now run ```php artisan lslibrary:lasalleinstall```
 
 Now, make this folder a git repo. Then, set up a repository of this folder in GitHub.com (or similar), so that Forge can install/update from this repo.
 
 ## If You Are Using MAMP
 
-If you are using MAMP, and your MySQL is not working, then add the third line to your .env
+If you are using MAMP, and your MySQL is not working, then add the third line to your .env:
 ```
 // https://stackoverflow.com/questions/50718944/laravel-5-6-connect-refused-using-mamp-server
 // uncomment this line if you use MAMP on your local environment

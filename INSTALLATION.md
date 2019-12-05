@@ -30,6 +30,10 @@ Now, make sure you have a database set-up, and update your .env with your databa
 
 In your .env set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=false```
 
+If you do *not* want to enable the IP "whitelist" check, then in your .env set ```LASALLE_WEB_MIDDLEWARE_DO_WHITELIST_CHECK=no```.
+
+If you have enabled the IP "whitelist" check, then enumerate your IP addresses in your .env by setting ```LASALLE_WEB_MIDDLEWARE_WHITELIST_IP_ADDRESSES=```. 
+
 In App\Providers\NovaServiceProvider, in gate(), delete all the email address except for "bob.bloom@lasallesoftware.ca".
 
 Now run ```php artisan key:generate``` to generate the [application key](https://laravel.com/docs/6.x#configuration)

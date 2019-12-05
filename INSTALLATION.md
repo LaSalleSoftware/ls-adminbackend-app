@@ -40,6 +40,8 @@ Now run ```php artisan key:generate``` to generate the [application key](https:/
 
 Now run ```php artisan lslibrary:lasalleinstall```
 
+You should be able to log in with these credentials: user = bob.bloom@lasallesoftware.ca, password = secret. Update these credentials when you log in.
+
 Now, make this folder a git repo. Then, set up a repository of this folder in GitHub.com (or similar), so that Forge can install/update from this repo.
 
 ## If You Are Using MAMP

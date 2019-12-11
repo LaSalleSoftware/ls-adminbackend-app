@@ -1,14 +1,26 @@
 # Installing LaSalle Software's Administrative Back-end Application 
 
+## Preamble
+
 There are a lot of ways to deploy to production. What I describe here is a very plain way to go about it.
 
-I am assuming that you use [Laravel Forge](https://forge.laravel.com). 
+I am assuming that you use [Laravel Forge](https://forge.laravel.com) to deploy to your production server. 
 
-Forge deploys from a repository, and I am assuming that you use GitHub.com. 
+I have yet to deploy my LaSalle Software to [Laravel Vapor](https://vapor.laravel.com), but that day is drawing nearer.
 
-So the way I do it is to set up my repository locally, then push to GitHub.com, then have Forge deploy from the GitHub.com repository. 
+Forge deploys from a repository, and I am assuming that, like me, you use GitHub.com. 
 
-## VERY IMPORTANT NOTE: You need to buy the [Laravel Nova package](https://nova.laravel.com). No, I do not earn any commissions!
+The way I do it is to set up my repository locally, then push to GitHub.com, then have Forge deploy from the GitHub.com repository.
+
+I use [MAMP Pro](https://www.mamp.info/en/mamp-pro/) (not an affiliate link) for my local installations. Whatever local environment you use, it comes down to the same things: composer install, creating your database, updating the .env, and then firing up your up locally. 
+
+## The Laravel Nova First Party Commercial Administration Package
+
+My administrative app needs [Laravel Nova](https://nova.laravel.com) to run. 
+
+So you need to buy Nova. No, I do not have an affiliate link nor an arrangement. 
+
+Nova is installed via composer. The documentation for doing this is [here](https://nova.laravel.com/docs/2.0/installation.html#installing-nova-via-composer).
 
 ## Installing On Your Local Development Computer
 
@@ -16,9 +28,7 @@ So the way I do it is to set up my repository locally, then push to GitHub.com, 
 
 You will need the usual server stuff for local development. Here's [Laravel's server requirements](https://laravel.com/docs/6.x#server-requirements).
 
-On my Mac, I use [MAMP Pro](https://www.mamp.info/en/mamp-pro/). 
-
-Run this command from the command line, which will create a "lsv2-adminbackup-app" folder, and install LaSalle Software's admin app:
+Run this command from the command line, which will create a "lsv2-adminbackup-app" folder, and install LaSalle Software's admin app. Create a folder name that suits your individual needs:
 
 ```composer create-project lasallesoftware/lsv2-adminbackend-app lsv2-adminbackup-app```
 
@@ -28,20 +38,25 @@ From the command line, run ```cd lsv2-adminbackup-app ``` to go into the local a
 
 You need a database, so if you have not set up your local database for this local deployment, the please do so now.
 
+#### Run lslibrary:lasalleinstallenv
+
+Run my custom installation artisan command for setting a few environment variables in your .env file:
+
+```php artisan lslibrary:lasalleinstallenv```
+
+"lasalleinstallenv" = a kind of a short form of "LaSalle Installation for Environment Variables". Well, only a few env vars.
+
 #### Edit your local .env file
 
-If you want to seed your database with test data, then in your .env set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=true```
+At this point, please review your local .env file. 
 
-If APP_KEY is blank, then from the command line, run ```php artisan key:generate``` to generate the [application key](https://laravel.com/docs/6.x#configuration)
+If APP_KEY is blank, then run ```php artisan key:generate``` to generate the [application key](https://laravel.com/docs/6.x#configuration)
 
-Now, scroll down to the database environment variables:
-- modify "DB_DATABASE" 
-- modify "DB_USERNAME"
-- modify "DB_PASSWORD"
+You should not see any values beginning with the characters "Dummy", which are placeholder values used in lslibrary:lasalleinstallenv for string substitution.
 
-Now save your modified local .env file.
+If you want to seed your database with test data, then in your .env set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=true```. Please note that test data will not seed in production.
 
-#### If You Are Using MAMP
+Are your database environment variables correct? They should be, but please double check!
 
 If you are using MAMP, your MySQL may not work so you should add the following "DB_SOCKET" variable to your .env:
 ```
@@ -49,23 +64,39 @@ If you are using MAMP, your MySQL may not work so you should add the following "
 DB_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock
 ```
 
-#### Run my custom installation artisan command
+Now save your modified local .env file.
 
-From the command line, run ```php artisan lslibrary:lasalleinstall```
+#### Run lslibrary:lasalleinstalladminapp
+
+Run my custom installation artisan command for my admin app only:
+
+```php artisan lslibrary:lasalleinstalladminapp```
+
+This command will prepare Laravel Nova, perform an optional database drop, and do the database migration and seeding.
+
+The database seed is necessary to run the admin app. 
+
+If you want to include my test data with the seeding, set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=true``` in your .env. 
 
 #### Edit the Nova Service Provider
 
-In App\Providers\NovaServiceProvider, in gate(), delete all the email address except for "bob.bloom@lasallesoftware.ca".
+In App\Providers\NovaServiceProvider, in gate() when you are not including my test data in the seeding, delete all the email addresses except for "bob.bloom@lasallesoftware.ca".
 
-#### Login!
+Please note that the emails you specify here will be pushed to GitHub.com for use on your Forge deployment. 
 
-You should be able to log in with these credentials: 
+#### Fire up your local LaSalle Software admin app in your browser!
+
+You should see the familiar Laravel welcome view. 
+
+Click "login". These credentials are set up so you can log in:
 - user = bob.bloom@lasallesoftware.ca
 - password = secret
 
-Update these credentials when you log in.
+Change these credentials!
 
 ## Deploying on Laravel Forge
+
+#### Preamble
 
 I use [Laravel's Forge](https://forge.laravel.com) and [Digital Ocean](https://www.digitalocean.com), so here are the steps...
 
@@ -77,14 +108,14 @@ Now, it's time to set up things on Forge.
 
 I assume that you have your server already set up. Make sure that when you set up your server that you set up your database server as well [Forge: Creating a Server With a Database](https://forge.laravel.com/docs/1.0/resources/databases.html#creating-a-server-with-a-database).
 
-#### Set up your new Laravel site
+#### Set up your new Laravel site in Forge
 
 - click Servers | the-name-of-your-server
 - you should see "New Site"
 - set up your new Laravel site, then click "Add Site"
 - you should see your new site listed in Active Sites
 
-#### Set up Let's Encrypt SSL
+#### Set up Let's Encrypt SSL in Forge
 
 - click Sites | the-name-of-your-site
 - click SSL
@@ -92,22 +123,27 @@ I assume that you have your server already set up. Make sure that when you set u
 - make sure that "Domains" is correct, then click "Obtain Certificate". 
 - that's it!
 
-#### Set up your database for your new Laravel site
+#### Set up your database, and optionally your database user, in Forge
 
 It's time to set up your database. Your database server should already be installed!
 
 - click Servers | the-name-of-your-server
 - click Database
 
-You must see your database server listed in the second box: "Databases | Name". 
-
-Personally, I prefer creating a database user for each database individual database. Instead of using the default "forge" database users. As a catch-up type of link to suggest for background, here's a link to [MySQL 8.0 Reference Manual: Chapter 6 Security](https://dev.mysql.com/doc/refman/8.0/en/security.html).
-
-Also, personally, I suggest using a monster crazy 256 character database user password. I grab random strings from sites like [PasswordsGenerator](https://passwordsgenerator.net/). BTW, sometimes I edit the strings before actually using them. Also, some people use super duper crazy strings for the database user name. Not me. Come to one of the Toronto area meet-ups I co-organize/attend and we'll talk about it!
-
-- in the "Add Database User" box, fill in the "Name" and "Password" fields. Then click the "Can Access" check-box for the database the user pertains.
-- click "Add User"
+In the "Add Database" box:
+- type in the "Name" of your database
+- type in new "User (Optional)" of your database, ONLY IF YOU WANT TO CREATE A NEW DATABASE USER
+- type the "Password (Optional)" for your new database user, ONLY IF YOU WANT TO CREATE A NEW DATABASE USER 
+- click "Add Database"
 - done!
+
+#### Run lslibrary:lasalleinstallenv
+
+Run my custom installation artisan command for setting a few environment variables in your .env file:
+
+```php artisan lslibrary:lasalleinstallenv```
+
+Please note that Forge has likely changed the values of your database environment variables. So my custom artisan command will not be able to change them if the values are incorrect.
 
 #### Edit your .env
 
@@ -115,9 +151,7 @@ Also, personally, I suggest using a monster crazy 256 character database user pa
 - click Environment
 - click "Edit Environment"
 
-You see the stuff with the word "Dummy"? This is for my custom installation artisan command. Same idea as you see [in this Laravel "stub"](https://github.com/laravel/framework/blob/6.x/src/Illuminate/Foundation/Console/stubs/channel.stub). Please do not touch!
-
-If you want to populate your database with test data, then set this variable to "true":
+If you want to populate your database with test data, then set this variable to "true" -- leave it "false" in production:
 ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=true```
 
 If you want to enable IP address "whitelisting", then set this variable to "yes",
@@ -130,33 +164,30 @@ If you have a lot of IP addresses to "whitelist", then please enumerate them in 
 
 When you want to allow an IP address temporarily, you have the option of specifying that IP address in the .env, and then when you logout of this app, you can delete the IP address from the .env. 
 
-Now, scroll down to the database environment variables. They should look like this:
-```
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=forge
-DB_USERNAME=forge
-DB_PASSWORD=abcdefghijklmnopqrst
-```
-- modify "DB_DATABASE" 
-- modify "DB_USERNAME"
-- modify "DB_PASSWORD"
-- click "Save"
-- done!
+Now, scroll down to the database environment variables. Please double check that they are correct!
 
-#### Run my custom installation artisan command
+#### Run lslibrary:lasalleinstalladminapp
 
-- ssh into your server 
+SSH into your cloud server.
 
-- run ```php artisan lslibrary:lasalleinstall```
+Run my custom installation artisan command for my admin app only:
 
-#### Login!
+```php artisan lslibrary:lasalleinstalladminapp```
 
-You should be able to log in with these credentials: 
+This command will prepare Laravel Nova, perform an optional database drop, and do the database migration and seeding.
+
+The database seed is necessary to run the admin app. 
+
+I highly recommend that you set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=false``` in your .env. 
+
+#### Fire up your local LaSalle Software admin app in your browser!
+
+You should see the familiar Laravel welcome view. 
+
+Click "login". These credentials are set up so you can log in:
 - user = bob.bloom@lasallesoftware.ca
 - password = secret
 
-Update these credentials when you log in.
+Change these credentials!
 
 

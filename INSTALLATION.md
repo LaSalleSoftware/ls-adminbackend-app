@@ -139,6 +139,8 @@ In the "Add Database" box:
 
 #### Run lslibrary:lasalleinstallenv
 
+SSH into your cloud (Digital Ocean) server (droplet), and cd into your app's root folder. 
+
 Run my custom installation artisan command for setting a few environment variables in your .env file:
 
 ```php artisan lslibrary:lasalleinstallenv```
@@ -168,7 +170,7 @@ Now, scroll down to the database environment variables. Please double check that
 
 #### Run lslibrary:lasalleinstalladminapp
 
-SSH into your cloud server.
+Return to your app's root folder on your cloud server instance.
 
 Run my custom installation artisan command for my admin app only:
 

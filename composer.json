@@ -29,7 +29,7 @@
         "fzaninotto/faker": "^1.4",
         "guzzlehttp/guzzle": "^6.0",
         "laravel/framework": "^6.2",
-        "laravel/nova": "2.8",
+        "laravel/nova": "~2.0",
         "laravel/tinker": "^1.0",
         "lasallesoftware/lsv2-blogbackend-pkg": "^2.0",
         "lasallesoftware/lsv2-library-pkg": "^2.0",

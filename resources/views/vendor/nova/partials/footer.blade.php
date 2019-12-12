@@ -1,6 +1,5 @@
 <p class="mt-8 text-center text-xs text-80">
-    LaSalle Software integrates the commercial first party Laravel admin package
-    <a
+    LaSalle Software integrates the commercial first party Laravel admin package <a
         href="https://nova.laravel.com"
         target="_blank"
         class="text-primary dim no-underline">

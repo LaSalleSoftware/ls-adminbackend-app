@@ -40,6 +40,13 @@
             }
         },
         {
+            "type": "path",
+            "url": "../packages/lsv2-backup-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
@@ -55,7 +62,8 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "lasallesoftware/lsv2-library-pkg": "dev-master",
         "lasallesoftware/lsv2-novabackend-pkg": "dev-master",
-        "lasallesoftware/lsv2-blogbackend-pkg": "dev-master"
+        "lasallesoftware/lsv2-blogbackend-pkg": "dev-master",
+        "lasallesoftware/lsv2-backup-pkg": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

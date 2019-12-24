@@ -40,7 +40,7 @@
     @endif
 
     @if (class_exists('Lasallesoftware\Backup\Version'))
-        <br />{{ Lasallesoftware\Backup\Version::PACKAGE }}v, {{ Lasallesoftware\Backup\Version::VERSION }} ({{ Lasallesoftware\Backup\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Backup\Version::PACKAGE }}, v{{ Lasallesoftware\Backup\Version::VERSION }} ({{ Lasallesoftware\Backup\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Lasalleui\Version'))

@@ -182,14 +182,20 @@ The database seed is necessary to run the admin app.
 
 I highly recommend that you set ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA=false``` in your .env. 
 
+When the ```LASALLE_POPULATE_DATABASE_WITH_TEST_DATA``` environment variable is false, you will be prompted to create the first user (with the "owner" role). Please follow the prompts to enter your first user's first name, surname, and email address.  
+
 #### Fire up your local LaSalle Software admin app in your browser!
 
 You should see the familiar Laravel welcome view. 
 
-Click "login". These credentials are set up so you can log in:
+Click "login". 
+
+If you were prompted to create your first user, then login with the email address that you entered. Your initial password defaults to "secret". Please change this password upon your initial login.
+
+If you seeded your database with test data, then use these credentials to log in:
 - user = bob.bloom@lasallesoftware.ca
 - password = secret
 
-Change these credentials!
+
 
 

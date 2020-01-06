@@ -183,4 +183,54 @@ return [
     | ========================================================================
     */
 
+    /*
+   | ========================================================================
+   | START: PATHS FOR FEATURED IMAGES
+   | ========================================================================
+   |
+   | You may want to store featured image images (!) in S3 folders, and not just
+   | in S3 buckets. And, you may want store Nova resource featured images in
+   | their own folders. You can specify individual S3 folders here for profile
+   | and blog resources.
+   |
+   | Must have a leading slash.
+   | Must not have a trailing slash.
+   |
+   | Do not want to use an S3 folder at all? Just put the images in the S3 bucket?
+   | Then, just specify '/',
+   |
+   | I designed this specifically for S3, but it applies generally because Nova
+   | uses Laravel's storage facade
+   | * https://laravel.com/docs/master/filesystem
+   | * https://nova.laravel.com/docs/2.0/resources/file-fields.html#file-fields
+   |
+   | IMPORTANT!!! ****You need to set up each S3 folder in your AWS console.****
+   | See https://github.com/LaSalleSoftware/lsv2-adminbackend-app/blob/master/AWS_S3_NOTES_README.md
+   |
+   */
+
+    // for Nova resources in the novabackend package
+    'image_path_for_address_nova_resource' => '/',
+    //'image_path_for_address_nova_resource' => '/address',
+
+    'image_path_for_company_nova_resource' => '/',
+    //'image_path_for_company_nova_resource' => '/company',
+
+    'image_path_for_person_nova_resource'  => '/',
+    //'image_path_for_person_nova_resource'  => '/person',
+
+
+    // for Nova resources in the blogbackend package
+    'image_path_for_category_nova_resource' => '/',
+    //'image_path_for_category_nova_resource' => '/category',
+
+    'image_path_for_post_nova_resource'     => '/',
+    //'image_path_for_post_nova_resource'     => '/post',
+
+    /*
+   | ========================================================================
+   | END: PATHS FOR FEATURED IMAGES
+   | ========================================================================
+   */
+
 ];

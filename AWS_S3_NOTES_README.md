@@ -106,6 +106,9 @@ Please ensure that these two lines are in your composer.json's require section:
 </CORSConfiguration>
 ```
 
+- over-write "https://yourdomain.com" with the actual name of your app's domain
+- click the "Save" button on the top right of the edit box
+
 ## Step 5: Enter your new bucket name into your .env's "AWS_BUCKET" parameter
 
 - open a new window with your application's .env file
@@ -208,86 +211,27 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - when you leave this page, the secret access key is not accessible, so be careful with this copy-paste
 - click the "Close" button at the bottom right
 
-## Step 10: Make your new bucket public
+## Step 10: Optional: use S3 folders
 
-Also:
-* paths
+Do you want to use S3 folders with your S3 buckets? Then follow these steps:
 
+## Step 10(a): Specify the folders you want to use for each set of featured images
 
+- go to your ```config/lasallesoftware-library.php``` config file
+- scroll down to the "PATHS FOR FEATURED IMAGES" section
+- specify the folders you want to use for each "resource". There are in-line directions
 
+## Step 10(b): Create the folders in S3
 
-555555555555555555555555555555555555555555
-555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+- log into your AWS console, if necessary
+- click "Services" at the top left
+- click "S3" under the "Storage" heading in the rather busy drop-down
+- you should see a list of your buckets
+- click the bucket that you previously created
+- click the "Create folder" button
+- enter the name of your new folder for each "Nova resource" 
 
+***********************************
+** end of AWS_S3_NOTES_README.md **
+***********************************
 
-
-
-Set up your S3 bucket as usual in S3. 
-
-You need to disable "Block all public access":
- * go to your bucket in the AWS S3 console
- * Permissions
- * Block public access
- * Edit
- * uncheck "Block all public access"
- * Save
- * click "Bucket Policy"
- * paste the following code and save (reminder: modify the bucket name, eh!):
- 
- ```
- {
-     "Version": "2012-10-17",
-     "Statement": [
-         {
-             "Sid": "PublicReadGetObject",
-             "Effect": "Allow",
-             "Principal": "*",
-             "Action": "s3:GetObject",
-             "Resource": "arn:aws:s3:::your-bucket-name-goes-here-eh!/*"
-         }
-     ]
- }
-```
-
-Now, you need to create an IAM user with programmatic access only to your bucket. Create a group for the policy, then the policy. Then, create the user, assigning the group to this user. 
- 
- Use this JSON for the group's policy (reminder: modify the bucket name, eh!):
- 
- ```
- {
-     "Version": "2012-10-17",
-     "Statement": [
-         {
-             "Sid": "VisualEditor0",
-             "Effect": "Allow",
-             "Action": [
-                 "s3:ListBucket",
-                 "s3:GetBucketLocation"
-             ],
-             "Resource": "arn:aws:s3:::your-bucket-name-goes-here-eh!"
-         },
-         {
-             "Sid": "VisualEditor1",
-             "Effect": "Allow",
-             "Action": [
-                 "s3:PutObject",
-                 "s3:GetObject",
-                 "s3:DeleteObject"
-             ],
-             "Resource": "arn:aws:s3:::your-bucket-name-goes-here-eh!/*"
-         },
-         {
-             "Sid": "VisualEditor2",
-             "Effect": "Allow",
-             "Action": "s3:ListAllMyBuckets",
-             "Resource": "*"
-         }
-     ]
- }
-```
- 
-The Amazon warnings are dire about making buckets public. Rightly so. Create a bucket solely for the purpose of storing images for your front and back ends. For example, do not store your images that you display to the public in the same bucket as you store your database backups!
-
-
- 

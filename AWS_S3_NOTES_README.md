@@ -37,7 +37,13 @@ Please ensure that these two lines are in your composer.json's require section:
 "league/flysystem-cached-adapter": "~1.0",
 ```
 
-## Step 2: Create the bucket where you want to store your images
+## Step 2: Set the config parameter to "s3"
+
+- go to the "config/lasallesoftware-library.php" config file
+- scroll down to the "Filesystem Disk Where Images Are Stored" section
+- set the parameter to 's3': ```'lasalle_filesystem_disk_where_images_are_stored'  => 's3',```
+
+## Step 3: Create the bucket where you want to store your images
 
 - log into your AWS console
 - click "Services" at the top left
@@ -62,7 +68,7 @@ Please ensure that these two lines are in your composer.json's require section:
 - you should see your new bucket in your (ahem) bucket list
 - your new bucket should say, under the "Access" column, "Objects can be public".
 
-## Step 3: Assign your new bucket "GetObject" permission
+## Step 4: Assign your new bucket "GetObject" permission
 
 - in your list of buckets, click the new bucket you just created
 - click the "Permissions" tab at the top
@@ -88,7 +94,7 @@ Please ensure that these two lines are in your composer.json's require section:
 - click the "Save" button on the top right of the edit box
 - you should see the message "This bucket has public access"
 
-## Step 4: Assign your new bucket new CORS permission
+## Step 5: Assign your new bucket new CORS permission
 
 - you should be seeing the "CORS configuration" button
 - please click this "CORS configuration" button
@@ -109,12 +115,12 @@ Please ensure that these two lines are in your composer.json's require section:
 - over-write "https://yourdomain.com" with the actual name of your app's domain
 - click the "Save" button on the top right of the edit box
 
-## Step 5: Enter your new bucket name into your .env's "AWS_BUCKET" parameter
+## Step 6: Enter your new bucket name into your .env's "AWS_BUCKET" parameter
 
 - open a new window with your application's .env file
 - paste your new bucket's name to your .env's "AWS_BUCKET" parameter
 
-## Step 6: Enter your .env's "AWS_URL" parameter
+## Step 7: Enter your .env's "AWS_URL" parameter
 
 The "AWS_URL" environment parameter is in the form: https://your-bucket's-name dot s3 dot region dot amazonaws dot com.
 
@@ -133,7 +139,7 @@ So, you need your bucket's name; and, you need your region.
 
 So, your "AWS_URL" environment parameter will look like: https://your-bucket's-name.s3.the-code-you-just-looked-up.amazonaws.com
 
-## Step 7: Create a custom "policy" for your app's S3 access
+## Step 8: Create a custom "policy" for your app's S3 access
 
 - click "Services" at the top left
 - click "IAM" under the "Security, Identity, & Compliance" heading in the rather busy drop-down
@@ -169,7 +175,7 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - you should be back at the policies listing, with a message at the top confirming that your policy was created
 - you should look up the policy you just created --> see what it looks like!
 
-## Step 8: Create a new group in IAM
+## Step 9: Create a new group in IAM
 
 - click "Groups" in the left vertical menu, under the "Access management" heading
 - click the "Create New Group" button at the top
@@ -184,7 +190,7 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - is the review details basically indecipherable? Yeah, well, after the hundreth time traversing the AWS console, and reading a few articles, it slowly starts to mostly make sense
 - are we good? Ok! Then click the "Create Group" button at the bottom right
 
-## Step 9: Create a new IAM "API" user
+## Step 10: Create a new IAM "API" user
 
 - click "Users" in the left vertical menu, under the "Access management" heading
 - click the "Add user" button at the top
@@ -211,17 +217,17 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - when you leave this page, the secret access key is not accessible, so be careful with this copy-paste
 - click the "Close" button at the bottom right
 
-## Step 10: Optional: use S3 folders
+## Step 11: Optional: use S3 folders
 
 Do you want to use S3 folders with your S3 buckets? Then follow these steps:
 
-## Step 10(a): Specify the folders you want to use for each set of featured images
+## Step 11(a): Specify the folders you want to use for each set of featured images
 
 - go to your ```config/lasallesoftware-library.php``` config file
 - scroll down to the "PATHS FOR FEATURED IMAGES" section
 - specify the folders you want to use for each "resource". There are in-line directions
 
-## Step 10(b): Create the folders in S3
+## Step 11(b): Create the folders in S3
 
 - log into your AWS console, if necessary
 - click "Services" at the top left

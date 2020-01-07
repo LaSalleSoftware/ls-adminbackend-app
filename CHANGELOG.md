@@ -2,6 +2,9 @@
 
 ## VERSION 2.0.8 (coming!)
 
+## VERSION 2.0.8 (January 07, 2019)
+* [v2.0.8 issues](https://github.com/LaSalleSoftware/lsv2-adminbackend-app/milestone/12?closed=1)
+
 ## VERSION 2.0.7 (December 23, 2019)
 * [v2.0.7 issues](https://github.com/LaSalleSoftware/lsv2-adminbackend-app/milestone/11?closed=1)
 

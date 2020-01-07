@@ -20,7 +20,7 @@
         LaSalle Software
     </a>
     <span class="px-1">&middot;</span>
-    &copy; {{ date('Y') }} The South LaSalle Trading Corporation
+    &copy; 2019-{{ date('Y') }} The South LaSalle Trading Corporation
     <span class="px-1">&middot;</span>
     By Bob Bloom
 

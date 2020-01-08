@@ -34,6 +34,12 @@ Run this command from the command line, which will create a "lsv2-adminbackup-ap
 
 From the command line, run ```cd lsv2-adminbackup-app ``` to go into the local app's root folder.
 
+#### If you are setting up this local admin app for production, then change the composer.json
+
+Generally, but especially when you are using Forge for production deployments, paste "composer.forge.json" to your composer.json.
+
+Then run ```composer update```
+
 #### Set up your local database
 
 You need a database, so if you have not set up your local database for this local deployment, the please do so now.
@@ -196,6 +202,9 @@ If you seeded your database with test data, then use these credentials to log in
 - user = bob.bloom@lasallesoftware.ca
 - password = secret
 
+## Using Cloud Storage
 
+In production, you should use cloud storage for your images, especially when you are using multiple domains. 
 
+See [notes on setting up Amazon Web Services S3](AWS_S3_NOTES_README.md)
 

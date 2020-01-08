@@ -139,6 +139,8 @@ So, you need your bucket's name; and, you need your region.
 
 So, your "AWS_URL" environment parameter will look like: https://your-bucket's-name.s3.the-code-you-just-looked-up.amazonaws.com
 
+UPDATE! Ah, on a fresh deploy, the AWS_URL is of the form: "https://s3.region.amazonaws.com/bucket". So you'll have to double-check!
+
 ## Step 8: Create a custom "policy" for your app's S3 access
 
 - click "Services" at the top left

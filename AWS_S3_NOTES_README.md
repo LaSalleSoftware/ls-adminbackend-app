@@ -163,7 +163,7 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - enter the name of the bucket you created in step #2 in the "Bucket name *" box
 - click the "Object name *" "Any" checkmark
 - please double check that you did NOT, repeat NOT, check the bucket name's "Any" checkbox. 
-  ==> WARNING! Clicking the bucket name's "Any" checkbox is COULD BE VERY VERY BAD.
+  ==> WARNING! Clicking the bucket name's "Any" checkbox COULD BE VERY VERY BAD.
 - are we good? Ok! Now please click the "Add" button at the bottom right of the pop-up box
 - you should be back in the policy visual editor
 - note that now the "Resources" "object" box specifies the AWS resource that you just specified in the pop-up box
@@ -187,7 +187,7 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - click the checkmark beside your new custom policy
 - click the "Next Step" button at the bottom right
 - you should be in the "Review" page
-- is the review details basically indecipherable? Yeah, well, after the hundreth time traversing the AWS console, and reading a few articles, it slowly starts to mostly make sense
+- are the review details basically indecipherable? Yeah, well, after the hundreth time traversing the AWS console, and reading a few articles, it slowly starts to mostly make sense
 - are we good? Ok! Then click the "Create Group" button at the bottom right
 
 ## Step 10: Create a new IAM "API" user
@@ -209,7 +209,7 @@ So, your "AWS_URL" environment parameter will look like: https://your-bucket's-n
 - your new user's "AWS access type" should say "Programmatic access - with an access key"
 - we're good? Ok! Click the "Create user" button on the bottom right
 - you should see a "Success" message
-- you should see the "Show" link? 
+- you should see the "Show" link 
 - open a new window and open your application's .env file, if you have yet to do so
 - paste the access key ID to your .env's "AWS_ACCESS_KEY_ID" parameter
 - click the "Show" link

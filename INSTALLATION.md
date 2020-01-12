@@ -174,6 +174,14 @@ When you want to allow an IP address temporarily, you have the option of specify
 
 Now, scroll down to the database environment variables. Please double check that they are correct!
 
+#### The "APP_KEY" environment variable
+
+If APP_KEY is blank, then run ```php artisan key:generate``` to generate the [application key](https://laravel.com/docs/6.x#configuration).
+
+Please save this key somewhere because it is used for encryption. You probably won't need to worry about it, but just in case. 
+
+My suggestion where to save your key: [AWS Key Management Service](https://aws.amazon.com/kms/).
+
 #### Run lslibrary:lasalleinstalladminapp
 
 Return to your app's root folder on your cloud server instance.
@@ -207,4 +215,3 @@ If you seeded your database with test data, then use these credentials to log in
 In production, you should use cloud storage for your images, especially when you are using multiple domains. 
 
 See [notes on setting up Amazon Web Services S3](AWS_S3_NOTES_README.md)
-

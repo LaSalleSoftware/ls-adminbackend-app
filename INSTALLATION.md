@@ -30,7 +30,7 @@ You will need the usual server stuff for local development. Here's [Laravel's se
 
 Run this command from the command line, which will create a "lsv2-adminbackup-app" folder, and install LaSalle Software's admin app. Create a folder name that suits your individual needs:
 
-```composer create-project lasallesoftware/lsv2-adminbackend-app lsv2-adminbackup-app```
+```composer create-project lasallesoftware/lsv2-adminbackend-app lsv2-adminbackend-app```
 
 From the command line, run ```cd lsv2-adminbackup-app ``` to go into the local app's root folder.
 

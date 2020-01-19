@@ -1,6 +1,9 @@
 # CHANGE LOG
 
-## VERSION 2.0.10 (coming!)
+## VERSION 2.0.11 (coming!)
+
+## VERSION 2.0.10 (January 10, 2019)
+* [v2.0.10 issues](https://github.com/LaSalleSoftware/lsv2-adminbackend-app/milestone/14?closed=1)
 
 ## VERSION 2.0.9 (January 17, 2019)
 * [v2.0.9 issues](https://github.com/LaSalleSoftware/lsv2-adminbackend-app/milestone/13?closed=1)

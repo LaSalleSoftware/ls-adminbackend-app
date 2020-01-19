@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Lasalle Software library (lasallesoftware/library)
+ * This file is part of the Lasalle Software library (lasallesoftware/library).
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,22 +14,24 @@
  * @license    http://opensource.org/licenses/MIT MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
- * @link       https://lasallesoftware.ca \Lookup_address_type;log, Podcast, Docs
- * @link       https://packagist.org/packages/lasallesoftware/library Packagist
- * @link       https://github.com/lasallesoftware/library GitHub
  *
+ * @see       https://lasallesoftware.ca \Lookup_address_type;log, Podcast, Docs
+ * @see       https://packagist.org/packages/lasallesoftware/library Packagist
+ * @see       https://github.com/lasallesoftware/library GitHub
  */
 
 namespace Tests\Browser\Nova\InstalledDomainsTable\Policies\Delete;
 
-
 // LaSalle Software
-use Tests\Browser\Nova\InstalledDomainsTable\InstalledDomainsTableBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
-
-// Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+// Laravel class
+use Tests\Browser\Nova\InstalledDomainsTable\InstalledDomainsTableBaseDuskTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
 {
     use DatabaseMigrations;
@@ -40,7 +42,6 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
 
         $this->artisan('lslibrary:customseed');
         $this->artisan('lslibrary:installeddomainseed');
-
     }
 
     /**
@@ -56,7 +57,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
      */
     public function testOwnersDomainOnly()
     {
-        echo "\n**Now testing Tests\Browser\Nova\InstalledDomainsTable\Policies\Delete\TestOwnersDomainOnly**";
+        echo "\n**Now testing Tests\\Browser\\Nova\\InstalledDomainsTable\\Policies\\Delete\\TestOwnersDomainOnly**";
 
         $login = $this->loginOwnerBobBloom;
         $pause = $this->pause();
@@ -73,9 +74,9 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->assertSee('Installed Domains')
                 ->clickLink('Installed Domains')
                 ->pause($pause['long'])
-                ->assertMissing('@1-delete-button')
-                ->assertMissing('@2-delete-button')
-                ->assertMissing('@3-delete-button')
+                ->assertVisible('@1-delete-button')
+                ->assertVisible('@2-delete-button')
+                ->assertVisible('@3-delete-button')
             ;
         });
     }

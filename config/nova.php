@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'guard' => env('NOVA_GUARD', null),
+    'guard' => env('LASALLE_NOVA_GUARD', null),
 
     /*
     |--------------------------------------------------------------------------

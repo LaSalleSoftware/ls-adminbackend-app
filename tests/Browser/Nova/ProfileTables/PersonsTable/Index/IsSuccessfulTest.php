@@ -121,7 +121,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
 
                 // Row 2 should display as follows:
                 ->assertVisible('@2-view-button')
-                ->assertMissing('@2-edit-button')
+                ->assertVisible('@2-edit-button')
                 ->assertMissing('@2-delete-button')
 
                 // Row 1 should display as follows:

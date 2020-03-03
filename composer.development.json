@@ -47,6 +47,13 @@
             }
         },
         {
+            "type": "path",
+            "url": "../packages/lsv2-contactformbackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
@@ -64,7 +71,8 @@
         "lasallesoftware/lsv2-library-pkg": "dev-master",
         "lasallesoftware/lsv2-novabackend-pkg": "dev-master",
         "lasallesoftware/lsv2-blogbackend-pkg": "dev-master",
-        "lasallesoftware/lsv2-backup-pkg": "dev-master"
+        "lasallesoftware/lsv2-backup-pkg": "dev-master",
+        "lasallesoftware/lsv2-contactformbackend-pkg": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

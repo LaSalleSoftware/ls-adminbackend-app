@@ -72,9 +72,8 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Lookup User Roles')  // just an added assert that this menu item is not visible in the sidebar
-                ->visit('/nova/resources/peoplebydomains')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/404')
+                ->assertVisible('@5-row')
             ;
         });
     }

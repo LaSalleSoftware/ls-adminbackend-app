@@ -13,7 +13,6 @@ return [
     |
     */
 
-    // EDITED BY BOB
     'defaults' => [
         'guard'     => 'web',
         'passwords' => 'users',
@@ -36,6 +35,7 @@ return [
     |
     */
 
+    // EDITED BY BOB FOR LASALLE SOFTWARE TO USE MY CUSTOM AUTHENTICATION GUARD
     'guards' => [
         'web' => [
             //'driver' => 'session',
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    // EDITED BY BOB
+    /// EDITED BY BOB FOR LASALLE SOFTWARE TO USE MY CUSTOM AUTHENTICATION GUARD
     'providers' => [
         'users' => [
             'driver' => 'eloquent',

@@ -33,6 +33,9 @@ use Laravel\Dusk\Browser;
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+// Laravel facade
+use Illuminate\Support\Facades\DB;
+
 class LoggingInTest extends DuskTestCase
 {
     use DatabaseMigrations;
@@ -134,5 +137,39 @@ class LoggingInTest extends DuskTestCase
         $this->assertDatabaseMissing('logins', ['personbydomain_id' => 1]);
         $this->assertDatabaseMissing('logins', ['uuid' => Uuid::find(2)->uuid]);
         $this->assertDatabaseMissing('logins', ['created_by' => 1]);
+    }
+
+    /**
+     * Test that the login is successful when the not the admin domain
+     *
+     * @group authentication
+     * @group authenticationLogginIn
+     * @group authenticationLogginInLoginsuccesswhennotadmindomain
+     */
+    public function testLoginSuccessWhenNotAdminDomain()
+    {
+        $personTryingToLogin = $this->personTryingToLogin;
+
+        // Change the domain
+        DB::table('personbydomains')
+            ->where('id', 1)
+            ->update(['installed_domain_title' => 'not.the.domain.you.are.looking.for'])
+        ;
+
+        $this->browse(function (Browser $browser) use ($personTryingToLogin) {
+            $browser->visit('/login')
+                ->type('email',    $personTryingToLogin['email'])
+                ->type('password', $personTryingToLogin['password'])
+                ->press('Login')
+                ->pause(5000)
+                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertSee('Personbydomains')
+             ;
+        });
+
+        // hard coding the values that are expected, made possible by my database table seeding
+        $this->assertDatabaseHas('logins', ['personbydomain_id' => 1]);
+        $this->assertDatabaseHas('logins', ['uuid' => Uuid::find(2)->uuid]);
+        $this->assertDatabaseHas('logins', ['created_by' => 1]);
     }
 }

@@ -102,7 +102,7 @@ class LasalleGuardTest extends TestCase
 
         // Assert
         $this->assertArrayHasKey('email',                  $fullCredentials);
-        $this->assertArrayHasKey('installed_domain_title', $fullCredentials);
+       // $this->assertArrayHasKey('installed_domain_title', $fullCredentials); ==> not applicable
         $this->assertArrayHasKey('password',               $fullCredentials);
     }
 
@@ -138,7 +138,7 @@ class LasalleGuardTest extends TestCase
 
         // Assert
         $this->assertArrayHasKey('email',                  $fullCredentials);
-        $this->assertArrayHasKey('installed_domain_title', $fullCredentials);
+       // $this->assertArrayHasKey('installed_domain_title', $fullCredentials); ==> not applicable
         $this->assertArrayHasKey('password',               $fullCredentials);
     }
 

@@ -43,7 +43,7 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
     }
 
     /**
-     * Test that admins cannot view via direct URL
+     * Test that admins can view their own user in the index listing
      *
      * @group nova
      * @group novaPersonbydomain
@@ -67,10 +67,17 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->pause($pause['long'])
                 ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
-                ->assertDontSee('Lookup User Roles')  // just an added assert that this menu item is not visible in the sidebar
-                ->visit('/nova/resources/personbydomains/5')
+                ->assertDontSee('Lookup User Roles')  // this menu item should not be visible in the sidebar
+                ->clickLink('Personbydomain')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/403')
+                ->pause($pause['long'])
+                ->assertDontSee('Create Personbydomain') // should not see the create button
+                ->assertVisible('@5-row')
+                ->assertMissing('@1-row')  // bob.bloom@lasallesoftware.ca, in the test seeding (actually, in the initial seeding)
+                ->assertMissing('@2-row')  // bbking@kingofblues.com, in the test seeding
+                ->assertMissing('@3-row')  // srv@doubletrouble.com, in the test seeding
+                ->assertMissing('@4-row')  // sidney.bechet@blogtest.ca, in the test seeding
+                ->assertSee('robert.johnson@blogtest.ca')
             ;
         });
     }

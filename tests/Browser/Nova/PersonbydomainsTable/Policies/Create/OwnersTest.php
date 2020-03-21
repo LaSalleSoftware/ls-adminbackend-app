@@ -43,7 +43,8 @@ class OwnersTest extends PersonbydomainsTableBaseDuskTest
     }
 
     /**
-     * Test that the an owner can create.
+     * Test that the an owner cannot create a personbydomains record.
+     * 
      *
      * @group nova
      * @group novaPersonbydomain

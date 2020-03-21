@@ -43,7 +43,9 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
     }
 
     /**
-     * Test that the an owner cannot create.
+     * Test that the an admin cannot create.
+     * 
+     * However, an admin can edit their own personbydomains record -- aka: their own user
      *
      * @group nova
      * @group novaPersonbydomain
@@ -67,10 +69,13 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->pause($pause['long'])
                 ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
-                ->visit('/nova/resources/peoplebydomain/new?viaResource=&viaResourceId=&viaRelationship=')
-                ->assertDontSee('Personbydomains')  // the menu item in the sidebar of this name should not be visible
+                ->assertDontSee('Lookup User Roles')  // this menu item should not be visible in the sidebar
+                ->clickLink('Personbydomain')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/404')
+                ->pause($pause['long'])
+                ->assertDontSee('Create Personbydomain') // should not see the create button
+                ->assertVisible('@5-row')
+                ->assertSee('robert.johnson@blogtest.ca')
             ;
         });
     }

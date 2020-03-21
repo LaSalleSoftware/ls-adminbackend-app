@@ -43,7 +43,7 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
     }
 
     /**
-     * Test that admins cannot update.
+     * Test that admins can update their own personbydomain record.
      *
      * @group nova
      * @group novaPersonbydomain
@@ -70,6 +70,10 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->assertDontSee('Lookup User Roles')  // just an added assert that this menu item is not visible in the sidebar
                 ->pause($pause['long'])
                 ->assertVisible('@5-edit-button')
+                ->assertMissing('@1-edit-button')  // bob.bloom@lasallesoftware.ca, in the test seeding (actually, in the initial seeding)
+                ->assertMissing('@2-edit-button')  // bbking@kingofblues.com, in the test seeding
+                ->assertMissing('@3-edit-button')  // srv@doubletrouble.com, in the test seeding
+                ->assertMissing('@4-edit-button')  // sidney.bechet@blogtest.ca, in the test seeding
             ;
         });
     }

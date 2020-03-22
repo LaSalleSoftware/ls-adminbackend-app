@@ -80,6 +80,7 @@ class UpdatePasswordIsSuccessfulTest extends PersonbydomainsTableBaseDuskTest
                 ->pause($pause['long'])
                 ->assertSee('Update Personbydomain')
                 ->type('@password', 'mapleleafs')
+                ->type('@password_confirmation', 'mapleleafs')
                 ->click('@update-button')
                 ->pause($pause['long'])
                 ->assertSee('Personbydomain Details')

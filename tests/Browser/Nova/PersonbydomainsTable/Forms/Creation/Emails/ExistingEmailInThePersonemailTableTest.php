@@ -98,6 +98,7 @@ class ExistingEmailInThePersonemailTableTest extends PersonbydomainsTableBaseDus
                 ->assertSee('Create Personbydomain')
                 ->type('@email', $newEmailData['email_address'])
                 ->type('@password', 'secret')
+                ->type('@password_confirmation', 'secret')
                 ->select('@installed_domain', 1)
 
                 // The following is required to cope with the drop-down being searchable. So we cannot use the usual

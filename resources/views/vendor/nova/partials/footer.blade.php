@@ -46,4 +46,8 @@
     @if (class_exists('Lasallesoftware\Lasalleui\Version'))
         <br />{{ Lasallesoftware\Lasalleui\Version::PACKAGE }}, v{{ Lasallesoftware\Lasalleui\Version::VERSION }} ({{ Lasallesoftware\Lasalleui\Version::RELEASEDATE }})
     @endif
+
+    @if (class_exists('Lasallesoftware\Contactformbackend\Version'))
+        <br />{{ Lasallesoftware\Contactformbackend\Version::PACKAGE }}, v{{ Lasallesoftware\Contactformbackend\Version::VERSION }} ({{ Lasallesoftware\Contactformbackend\Version::RELEASEDATE }})
+    @endif
 </p>

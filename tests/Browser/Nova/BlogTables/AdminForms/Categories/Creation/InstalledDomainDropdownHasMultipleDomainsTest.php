@@ -39,7 +39,6 @@ class InstalledDomainDropdownHasMultipleDomainsTest extends BlogTablesBaseDuskTe
 
         $this->artisan('lslibrary:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
-
     }
 
     /**

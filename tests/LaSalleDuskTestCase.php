@@ -24,6 +24,9 @@ namespace Tests;
 
 use Tests\DuskTestCase;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
+
 class LaSalleDuskTestCase extends DuskTestCase
 {
     /**
@@ -61,6 +64,5 @@ class LaSalleDuskTestCase extends DuskTestCase
         // https://stackoverflow.com/questions/2461762/force-freeing-memory-in-php
         gc_enable();
         gc_collect_cycles();
-
     }
 }

@@ -39,7 +39,6 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
 
         $this->artisan('lslibrary:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
-
     }
 
     /**

@@ -83,10 +83,13 @@ class BlogTablesBaseDuskTestCase extends LaSalleDuskTestCase
         '3' => 'A Very Important Update!',
     ];
 
+    // PLEASE NOTE THAT YOU CANNOT SPECIFY A CATEGORY ON A POST CREATE ANYMORE!! 
+    // CATEGORY IS NULLABLE! ==> $table->integer('category_id')->unsigned()->nullable();
+    // https://github.com/LaSalleSoftware/lsv2-blogbackend-pkg/blob/master/database/migrations/2019_06_03_183254_create_posts_table.php
     public $newPostData = [
         'installed_domain_id' => 1,
         'personbydomain_id'   => 1,
-        'category_id'         => 1,
+        'category_id'         => null, 
         'title'               => 'Lorem ipsum dolor sit amet consectetur',
         'slug'                => 'lorem-ipsum-dolor-sit-amet-consectetur',
         'content'             => 'Lorem ipsum dolor sit amet consectetur adipiscing elit per, est gravida id cursus sagittis',

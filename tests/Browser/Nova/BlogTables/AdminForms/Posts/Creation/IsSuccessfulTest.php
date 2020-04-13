@@ -48,6 +48,9 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
      * Test that the creation is successful.
      *
      * Note that the "publish_on" field is left blank intentionally as it will be populated via model event when left blank
+     * 
+     * NOTE THAT THE CATEGORY_ID IS NULL BECAUSE YOU CANNOT ASSIGN A CATEGORY ON A CREATE!
+     * NOTE THAT CATEGORY_ID IS NULLABLE!
      *
      * @group nova
      * @group novablogtables
@@ -59,6 +62,8 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
     public function testCreateNewRecordIsSuccessful()
     {
         echo "\n**Now testing Tests\Browser\Nova\BlogTables\AdminForms\Posts\Creation\TestCreateNewRecordIsSuccessful**";
+
+        $this->assertTrue(true);
 
         $login       = $this->loginOwnerBobBloom;
         $pause       = $this->pause();

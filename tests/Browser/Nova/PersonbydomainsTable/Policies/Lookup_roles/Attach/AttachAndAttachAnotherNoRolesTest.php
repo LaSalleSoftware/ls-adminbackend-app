@@ -92,7 +92,8 @@ class AttachAndAttachAnotherNoRolesTest extends PersonbydomainsTableBaseDuskTest
                 ->assertVisible('@2-view-button')
 
                 ->click('@2-view-button')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
+
                 ->assertSee('Personbydomain Details')
                 ->assertSee('Lookup User Role')
                 ->assertVisible(('@attach-button'))

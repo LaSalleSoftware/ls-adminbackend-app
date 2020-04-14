@@ -72,10 +72,10 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Lookup Website Types')         // Superadmins and Admins do not see lookup tables
-                ->visit('/nova/resources/Lookup_website_types')
+                ->visit('/nova/resources/lookup_website_types')
                 ->pause($pause['long'])
                 ->assertDontSee('Create Lookup Website Type')
-                ->assertDontSee('Blog')
+                //->assertDontSee('Blog')  ==> The word "BLOG" exists in the left vertical menu
                 ->assertDontSee('Podcast')
                 ->assertDontSee('Ecommerce')
                 ->assertDontSee('Business')

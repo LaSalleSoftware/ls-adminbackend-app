@@ -81,6 +81,9 @@ class SuppressEditAttachedButtonTest extends LookupTablesBaseDuskTestCase
                 ->pause($pause['short'])
                 ->assertSee('Lookup User Role Details')
                 ->assertSee('Personbydomains')
+
+                ->pause($pause['long'])
+
                 ->assertVisible('@4-row')
                 ->assertMissing('@4-edit-attached-button')
             ;

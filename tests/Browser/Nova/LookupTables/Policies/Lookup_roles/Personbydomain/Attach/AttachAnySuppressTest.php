@@ -81,7 +81,6 @@ class AttachAnySuppressTest extends LookupTablesBaseDuskTestCase
                 ->pause($pause['short'])
                 ->assertSee('Lookup User Role Details')
                 ->assertSee('Personbydomains')
-                ->assertVisible('@4-row')
                 ->assertMissing('@attach-button')
             ;
         });

@@ -81,8 +81,11 @@ class SuppressDetachButtonTest extends LookupTablesBaseDuskTestCase
                 ->pause($pause['short'])
                 ->assertSee('Lookup User Role Details')
                 ->assertSee('Personbydomains')
-                ->assertVisible('@4-row')
-                ->assertMissing('@4-delete-button')
+
+                ->pause($pause['long'])
+                
+                ->assertVisible('@2-row')
+                ->assertMissing('@2-delete-button')
             ;
         });
     }

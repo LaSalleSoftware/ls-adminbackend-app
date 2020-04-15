@@ -33,7 +33,7 @@ use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class MenuItemExposedForAdminsTest extends InstalledDomainsTableBaseDuskTestCase
+class MenuItemSuppressedForAdminsTest extends InstalledDomainsTableBaseDuskTestCase
 {
     use DatabaseMigrations;
 

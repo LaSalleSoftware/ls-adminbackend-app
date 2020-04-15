@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\BlogTables\Policies\PostUpdates\Create;
+namespace Tests\Browser\Nova\BlogTables\Policies\PostUpdates\CreateSuppressed;
 
 
 // LaSalle Software

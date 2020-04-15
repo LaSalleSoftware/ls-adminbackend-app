@@ -83,7 +83,7 @@ class AttachAnyWhenNoRolesTest extends PersonbydomainsTableBaseDuskTest
                 ->pause($pause['long'])
                 ->assertVisible('@2-view-button')
                 ->click('@2-view-button')
-                ->pause($pause['short'])
+                ->pause($pause['long'])
                 ->assertSee('Personbydomain Details')
                 ->assertSee('Lookup User Role')
                 ->assertMissing('@2-row')

@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\BlogTables\Policies\Postupdates\Menu;
+namespace Tests\Browser\Nova\BlogTables\Policies\PostUpdates\Menu;
 
 
 // ** WELL, THIS IS NOT ACTUALLY TESTING POLICIES, BUT THE NOVA RESOURCE SETTING. BUT THIS TEST IS STAYING IN THIS FOLDER ANYWAYS! **

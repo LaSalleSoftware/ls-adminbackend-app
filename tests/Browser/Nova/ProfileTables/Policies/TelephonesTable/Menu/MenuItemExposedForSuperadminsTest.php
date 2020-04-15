@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\ProfileTables\Policies\TelephoneTable\Menu;
+namespace Tests\Browser\Nova\ProfileTables\Policies\TelephonesTable\Menu;
 
 
 // ** WELL, THIS IS NOT ACTUALLY TESTING POLICIES, BUT THE NOVA RESOURCE SETTING. BUT THIS TEST IS STAYING IN THIS FOLDER ANYWAYS! **

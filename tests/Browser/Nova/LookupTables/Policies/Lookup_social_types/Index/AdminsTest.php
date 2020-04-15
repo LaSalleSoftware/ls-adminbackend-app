@@ -30,7 +30,7 @@ use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class Adminsest extends LookupTablesBaseDuskTestCase
+class AdminsTest extends LookupTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 

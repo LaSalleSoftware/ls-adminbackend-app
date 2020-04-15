@@ -25,7 +25,7 @@
  * is already tested in the "Index" tests. Since the index listing is not available, the delete button is not available.
  */
 
-namespace Tests\Browser\Nova\ProfileTables\Policies\TelephoneTable\Delete;
+namespace Tests\Browser\Nova\ProfileTables\Policies\TelephonesTable\Delete;
 
 
 // LaSalle Software

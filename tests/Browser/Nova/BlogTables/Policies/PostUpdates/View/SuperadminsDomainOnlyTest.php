@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\BlogTables\Policies\Postupdates\View;
+namespace Tests\Browser\Nova\BlogTables\Policies\PostUpdates\View;
 
 
 // LaSalle Software

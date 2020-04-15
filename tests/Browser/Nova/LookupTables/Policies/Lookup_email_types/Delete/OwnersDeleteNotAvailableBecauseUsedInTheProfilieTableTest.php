@@ -35,7 +35,7 @@ use Illuminate\Support\Carbon;
 // Laravel facade
 use Illuminate\Support\Facades\DB;
 
-class OwnersDeleteNotAvailableBecauseUsedInTheAddressTableTest extends LookupTablesBaseDuskTestCase
+class OwnersDeleteNotAvailableBecauseUsedInTheProfilieTableTest extends LookupTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 

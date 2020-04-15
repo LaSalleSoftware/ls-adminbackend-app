@@ -30,7 +30,7 @@ use Lasallesoftware\Library\Dusk\LaSalleBrowser;
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class insDomainOnlyTest extends BlogTablesBaseDuskTestCase
+class SuperadminsDomainOnlyTest extends BlogTablesBaseDuskTestCase
 {
     use DatabaseMigrations;
 

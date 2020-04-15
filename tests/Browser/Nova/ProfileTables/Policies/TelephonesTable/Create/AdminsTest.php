@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\ProfileTables\Policies\TelephoneTable\Create;
+namespace Tests\Browser\Nova\ProfileTables\Policies\TelephonesTable\Create;
 
 
 // LaSalle Software

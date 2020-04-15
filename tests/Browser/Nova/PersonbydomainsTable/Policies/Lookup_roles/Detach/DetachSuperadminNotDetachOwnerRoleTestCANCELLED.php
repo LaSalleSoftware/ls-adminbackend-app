@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Detach\Lookup_roles;
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Lookup_roles\Detach;
 
 // LaSalle Software
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
@@ -32,7 +32,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 // Laravel facade
 use Illuminate\Support\Facades\DB;
 
-class DetachSuperadminNotDetachOwnerRoleTest extends PersonbydomainsTableBaseDuskTest
+class DetachSuperadminNotDetachOwnerRoleTestCANCELLED extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 

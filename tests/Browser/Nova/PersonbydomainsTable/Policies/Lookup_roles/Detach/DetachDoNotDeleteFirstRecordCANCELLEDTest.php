@@ -20,7 +20,7 @@
  *
  */
 
-namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Detach\Lookup_roles;
+namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Lookup_roles\Detach;
 
 // LaSalle Software
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;

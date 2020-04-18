@@ -29,14 +29,14 @@ class Version
      *
      * @var string
      */
-    const VERSION = '2.0.10';
+    const VERSION = '2.0.11';
 
     /**
      * This package's release date.
      *
      * @var string
      */
-    const RELEASEDATE = 'January 19, 2020';
+    const RELEASEDATE = 'April 17, 2020';
 
     /**
      * This package's name.

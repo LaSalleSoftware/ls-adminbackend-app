@@ -26,6 +26,8 @@ Every individual AWS service costs! Be careful what you click! It is so easy to 
 
 To the best of my knowledge, setting up IAM policies, groups, users, and user credentials is free. 
 
+For reference: [https://dev.to/matttyler/the-hitchhiker-s-guide-to-s3-access-controls-2h0a](https://dev.to/matttyler/the-hitchhiker-s-guide-to-s3-access-controls-2h0a)
+
 ## Step 1: Double check that you have these dependencies in your composer.json
 
 Yes, I have [these dependencies](https://laravel.com/docs/master/filesystem#driver-prerequisites) in composer.json already. Yes, I am asking you to double check anyways because if something is not working this is the first thing to check. Might as well take a peek now!

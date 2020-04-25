@@ -23,12 +23,13 @@
     <php>
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
-        <env name="DB_DATABASE" value="lsv2adminbackendapptest"/>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="MAIL_DRIVER" value="array"/>
-        <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
+        <server name="DB_DATABASE" value="lsv2adminbackendapptest"/>
+        <server name="APP_ENV" value="testing"/>
+        <server name="BCRYPT_ROUNDS" value="4"/>
+        <server name="CACHE_DRIVER" value="array"/>
+        <server name="MAIL_MAILER" value="array"/>
+        <server name="QUEUE_CONNECTION" value="sync"/>
+        <server name="SESSION_DRIVER" value="array"/>
+        <server name="TELESCOPE_ENABLED" value="false"/>
     </php>
 </phpunit>

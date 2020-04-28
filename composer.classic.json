@@ -37,7 +37,8 @@
         "lasallesoftware/lsv2-blogbackend-pkg": "^2.1",
         "lasallesoftware/lsv2-backup-pkg": "^2.1",
         "lasallesoftware/lsv2-contactformbackend-pkg": "^2.1",
-        "laravel/nova": "~3.0"
+        "laravel/nova": "~3.0",
+        "laravel/ui": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

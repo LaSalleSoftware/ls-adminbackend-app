@@ -23,6 +23,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Nova Domain Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the "domain name" associated with your application. This
+    | can be used to prevent Nova's internal routes from being registered
+    | on subdomains which do not need access to your admin application.
+    |
+    */
+
+    'domain' => env('NOVA_DOMAIN_NAME', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Nova App URL
     |--------------------------------------------------------------------------
     |
@@ -118,5 +131,19 @@ return [
     'actions' => [
         'resource' => ActionResource::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Nova Currency
+    |--------------------------------------------------------------------------
+    |
+    | This configuration option allows you to define the default currency
+    | used by the Currency field within Nova. You may change this to a
+    | valid ISO 4217 currency code to suit your application's needs.
+    |
+    */
+
+    //'currency' => 'USD',
+    'currency' => 'CAD',
 
 ];

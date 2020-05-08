@@ -47,7 +47,8 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5",
         "laravel/dusk": "^6.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "barryvdh/laravel-debugbar": "^3.0"
     },
     "config": {
         "optimize-autoloader": true,

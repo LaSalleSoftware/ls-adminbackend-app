@@ -6,6 +6,7 @@
 /public/storage
 /public/vendor/nova
 /storage/*.key
+/storage/debugbar
 /vendor
 /.idea
 npm-debug.log

@@ -17,6 +17,7 @@ yarn-error.log
 .phpunit.result.cache
 
 composer.lock
+package-lock.json
 
 .DS_Store
 Thumbs.db

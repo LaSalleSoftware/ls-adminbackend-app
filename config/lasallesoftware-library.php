@@ -178,6 +178,25 @@ return [
     'web_middleware_whitelist_ip_addresses' => [],
 
     /*
+	|--------------------------------------------------------------------------
+	| Default Path for Lasallesoftware\Library\Authentication\Http\Middleware\RedirectSomeRoutes
+	|--------------------------------------------------------------------------
+	|
+    | What path do you want Lasallesoftware\Library\Authentication\Http\Middleware\RedirectSomeRoutes
+    | middleware to redirect to?
+    |
+    | If you are logged in, these paths will redirect to the default path
+    | * home
+    | * nova
+    | * nova/dashboards
+    | * nova/dashboards/main
+    | * nova/resources
+	|
+    */
+    //'web_middleware_default_path' => '/nova/resources/personbydomains',
+    'web_middleware_default_path' => '/nova/resources/websites',
+
+    /*
     | ========================================================================
     | END: MIDDLEWARE
     | ========================================================================

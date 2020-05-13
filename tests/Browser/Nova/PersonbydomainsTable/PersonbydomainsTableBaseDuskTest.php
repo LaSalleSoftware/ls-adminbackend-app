@@ -40,6 +40,11 @@ class PersonbydomainsTableBaseDuskTest extends LaSalleDuskTestCase
         'password' => 'secret',
     ];
 
+    public $loginSuperadminDomain2 = [
+        'email'    => 'bbking@kingofblues.com',
+        'password' => 'secret',
+    ];
+
     public $loginAdminDomain1 = [
         'email'    => 'robert.johnson@blogtest.ca',
         'password' => 'secret',

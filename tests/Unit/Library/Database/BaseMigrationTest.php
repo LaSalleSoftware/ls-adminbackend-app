@@ -33,7 +33,10 @@ class BaseMigrationTest extends TestCase
     /**
      * Migrations in production for the admin LaSalle Software app should run
      *
-     * @group migration
+     * @group Library
+     * @group LibraryDatabase
+     * @group LibraryDatabaseBaseMigration
+     * @group LibraryDatabaseBaseMigrationtRunmigrationinproductionforadmin
      *
      * @return void
      */
@@ -56,7 +59,10 @@ class BaseMigrationTest extends TestCase
     /**
      * Migrations in production for the non-admin LaSalle Software apps should *not* run
      *
-     * @group migration
+     * @group Library
+     * @group LibraryDatabase
+     * @group LibraryDatabaseBaseMigration
+     * @group LibraryDatabaseBaseMigrationtRunmigrationinproductionfornonadmin
      *
      * @return void
      */
@@ -77,7 +83,10 @@ class BaseMigrationTest extends TestCase
     /**
      * Migrations in non-production should run for all LaSalle Software apps
      *
-     * @group migration
+     * @group Library
+     * @group LibraryDatabase
+     * @group LibraryDatabaseBaseMigration
+     * @group LibraryDatabaseBaseMigrationtRunmigrationinnonproductionforadmin
      *
      * @return void
      */

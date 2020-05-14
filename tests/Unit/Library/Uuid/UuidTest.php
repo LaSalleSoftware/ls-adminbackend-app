@@ -47,7 +47,10 @@ class UuidTest extends TestCase
      * The UUID should be 36 characters long. If not, the Ramsey package might have changed the UUID,
      * and the UUID could be longer than the 36char UUID database field
      *
-     * @group uuid
+     * @group Library
+     * @group LibraryUuid
+     * @group LibraryUuidUuid
+     * @group LibraryUuidUuidUuidshouldbe36characterslong
      *
      * @return void
      */
@@ -77,7 +80,10 @@ class UuidTest extends TestCase
      *  created_by = 1
      *  created_at = now()
      *
-     * @group uuid
+     * @group Library
+     * @group LibraryUuid
+     * @group LibraryUuidUuid
+     * @group LibraryUuidUuidInsertuuidwithfactoryvalues
      *
      * @return void
      */
@@ -116,7 +122,10 @@ class UuidTest extends TestCase
     /**
      * Testing that the UUID is INSERTed into the database with no (null) comments.
      *
-     * @group uuid
+     * @group Library
+     * @group LibraryUuid
+     * @group LibraryUuidUuid
+     * @group LibraryUuidUuidInsertuuidwithcomments
      *
      * @return void
      */
@@ -147,7 +156,10 @@ class UuidTest extends TestCase
     /**
      * Testing that the createUuid() method.
      *
-     * @group uuid
+     * @group Library
+     * @group LibraryUuid
+     * @group LibraryUuidUuid
+     * @group LibraryUuidUuidCreateuuidmethod
      *
      * @return void
      */

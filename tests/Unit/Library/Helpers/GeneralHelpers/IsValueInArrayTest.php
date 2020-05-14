@@ -39,9 +39,11 @@ class IsValueInArrayTest extends TestCase
      * Using IP addresses because Lasallesoftware\Library\Helpers\GeneralHelpers\isValueInArray() exists for the
      * Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist middleware.
      *
-     * @group helpers
-     * @group helpersGeneralhelpers
-     * @group helpersGeneralhelpersValueexistsinthearray
+     * @group Library
+     * @group LibraryHelpers
+     * @group LibraryHelpersGeneralhelpers
+     * @group LibraryHelpersGeneralhelpersIsvalueinarray
+     * @group LibraryHelpersGeneralhelpersIsvalueinarrayValueexistsinthearray
      *
      * @return void
      * @throws \ReflectionException
@@ -73,9 +75,11 @@ class IsValueInArrayTest extends TestCase
      * Using IP addresses because Lasallesoftware\Library\Helpers\GeneralHelpers\isValueInArray() exists for the
      * Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist middleware.
      *
-     * @group helpers
-     * @group helpersGeneralhelpers
-     * @group helpersGeneralhelpersValuenotexistinthearray
+     * @group Library
+     * @group LibraryHelpers
+     * @group LibraryHelpersGeneralhelpers
+     * @group LibraryHelpersGeneralhelpersIsvalueinarray
+     * @group LibraryHelpersGeneralhelpersIsvalueinarrayValuenotexistinthearray
      *
      * @return void
      * @throws \ReflectionException

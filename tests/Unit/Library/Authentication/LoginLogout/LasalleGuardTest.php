@@ -63,8 +63,11 @@ class LasalleGuardTest extends TestCase
     /**
      * The login token should be 40 characters long.
      *
-     * @group login
-     * @group lasalleguard
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLasalleguard
+     * @group LibraryAuthenticationLoginlogoutLasalleguardLogintokenshouldbe40characterslong
      *
      * @return void
      */

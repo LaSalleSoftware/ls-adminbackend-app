@@ -31,9 +31,11 @@ class DeleteOrphanedRecordsTest extends TestCase
      * Assuming that the config value of lasallesoftware-library.lasalle_number_of_minutes_allowed_before_deleting_the_logins_record
      * is its default value, which is 10 minutes.
      *
-     * @group authentication
-     * @group authenticationLoginstable
-     * @group authenticationLoginstableDeleteorphanedrecords
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginstable
+     * @group LibraryAuthenticationLoginstableDeleteorphanedrecords
+     * @group LibraryAuthenticationLoginstableDeleteorphanedrecordsDeleteorphanedrecords
      *
      * @return void
      */

@@ -47,7 +47,11 @@ class LoginModelTest extends TestCase
     /**
      * Test that a new login record is inserted into the database
      *
-     * @group login
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelCreatenewloginsrecord
      *
      * @return void
      */
@@ -102,7 +106,11 @@ class LoginModelTest extends TestCase
     /**
      * Test that a new login record is updated in the database
      *
-     * @group login
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelUpdateexsitingloginsrecord
      *
      * @return void
      */
@@ -161,8 +169,11 @@ class LoginModelTest extends TestCase
     /**
      * Test that a login record is deleted from the database when given the model to delete
      *
-     * @group login
-     * @group logout
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelDeleteexistingloginsrecordbymodel
      *
      * @return void
      */
@@ -205,8 +216,11 @@ class LoginModelTest extends TestCase
     /**
      * Test that a login record is deleted from the database when given the loginToken
      *
-     * @group login
-     * @group logout
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelDeleteexistingloginsrecordbylogintoken
      *
      * @return void
      */
@@ -249,8 +263,11 @@ class LoginModelTest extends TestCase
     /**
      * Test select login records when given a personbydomain_id
      *
-     * @group login
-     * @group loginread
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelReadloginsrecordbypersonbydomainid
      *
      * @return void
      */
@@ -293,8 +310,11 @@ class LoginModelTest extends TestCase
     /**
      * Test select a login record when given the loginToken
      *
-     * @group login
-     * @group loginread
+     * @group Library
+     * @group LibraryAuthentication
+     * @group LibraryAuthenticationLoginlogout
+     * @group LibraryAuthenticationLoginlogoutLoginmodel
+     * @group LibraryAuthenticationLoginlogoutLoginmodelReadloginsrecordbylogintoken
      *
      * @return void
      */

@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\DB;
 // Third Party Classes
 use Carbon\CarbonImmutable;
 
-class UnsetUserFromBannedTestTest extends PersonbydomainsTableBaseDuskTest
+class UnsetUserFromBannedTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 

@@ -11,9 +11,14 @@
 /.idea
 npm-debug.log
 yarn-error.log
+
 .env
-.env.dusk.local
 .env.backup
+
+.env.dusk.local
+.env.dusk.local.backup
+.env.dusk.emergencybanuser
+
 .phpunit.result.cache
 
 composer.lock
@@ -24,3 +29,5 @@ Thumbs.db
 
 /tests/Browser/console
 /tests/Browser/screenshots
+
+quickdrop.sh 

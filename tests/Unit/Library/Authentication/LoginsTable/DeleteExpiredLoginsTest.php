@@ -29,7 +29,7 @@ class DeleteExpiredLoginsTest extends TestCase
      * Test that a new login record is inserted into the database.
      *
      * Assuming that the config value of lasallesoftware-library.lasalle_number_of_minutes_allowed_before_deleting_the_logins_record
-     * is its default value, which is 10 minutes.
+     * is its default value, which is 60 minutes.
      *
      * @group Library
      * @group LibraryAuthentication

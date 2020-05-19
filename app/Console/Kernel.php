@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('auth:clear-resets')->dailyAt('04:00');
-        $schedule->command('lslibrary:deleteexpiredlogins')->dailyAt('04:30');
+        $schedule->command('lslibrary:deleteexpiredlogins')->dailyAt('04:05');
+        $schedule->command('lslibrary:deleteexpiredjwt')->dailyAt('04:10');
     }
 
     /**

@@ -33,7 +33,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 // Laravel facade
 use Illuminate\Support\Facades\DB;
 
-class EmergencyBanDisableTest extends PersonbydomainsTableBaseDuskTest
+class EmergencyBanDisabledTest extends PersonbydomainsTableBaseDuskTest
 {
     use DatabaseMigrations;
 
@@ -51,12 +51,12 @@ class EmergencyBanDisableTest extends PersonbydomainsTableBaseDuskTest
      * @group nova
      * @group novaPersonbydomain
      * @group novaPersonbydomainBanuser
-     * @group novaPersonbydomainBanuserEmergencyban
-     * @group novaPersonbydomainBanuserEmergencybanIsdisabled
+     * @group novaPersonbydomainBanuserEmergencybandisabled
+     * @group novaPersonbydomainBanuserEmergencybandisabledIsdisabled
      */
     public function testIsDisabled()
     {
-        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Ban_User\EmergencyBanDisableTest**";
+        echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Ban_User\EmergencyBanDisabledTest**";
 
         $personTryingToLogin = $this->loginOwnerBobBloom;
         $pause               = $this->pause();

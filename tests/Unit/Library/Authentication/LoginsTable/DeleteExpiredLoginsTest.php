@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\CarbonImmutable;
 
 
-class DeleteOrphanedRecordsTest extends TestCase
+class DeleteExpiredLoginsTest extends TestCase
 {
     // Define hooks to migrate the database before and after each test
     use DatabaseMigrations;
@@ -34,14 +34,14 @@ class DeleteOrphanedRecordsTest extends TestCase
      * @group Library
      * @group LibraryAuthentication
      * @group LibraryAuthenticationLoginstable
-     * @group LibraryAuthenticationLoginstableDeleteorphanedrecords
-     * @group LibraryAuthenticationLoginstableDeleteorphanedrecordsDeleteorphanedrecords
+     * @group LibraryAuthenticationLoginstableDeleteexpiredrecords
+     * @group LibraryAuthenticationLoginstableDeleteexpiredrecordsIsdeletedsuccessfully
      *
      * @return void
      */
-    public function testDeleteOrphanedRecords()
+    public function testIsDeletedSuccessfully()
     {
-        echo "\n**Now testing Tests\Unit\Library\Authentication\LoginsTable\DeleteOrphanedRecordsTest**";
+        echo "\n**Now testing Tests\Unit\Library\Authentication\LoginsTable\DeleteExpiredLoginsTest**";
 
 
         // Arrange
@@ -73,7 +73,7 @@ class DeleteOrphanedRecordsTest extends TestCase
             'uuid'              => 'uuid3',
             'created_at'        => $now,
             'created_by'        => 1,
-            'updated_at'        => $now->subMinutes(60),
+            'updated_at'        => $now->subMinutes(70),
             'updated_by'        => 1,
         ]);
 
@@ -90,7 +90,7 @@ class DeleteOrphanedRecordsTest extends TestCase
 
 
         // Act
-        $logins->deleteInactiveLoginsRecords();
+        $logins->deleteExpired();
 
         // Assert
         $this->assertDatabaseHas('logins', ['id' => '1']);

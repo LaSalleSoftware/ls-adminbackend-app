@@ -111,7 +111,7 @@ class PasswordResetTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password_new'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertSee('ResourcesXXXX')
+                ->assertSee('Resources')
                 ->assertSee('JWT Keys')
              ;
        });

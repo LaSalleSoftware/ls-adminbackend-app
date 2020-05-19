@@ -81,7 +81,7 @@ return [
     | https://stackoverflow.com/questions/41983976/laravel-5-session-lifetime)
 	|
 	*/
-    'lasalle_number_of_minutes_allowed_before_deleting_the_logins_record' => env('LASALLE_HOW_MANY_MINUTES_UNTIL_LOGINS_INACTIVITY', 10),
+    'lasalle_number_of_minutes_allowed_before_deleting_the_logins_record' => env('LASALLE_HOW_MANY_MINUTES_UNTIL_LOGINS_INACTIVITY', 60),
 
     /*
 	|--------------------------------------------------------------------------

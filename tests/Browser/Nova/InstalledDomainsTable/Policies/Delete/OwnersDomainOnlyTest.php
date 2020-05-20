@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Lasalle Software library (lasallesoftware/library).
+ * This file is part of  Lasalle Software .
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright  (c) 2019 The South LaSalle Trading Corporation
- * @license    http://opensource.org/licenses/MIT MIT
+ * @license    http://opensource.org/licenses/MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  *

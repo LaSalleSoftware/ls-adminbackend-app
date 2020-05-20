@@ -28,11 +28,11 @@ Nova is installed via composer. The documentation for doing this is [here](https
 
 You will need the usual server stuff for local development. Here's [Laravel's server requirements](https://laravel.com/docs/6.x#server-requirements).
 
-Run this command from the command line, which will create a "lsv2-adminbackup-app" folder, and install LaSalle Software's admin app. Create a folder name that suits your individual needs:
+Run this command from the command line, which will create a "ls-adminbackup-app" folder, and install LaSalle Software's admin app. Create a folder name that suits your individual needs:
 
-```composer create-project lasallesoftware/lsv2-adminbackend-app lsv2-adminbackend-app```
+```composer create-project lasallesoftware/ls-adminbackend-app ls-adminbackend-app```
 
-From the command line, run ```cd lsv2-adminbackup-app ``` to go into the local app's root folder.
+From the command line, run ```cd ls-adminbackup-app ``` to go into the local app's root folder.
 
 #### If you are setting up this local admin app for production, then change the composer.json
 

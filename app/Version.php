@@ -11,13 +11,13 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright  (c) 2019-2020 The South LaSalle Trading Corporation
- * @license    http://opensource.org/licenses/MIT MIT
+ * @license    http://opensource.org/licenses/MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
  *
  * @see       https://lasallesoftware.ca
- * @see       https://packagist.org/packages/lasallesoftware/lsv2-basicfrontend-app
- * @see       https://github.com/LaSalleSoftware/lsv2-adminbackend-app
+ * @see       https://packagist.org/packages/lasallesoftware/ls-basicfrontend-app
+ * @see       https://github.com/LaSalleSoftware/ls-adminbackend-app
  */
 
 namespace App;

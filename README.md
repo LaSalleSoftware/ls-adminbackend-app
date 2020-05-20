@@ -1,12 +1,12 @@
 # LaSalle Software's Administrative Back-end Application 
 
 <p align="center">
-<a href="https://packagist.org/packages/lasallesoftware/lsv2-adminbackend-app"><img src="https://poser.pugx.org/lasallesoftware/lsv2-adminbackend-app/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/lasallesoftware/lsv2-adminbackend-app"><img src="https://poser.pugx.org/lasallesoftware/lsv2-adminbackend-app/license.svg" alt="License"></a> 
-<a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-v6-brightgreen.svg?style=flat-square" alt="Laravel v6.x"></a> 
+<a href="https://packagist.org/packages/lasallesoftware/ls-adminbackend-app"><img src="https://poser.pugx.org/lasallesoftware/ls-adminbackend-app/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/lasallesoftware/ls-adminbackend-app"><img src="https://poser.pugx.org/lasallesoftware/ls-adminbackend-app/license.svg" alt="License"></a> 
+<a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-v7-brightgreen.svg?style=flat-square" alt="Laravel v7.x"></a> 
 </p>
 
-Admin Back-end package for my LaSalle Software Version 2.
+Admin Back-end package for my LaSalle Software.
 
 ## Security
 

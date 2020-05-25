@@ -19,7 +19,7 @@ return [
     |
     */
 
-    'name' => 'LaSalle Software Admin Site',
+    'name' => env('NOVA_APP_NAME', env('APP_NAME')),
 
     /*
     |--------------------------------------------------------------------------

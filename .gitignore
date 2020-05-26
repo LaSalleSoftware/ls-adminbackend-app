@@ -9,6 +9,7 @@
 /storage/debugbar
 /vendor
 /.idea
+.vscode
 npm-debug.log
 yarn-error.log
 

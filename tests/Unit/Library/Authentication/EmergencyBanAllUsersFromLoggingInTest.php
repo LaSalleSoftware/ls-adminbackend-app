@@ -49,8 +49,6 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Carbon;
 
-use Illuminate\Support\Facades\Config;
-
 class EmergencyBanAllUsersFromLoggingInTest extends TestCase
 {
     // Define hooks to migrate the database before and after each test

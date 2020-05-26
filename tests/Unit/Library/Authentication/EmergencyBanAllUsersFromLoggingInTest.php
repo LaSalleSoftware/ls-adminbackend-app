@@ -49,6 +49,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Carbon;
 
+use Illuminate\Support\Facades\Config;
+
 class EmergencyBanAllUsersFromLoggingInTest extends TestCase
 {
     // Define hooks to migrate the database before and after each test
@@ -79,7 +81,7 @@ class EmergencyBanAllUsersFromLoggingInTest extends TestCase
             ->getMock()
         ;
 
-        config(['lasallesoftware-library.emergency_ban_all_users_from_admin_app_login' => true]);
+        config(['lasallesoftware-library.ban_all_users_from_logging_into_the_admin_backend' => true]);
 
         // Act
         $ban = $lasalleguard->emergencyBanAllUsersFromLoggingIn();
@@ -107,7 +109,7 @@ class EmergencyBanAllUsersFromLoggingInTest extends TestCase
             ->getMock()
         ;
 
-        config(['lasallesoftware-library.emergency_ban_all_users_from_admin_app_login' => false]);
+        config(['lasallesoftware-library.ban_all_users_from_logging_into_the_admin_backend' => false]);
 
         // Act
         $ban = $lasalleguard->emergencyBanAllUsersFromLoggingIn();

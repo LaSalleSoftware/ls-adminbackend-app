@@ -52,25 +52,12 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
      * @group novaPersonbydomain-SKIP
      * @group novaPersonbydomainBanuser-SKIP
      * @group novaPersonbydomainBanuserEmergencyban-SKIP
-     * @group novaPersonbydomainBanuserEmergencybanIsenabled-SKIP
+     * @group novaPersonbydomainBanuserEmergencybanIsenabled
      */
-
-
-     /* 
-     ================================================================================================================
-     WELL, AFTER WRESTLING WITH THIS TEST, I GIVE UP:
-      
-       ** .env.dusk.emergencybanuser IS NOT ALWAYS USED
-       ** I'm not even sure that it's using my .env.dusk.local when the "emergencybanuser" env file is ignore
-       ** This test is somehow, incredibly, magically, deleting my "persons" pivot tables! IN MY "local" DATABASE!
-    
-     SO I'M SKIPPING THIS ONE. SEE https://lasallesoftware.ca/docs/v2/gettingstarted_tests#problem_with_ban_user_test
-     ================================================================================================================
-     */
-
 
      /*****************************************************************************************************************
-      **                                     MUST RUN WITH THE COMMAND                                               **
+      **   To set the env var to true -- "LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN=true",                **
+      **   you must run this test with a separate environment file:                                                  **
       **                                                                                                             **
       **   "php artisan dusk --group novaPersonbydomainBanuserEmergencybanIsenabled --env=dusk.emergencybanuser"     **
       *****************************************************************************************************************/
@@ -79,8 +66,8 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
     {
         echo "\n**Now testing Tests\Browser\Nova\PersonbydomainsTable\Ban_User\EmergencyBanEnabledNeedSpecialEnvFileForThisTest**";
 
-        echo "\n\n";
 
+        echo "\n\n";
         echo "\n *****************************************************************************************************************************************";
         echo "\n * PLEASE NOTE THAT IF THIS TEST FAILS, THEN PLEASE ENSURE THAT YOU ARE RUNNING IT WITH THE .env.dusk.emergencybanuser env file.         *";
         echo "\n *                                                                                                                                       *";
@@ -88,24 +75,10 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
         echo "\n *                                                                                                                                       *";
         echo "\n * php artisan dusk --group novaPersonbydomainBanuserEmergencybanIsenabled --env=dusk.emergencybanuser                                   *";
         echo "\n *                                                                                                                                       *";
-        echo "\n *  FYI: the LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN = " . env('LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN') . " for this Dusk test.                                                *";
-        echo "\n *                                                                                                                                       *";
         echo "\n *****************************************************************************************************************************************";
-
         echo "\n\n";
 
-        echo "\n *****************************************************************************************************************************************";
-        echo "\n *                                                                                                                                       *";
-        echo "\n *  Unfortunately, sometimes the '.env.dusk.emergencybanuser' environment file is not read during the Dusk test.                         *";
-        echo "\n *  More unfortunate is that I have not figured out the reason!                                                                          *";
-        echo "\n *                                                                                                                                       *";
-        echo "\n *  FYI: the LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN = " . env('LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN') . " for this Dusk test.                                                *";
 
-        echo "\n *                                                                                                                                       *";
-        echo "\n *****************************************************************************************************************************************";
-
-
-        /*
         $personTryingToLogin = $this->loginOwnerBobBloom;
         $pause               = $this->pause();
         
@@ -119,6 +92,5 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
                 ->assertSee('Forgot Your Password?') 
             ;
         });
-        */
     }
 }

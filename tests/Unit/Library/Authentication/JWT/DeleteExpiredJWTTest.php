@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Library\Authentication\LoginsTable;
+namespace Tests\Unit\Library\Authentication\JWT;
 
 // LaSalle Software classes
 use Lasallesoftware\Library\Authentication\Models\Json_web_token;

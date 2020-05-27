@@ -149,6 +149,19 @@ return [
 	| 
 	*/
     'ban_all_users_from_logging_into_the_admin_backend' => env('LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN', false),
+
+    /*
+	|--------------------------------------------------------------------------
+	| Seed database with test data
+	|--------------------------------------------------------------------------
+	|
+    | Seed database with test data? 
+    |
+    | Test data will seed in the "testing" environment, even when this setting is false.
+    | 
+    */
+    'seed_database_with_test_data' => env('LASALLE_POPULATE_DATABASE_WITH_TEST_DATA', false),
+
     
 
     /*

@@ -104,6 +104,7 @@ class UpdateUniqueValidationFailsWithAddressline2FieldTest extends LaSalleDuskTe
                 // enter a value in the currently null "address_line_2" field
                 // which makes this address a completely new address; ie, *not* unique
                 ->type('@address_line_2', 'in the loop')
+                ->type('@postal_code', $testFailsData['postal_code'])   // the wrong zip code is entered automatically, so need to override it with what we want
                 ->pause($pause['long'])
                 ->click('@update-button')
                 ->pause($pause['long'])

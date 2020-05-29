@@ -106,6 +106,8 @@ class CreationUniqueValidationFailsTest extends LaSalleDuskTestCase
                 ->pause($pause['long'])
                 ->keys('@address_line_1', '{enter}')
                 ->select('@lookup_address_type', $testFailsData['lookup_address_type_id'])
+                ->type('@postal_code', $testFailsData['postal_code'])   // the wrong zip code is entered automatically, so need to override it with what we want
+                ->pause($pause['long'])
                 ->pause($pause['long'])
                 ->click('@create-button')
                 ->pause($pause['long'])

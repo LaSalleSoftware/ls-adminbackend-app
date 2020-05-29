@@ -56,7 +56,7 @@ class LoggingOutTest extends DuskTestCase
      * @group authentication
      * @group authenticationLogout
      */
-    public function testLoginShouldBeSuccessful()
+    public function testLogoutShouldBeSuccessful()
     {
         echo "\n**Now testing Tests\Browser\Authentication\LoggingOutTest **";
 
@@ -70,9 +70,8 @@ class LoggingOutTest extends DuskTestCase
                 ->pause(5000)
                 ->visit('/logout')
                 ->click('@logout-button')
-                ->pause(5000)
-                ->assertSee('REGISTER')
-                ->assertSee('Laravel')
+                ->pause(10000)
+                ->assertSee('Forgot Your Password?')
             ;
         });
 

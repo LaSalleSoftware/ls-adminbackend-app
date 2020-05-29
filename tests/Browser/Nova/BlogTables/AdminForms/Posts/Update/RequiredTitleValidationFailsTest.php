@@ -66,7 +66,6 @@ class RequiredTitleValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Posts')
                 ->pause($pause['long'])

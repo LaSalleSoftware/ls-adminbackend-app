@@ -141,14 +141,15 @@ class LoggingInTest extends TestCase
      *
      * @group login
      * @group loggingintest
+     * @group loggingintestI_login_unsuccessfully_with_wrong_email_with_the_lasalleguard_attempt_method
      *
      * @return void
      */
     public function test_I_login_unsuccessfully_with_wrong_email_with_the_lasalleguard_attempt_method()
     {
         $credentials =  [
-            'email' => 'bob@lasallesoftware.ca',
-            'password'              => 'secret',
+            'email'    => 'wrong@lemail.com',
+            'password' => 'secret',
         ];
 
         // Simulate my logging in
@@ -158,9 +159,8 @@ class LoggingInTest extends TestCase
             ->get('/home')                                // Redirected to "home" when successfully logged in
         ;
 
-        // Was I redirected to "home" when I logged in?
+        // Was I redirected?
         $response->assertStatus(302);
-        $response->assertSee('login');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken
@@ -178,8 +178,9 @@ class LoggingInTest extends TestCase
     /**
      * HTTP test that I login unsuccessfully with the wrong password using LasalleGuard's attempt method
      *
-     * @group login2
      * @group login
+     * @group loggingintest
+     * @group loggingintestI_login_unsuccessfully_with_wrong_paswword_with_the_lasalleguard_attempt_method
      *
      * @return void
      */
@@ -197,9 +198,8 @@ class LoggingInTest extends TestCase
             ->get('/home')                                // Redirected to "home" when successfully logged in
         ;
 
-        // Was I redirected to "home" when I logged in?
+        // Was I redirected?
         $response->assertStatus(302);
-        $response->assertSee('login');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken

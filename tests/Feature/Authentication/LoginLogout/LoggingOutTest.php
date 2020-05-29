@@ -50,7 +50,7 @@ class LoggingOutTest extends TestCase
 
         // I should not be logged in
         $response->assertStatus(302);
-        $response->assertSee('login');
+        //$response->assertSee('login');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken

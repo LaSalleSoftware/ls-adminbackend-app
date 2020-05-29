@@ -30,8 +30,9 @@ class LasalleGuardTest extends TestCase
     /**
      * HTTP test that that lasalleguard::user() returns a authenticatable user object when user is logged in
      *
-     * @group login
-     * @group lasalleguard
+     * @group Loginlogout
+     * @group LoginlogoutLasalleguard
+     * @group LoginlogoutLasalleguardThe_user_method_returns_a_user_when_a_user_is_logged_in
      *
      * @return void
      */
@@ -54,8 +55,9 @@ class LasalleGuardTest extends TestCase
     /**
      * HTTP test that that lasalleguard::user() returns null when not logged in
      *
-     * @group login
-     * @group lasalleguard
+     * @group Loginlogout
+     * @group LoginlogoutLasalleguard
+     * @group LoginlogoutLasalleguardThe_user_method_returns_null_when_no_user_is_logged_in
      *
      * @return void
      */
@@ -73,8 +75,9 @@ class LasalleGuardTest extends TestCase
     /**
      * HTTP test that that lasalleguard::user() returns a authenticatable user object when user is logged in
      *
-     * @group login
-     * @group lasalleguard
+     * @group Loginlogout
+     * @group LoginlogoutLasalleguard
+     * @group LoginlogoutLasalleguardThe_id_method_returns_a_personbydomain_id_when_a_user_is_logged_in
      *
      * @return void
      */
@@ -96,8 +99,9 @@ class LasalleGuardTest extends TestCase
     /**
      * HTTP test that lasalleguard::user() returns null when not logged in
      *
-     * @group login
-     * @group lasalleguard
+     * @group Loginlogout
+     * @group LoginlogoutLasalleguard
+     * @group LoginlogoutLasalleguardThe_id_method_returns_null_when_no_user_is_logged_in
      *
      * @return void
      */
@@ -114,8 +118,9 @@ class LasalleGuardTest extends TestCase
     /**
      * HTTP test that lasalleguard::loginUsingId() successfully logs in
      *
-     * @group login
-     * @group lasalleguard
+     * @group Loginlogout
+     * @group LoginlogoutLasalleguard
+     * @group LoginlogoutLasalleguardThe_loginusingid_method_should_successfully_login
      */
     public function test_the_loginusingid_method_should_successfully_login()
     {

@@ -26,7 +26,7 @@ class DeleteExpiredJWTTest extends TestCase
     }
 
     /**
-     * Test that a new login record is inserted into the database.
+     * Test that expired JWT's are deleted from the json_web_tokens database table
      *
      * @group Library
      * @group LibraryAuthentication
@@ -83,7 +83,7 @@ class DeleteExpiredJWTTest extends TestCase
     }
 
     /**
-     * Test that a new login record is inserted into the database.
+     * Test that expired JWT's are deleted from the json_web_tokens database table via the artisan command
      *
      * @group Library
      * @group LibraryAuthentication

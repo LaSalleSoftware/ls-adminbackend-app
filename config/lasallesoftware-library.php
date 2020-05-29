@@ -162,6 +162,18 @@ return [
     */
     'seed_database_with_test_data' => env('LASALLE_POPULATE_DATABASE_WITH_TEST_DATA', false),
 
+    /*
+	|--------------------------------------------------------------------------
+	| UUID Expiration
+	|--------------------------------------------------------------------------
+	|
+    | How many days until a record in the "uuids" database table expires?
+    |
+    | Used in Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid's daysToExpiration() method.
+	| 
+	*/
+    'uuid_number_of_days_until_expiration' => 7,
+
     
 
     /*

@@ -97,7 +97,6 @@ class ExistingEmailInThePersonemailTableTest extends PersonbydomainsTableBaseDus
                 ->press('Login')
                 ->pause($pause['long'])
                 ->assertSee('Personbydomains')
-                ->assertSee('Personbydomains')
                 ->clickLink('Personbydomains')
                 ->pause($pause['long'])
                 ->assertVisible('@1-row')
@@ -108,7 +107,7 @@ class ExistingEmailInThePersonemailTableTest extends PersonbydomainsTableBaseDus
                 ->type('@email', $newEmailListedInNovaServiceProvider['email_address'])
                 ->click('@update-button')
                 ->pause($pause['long'])
-                ->assertSee('Personbydomain Details')
+               // ->assertSee('Personbydomain Details')  // No, logged in user changed email --> logged out!
             ;
         });
 

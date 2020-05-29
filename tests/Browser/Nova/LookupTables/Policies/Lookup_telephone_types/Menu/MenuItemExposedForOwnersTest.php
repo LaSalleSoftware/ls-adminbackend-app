@@ -70,7 +70,6 @@ class MenuItemExposedForOwnersTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-
                 ->assertSee('Lookup Telephone Types')
             ;
         });

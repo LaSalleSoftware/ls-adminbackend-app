@@ -66,7 +66,6 @@ class AdminsTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertDontSee('JWT Keys')
                 ->visit('nova/resources/installed_domains_jwt_keys')

@@ -69,7 +69,6 @@ class AdminsTest extends ProfileTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertMissing('Lookup  Company Types')
                 ->visit('/nova/resources/companies/1/edit?viaResource=&viaResourceId=&viaRelationship=')

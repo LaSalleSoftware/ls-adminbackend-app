@@ -69,7 +69,6 @@ class MenuItemSuppressedForSuperadminsTest extends InstalledDomainsTableBaseDusk
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Installed Domains')
             ;

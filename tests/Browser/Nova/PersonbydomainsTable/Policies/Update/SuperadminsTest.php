@@ -71,7 +71,6 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertSee('Lookup User Roles')  // just an added assert that this menu item is visible in the sidebar
                 ->clickLink('Personbydomains')
@@ -114,7 +113,6 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->visit('/nova/resources/personbydomains/1/edit?viaResource=&viaResourceId=&viaRelationship=')
                 ->pause($pause['long'])

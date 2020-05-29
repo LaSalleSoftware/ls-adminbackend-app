@@ -77,7 +77,6 @@ class UniqueValidationFailsTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Companies')
                 ->pause($pause['long'])

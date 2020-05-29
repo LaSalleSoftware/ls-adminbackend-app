@@ -81,8 +81,7 @@ class OwnersDeleteIsAvailableBecauseNotUsedInTheProfileTableTest extends LookupT
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertSee('Lookup User Roles')
                 ->clickLink('Lookup User Roles')
                 ->pause($pause['long'])

@@ -67,8 +67,7 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertMissing('Lookup Social Types')
                 ->visit('/nova/resources/Lookup_social_types/5')
                 ->pause($pause['short'])

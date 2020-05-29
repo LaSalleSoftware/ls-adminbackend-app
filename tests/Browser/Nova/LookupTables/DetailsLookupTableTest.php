@@ -67,8 +67,7 @@ class DetailsLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->visit('/nova/resources/lookup_address_types/5')
                 ->pause($pause['long'])
                 ->assertSee('Work')
@@ -97,8 +96,7 @@ class DetailsLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/6')
                 ->pause($pause['long'])

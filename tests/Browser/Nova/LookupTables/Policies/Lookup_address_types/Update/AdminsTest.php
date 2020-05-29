@@ -69,8 +69,7 @@ class AdminsTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertMissing('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types/6/edit?viaResource=&viaResourceId=&viaRelationship=')
                 ->pause($pause['short'])

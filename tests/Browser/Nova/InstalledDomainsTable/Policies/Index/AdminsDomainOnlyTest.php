@@ -70,13 +70,12 @@ class AdminsDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Installed Domains')
                 ->visit('/nova/resources/installed_domains')
                 ->pause($pause['long'])
                 ->assertSee('Installed Domains')
-                ->assertDontSee(env('LASALLE_APP_DOMAIN_NAME'))
+                ->assertSee(env('LASALLE_APP_DOMAIN_NAME'))  // Admin belongs to this domain
                 ->assertDontSee('Pretendfrontend.com')
                 ->assertDontSee('Anotherpretendfrontend.com')
             ;

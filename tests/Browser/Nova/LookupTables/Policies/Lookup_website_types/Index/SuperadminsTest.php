@@ -69,8 +69,7 @@ class SuperadminsTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertDontSee('Lookup Website Types')         // Superadmins and Admins do not see lookup tables
                 ->visit('/nova/resources/lookup_website_types')
                 ->pause($pause['long'])

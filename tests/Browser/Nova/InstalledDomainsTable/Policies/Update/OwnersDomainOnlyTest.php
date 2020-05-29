@@ -68,7 +68,6 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertSee('Installed Domains')
                 ->clickLink('Installed Domains')

@@ -75,8 +75,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->clickLink('Lookup Address Types')
                 ->pause($pause['long'])
                 ->assertSee('Create Lookup Address Type')
@@ -119,8 +118,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->clickLink('Lookup Address Types')
                 ->pause($pause['short'])
                 ->assertSee('Create Lookup Address Type')
@@ -153,8 +151,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->clickLink('Lookup Address Types')
                 ->pause($pause['short'])
                 ->assertSee('Create Lookup Address Type')
@@ -191,8 +188,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['short'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertDontSeeLink('Lookup Address Types')
                 ->visit('/nova/resources/lookup_address_types')
                 ->pause($pause['long'])

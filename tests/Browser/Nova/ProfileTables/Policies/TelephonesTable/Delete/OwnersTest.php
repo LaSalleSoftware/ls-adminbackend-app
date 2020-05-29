@@ -72,7 +72,6 @@ class OwnersTest extends ProfileTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertSee('Telephone Numbers')
                 ->clickLink('Telephone Numbers')

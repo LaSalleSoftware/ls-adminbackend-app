@@ -81,7 +81,6 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Addresses')
                 ->pause($pause['long'])

@@ -95,7 +95,6 @@ Sodales ut eu sem integer. Velit aliquet sagittis id consectetur purus ut faucib
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Telephone Numbers')
                 ->pause($pause['long'])

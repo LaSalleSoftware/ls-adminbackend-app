@@ -69,7 +69,6 @@ class SuperadminsTest extends ProfileTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertSee('Social Sites')
                 ->clickLink('Social Sites')

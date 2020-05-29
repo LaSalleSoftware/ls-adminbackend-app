@@ -66,7 +66,6 @@ class OwnersTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->assertSee('Lookup User Roles')  // just an added assert that this menu item is visible in the sidebar
                 ->clickLink('Personbydomain')

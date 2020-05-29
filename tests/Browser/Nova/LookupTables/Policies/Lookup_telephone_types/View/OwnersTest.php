@@ -67,8 +67,7 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertSee('Lookup Telephone Types')
                 ->clickLink('Lookup Telephone Types')
                 ->pause($pause['long'])

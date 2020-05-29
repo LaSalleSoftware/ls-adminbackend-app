@@ -67,8 +67,7 @@ class IndexLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->clickLink('Lookup Address Types')
                 ->pause($pause['long'])
                 ->assertVisible('@1-row')
@@ -101,8 +100,7 @@ class IndexLookupTableTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
-                ->assertSee('Personbydomains')
+
                 ->assertDontSeeLink('Lookup Address Types')
             ;
         });

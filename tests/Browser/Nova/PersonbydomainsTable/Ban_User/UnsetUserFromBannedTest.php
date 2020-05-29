@@ -89,7 +89,6 @@ class UnsetUserFromBannedTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
                 ->assertSee('Personbydomains')
                 ->clickLink('Personbydomains')
                 ->pause($pause['long'])

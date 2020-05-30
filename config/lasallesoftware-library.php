@@ -174,6 +174,20 @@ return [
 	*/
     'uuid_number_of_days_until_expiration' => 7,
 
+    /*
+	|--------------------------------------------------------------------------
+	| Deleting Nova's "action_events" database table records
+	|--------------------------------------------------------------------------
+	|
+    | How many days until a deleting records in the "action_events" database table?
+    |
+    | "action_events" db table is Nova. 
+    |
+    | Used in Lasallesoftware\Library\Nova\DeleteActioneventsRecords class.
+	| 
+	*/
+    'actionevents_number_of_days_until_deletion' => 14,
+
     
 
     /*

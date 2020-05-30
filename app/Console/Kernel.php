@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('lslibrary:deleteexpiredlogins')->dailyAt('04:05');
         $schedule->command('lslibrary:deleteexpiredjwt')->dailyAt('04:10');
         $schedule->command('lslibrary:deleteexpireduuid')->dailyAt('04:15');
+        $schedule->command('lslibrary:deleteactioneventsrecords')->dailyAt('04:20');
     }
 
     /**

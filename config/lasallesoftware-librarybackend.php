@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the Lasalle Software library package
+ * This file is part of the Lasalle Software library back-end package. 
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,10 +14,10 @@
  * @license    http://opensource.org/licenses/MIT
  * @author     Bob Bloom
  * @email      bob.bloom@lasallesoftware.ca
- * @link       https://lasallesoftware.ca
- * @link       https://packagist.org/packages/lasallesoftware/library
- * @link       https://github.com/lasallesoftware/library
  *
+ * @see        https://lasallesoftware.ca
+ * @see        https://packagist.org/packages/lasallesoftware/ls-librarybackend-pkg
+ * @see        https://github.com/LaSalleSoftware/ls-librarybackend-pkg
  */
 
 return [
@@ -90,7 +90,8 @@ return [
 	|
     | How many seconds until a JWT expires?
     |
-    | This EXP claim is set in the client domain.
+    | This EXP claim is set in the front-end domain, so you'll want all your domains 
+    | set with the same number.
 	|
     | https://tools.ietf.org/html/rfc7519#section-4.1.4
 	|

@@ -72,7 +72,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             //'model'  => App\User::class,
-            'model'  => \Lasallesoftware\Library\Authentication\Models\Personbydomain::class,
+            'model'  => \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain::class,
         ],
 
         // 'users' => [

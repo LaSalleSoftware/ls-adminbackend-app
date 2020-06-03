@@ -27,6 +27,13 @@
         },
         {
             "type": "path",
+            "url": "../packages/lsv2-librarybackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
             "url": "../packages/lsv2-novabackend-pkg",
             "options": {
                 "symlink": true
@@ -68,6 +75,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "lasallesoftware/ls-library-pkg": "dev-master",
+        "lasallesoftware/ls-librarybackend-pkg": "dev-master",
         "lasallesoftware/ls-novabackend-pkg": "dev-master",
         "lasallesoftware/ls-blogbackend-pkg": "dev-master",
         "lasallesoftware/ls-backup-pkg": "dev-master",

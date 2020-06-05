@@ -23,7 +23,7 @@
 namespace Tests\Unit\Library\Authentication\BanUsers;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
 
 // Laravel classes
 use Tests\TestCase;
@@ -40,7 +40,7 @@ class PersonbydomainModelIsBannedMethodTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**

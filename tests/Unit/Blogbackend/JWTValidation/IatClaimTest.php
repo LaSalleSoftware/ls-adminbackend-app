@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\JWTValidation;
 
 // LaSalle Software
-use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Librarybackend\JWT\Validation\JWTValidation;
 
 // Laravel classes
 use Tests\TestCase;
@@ -45,7 +45,7 @@ class IatClaimTest extends TestCase
         // Arrange
         $time  = time();
 
-        config::set('lasallesoftware-library.lasalle_jwt_iat_claim_valid_for_how_many_seconds', 120);
+        config::set('lasallesoftware-librarybackend.lasalle_jwt_iat_claim_valid_for_how_many_seconds', 120);
 
         $token = (new Builder())
             ->issuedBy('https://lasallesoftware.ca')         // Configures the issuer (iss claim) (frontend.com)
@@ -84,7 +84,7 @@ class IatClaimTest extends TestCase
         // Arrange
         $time  = time() - 600;
 
-        config::set('lasallesoftware-library.lasalle_jwt_iat_claim_valid_for_how_many_seconds', 120);
+        config::set('lasallesoftware-librarybackend.lasalle_jwt_iat_claim_valid_for_how_many_seconds', 120);
 
         $token = (new Builder())
             ->issuedBy('https://LaSalleSoftware.ca')        // Configures the issuer (iss claim) (frontend.com)

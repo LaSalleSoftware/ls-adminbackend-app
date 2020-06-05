@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\BlogTables\AdminForms\Posts\Creation;
 // LaSalle Software
 use Tests\Browser\Nova\BlogTables\BlogTablesBaseDuskTestCase;
 use Lasallesoftware\Blogbackend\Models\Post;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -39,7 +39,7 @@ class IsSuccessfulTest extends BlogTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

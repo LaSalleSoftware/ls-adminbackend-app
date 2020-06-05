@@ -40,9 +40,9 @@
 namespace Tests\Unit\Library\Authentication\LoginLogout;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\CustomGuards\LasalleGuard;
-use Lasallesoftware\Library\Authentication\Models\Login;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+use Lasallesoftware\Librarybackend\Authentication\CustomGuards\LasalleGuard;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel classes
 use Tests\TestCase;
@@ -57,7 +57,7 @@ class LasalleGuardTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**

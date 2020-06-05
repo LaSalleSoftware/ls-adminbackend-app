@@ -26,7 +26,7 @@ namespace Tests\Unit\Library\Database;
 use Tests\TestCase;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Database\Migrations\BaseMigration;
+use Lasallesoftware\Librarybackend\Database\Migrations\BaseMigration;
 
 class BaseMigrationTest extends TestCase
 {

@@ -3,8 +3,8 @@
 namespace Tests\Feature\Authentication\LoginLogout;
 
 // LaSalle Software
-use Lasallesoftware\Library\Testing\Concerns\Auth\InteractsWithAuthentication;
-use Lasallesoftware\Library\Testing\Concerns\Uuid\InteractsWithUuid;
+use Lasallesoftware\Librarybackend\Testing\Concerns\Auth\InteractsWithAuthentication;
+use Lasallesoftware\Librarybackend\Testing\Concerns\Uuid\InteractsWithUuid;
 
 // Laravel
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class LoggingInTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->makeUuidgenerator();
     }
 
@@ -60,7 +60,7 @@ class LoggingInTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         // When I am successfully logged in, the logins table has a record:
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
         $this->assertTrue($record->personbydomain_id == $this->app['session']->get($this->getTheNameFromTheGetNameMethod()),'***The login personbydomain_id should be 1***');
         $this->assertTrue($record->token == $this->app['session']->get('loginToken'),'***The login token is wrong***');
         //$this->assertTrue($record->uuid == UUIDGENERATORUUID,'***The uuid is wrong***');
@@ -78,7 +78,7 @@ class LoggingInTest extends TestCase
         $this->assertTrue(is_int($record->updated_by), "***The updated_by must be an integer***");
 
         // When I am successfully logged in, the UUID inserted into the uuids table should be the same as the UUID constant
-        $uuid = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
+        $uuid = \Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
         $this->assertTrue($record->uuid == $GLOBALS['uuid_generator_uuid'],'***The two uuids do not match***');
     }
 
@@ -118,7 +118,7 @@ class LoggingInTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         // When I am successfully logged in, the logins table has a record:
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
         $this->assertTrue($record->personbydomain_id == $this->app['session']->get($this->getTheNameFromTheGetNameMethod()),'***The login personbydomain_id should be 1***');
         $this->assertTrue($record->token == $this->app['session']->get('loginToken'),'***The login token is wrong***');
         //$this->assertTrue($record->uuid == UUIDGENERATORUUID,'***The uuid is wrong***');
@@ -132,7 +132,7 @@ class LoggingInTest extends TestCase
         $this->assertTrue(is_int($record->updated_by), "***The updated_by must be an integer***");
 
         // When I am successfully logged in, the UUID inserted into the uuids table should be the same as the UUID constant
-        $uuid = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
+        $uuid = \Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::find(2);
         $this->assertTrue($record->uuid == $GLOBALS['uuid_generator_uuid'],'***The two uuids do not match***');
     }
 
@@ -171,7 +171,7 @@ class LoggingInTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         // The logins table should not have a record:
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
         $this->assertTrue(is_null($record));
     }
 
@@ -210,7 +210,7 @@ class LoggingInTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         // The logins table should not have a record:
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
         $this->assertTrue(is_null($record));
     }
 }

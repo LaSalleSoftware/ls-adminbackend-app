@@ -23,8 +23,8 @@
 namespace Tests\Browser\Nova\LookupTables;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
-use Lasallesoftware\Library\Profiles\Models\Lookup_address_type;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Profiles\Models\Lookup_address_type;
 use Tests\LaSalleDuskTestCase;
 
 // Laravel class
@@ -41,7 +41,7 @@ class UpdateLookupTableTest extends LaSalleDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',

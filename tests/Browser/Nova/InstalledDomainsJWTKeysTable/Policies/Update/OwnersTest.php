@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\InstalledDomainsJWTKeysTable\Policies\Update;
 
 // LaSalle Software
 use Tests\Browser\Nova\InstalledDomainsTable\InstalledDomainsTableBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -39,8 +39,8 @@ class OwnersTest extends InstalledDomainsTableBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
-        $this->artisan('lslibrary:installeddomainseed');
+        $this->artisan('lslibrarybackend:customseed');
+        $this->artisan('lslibrarybackend:installeddomainseed');
 
     }
 

@@ -28,7 +28,7 @@ namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_social_types\Menu;
 
 // LaSalle Software
 use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class MenuItemSuppressedForAdminsTest extends LookupTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

@@ -23,10 +23,10 @@
 namespace Tests\Browser\Nova\PersonbydomainsTable\Forms\Update\Emails;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Email;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -43,8 +43,8 @@ class ExistingEmailNotInThePersonemailTableTest extends PersonbydomainsTableBase
         parent::setUp();
 
         // Yes, I am using the blog seeds!
-        $this->artisan('lslibrary:customseed');
-        $this->artisan('lslibrary:installeddomainseed');
+        $this->artisan('lslibrarybackend:customseed');
+        $this->artisan('lslibrarybackend:installeddomainseed');
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\JWTValidation;
 
 // LaSalle Software
-use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Librarybackend\JWT\Validation\JWTValidation;
 
 // Laravel classes
 use Tests\TestCase;
@@ -20,7 +20,7 @@ class IssClaimTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
     }
 

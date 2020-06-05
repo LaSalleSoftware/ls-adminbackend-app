@@ -23,9 +23,9 @@
 namespace Tests\Browser\Nova\ProfileTables\AddressesTable\Creation;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Address;
+use Lasallesoftware\Librarybackend\Profiles\Models\Address;
 use Tests\LaSalleDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',

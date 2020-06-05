@@ -24,9 +24,9 @@ namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_email_types\Delete;
 
 
 // LaSalle Software
-use Lasallesoftware\Library\Profiles\Models\Lookup_email_type;
+use Lasallesoftware\Librarybackend\Profiles\Models\Lookup_email_type;
 use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel classes
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -43,7 +43,7 @@ class OwnersDeleteNotAvailableBecauseUsedInTheProfilieTableTest extends LookupTa
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

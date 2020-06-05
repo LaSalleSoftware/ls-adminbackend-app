@@ -23,9 +23,9 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software class
-use Lasallesoftware\Library\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
 use Tests\LaSalleDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -42,7 +42,7 @@ class UpdateUniqueValidationFailsWithMiddlenameFieldCANCELLEDTest extends LaSall
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\Jsonwebtokendbtable;
 
 // LaSalle Software
-use Lasallesoftware\Library\Authentication\Models\Json_web_token;
+use Lasallesoftware\Librarybackend\Authentication\Models\Json_web_token;
 
 // Laravel classes
 use Tests\TestCase;

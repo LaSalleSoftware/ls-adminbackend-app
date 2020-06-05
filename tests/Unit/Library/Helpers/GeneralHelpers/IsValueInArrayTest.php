@@ -36,8 +36,8 @@ class IsValueInArrayTest extends TestCase
     /**
      * Does a value exist within an array?
      *
-     * Using IP addresses because Lasallesoftware\Library\Helpers\GeneralHelpers\isValueInArray() exists for the
-     * Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist middleware.
+     * Using IP addresses because Lasallesoftware\Librarybackend\Helpers\GeneralHelpers\isValueInArray() exists for the
+     * Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist middleware.
      *
      * @group Library
      * @group LibraryHelpers
@@ -60,7 +60,7 @@ class IsValueInArrayTest extends TestCase
             '151.101.193.155'
         ];
 
-        $generalHelpers = $this->getMockForTrait('Lasallesoftware\Library\Helpers\GeneralHelpers');
+        $generalHelpers = $this->getMockForTrait('Lasallesoftware\Librarybackend\Helpers\GeneralHelpers');
 
         // Act
         $result = $generalHelpers->isValueInArray($needle, $haystack);
@@ -72,8 +72,8 @@ class IsValueInArrayTest extends TestCase
     /**
      * Does a value NOT exist within an array?
      *
-     * Using IP addresses because Lasallesoftware\Library\Helpers\GeneralHelpers\isValueInArray() exists for the
-     * Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist middleware.
+     * Using IP addresses because Lasallesoftware\Librarybackend\Helpers\GeneralHelpers\isValueInArray() exists for the
+     * Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist middleware.
      *
      * @group Library
      * @group LibraryHelpers
@@ -94,7 +94,7 @@ class IsValueInArrayTest extends TestCase
             '151.101.193.155'
         ];
 
-        $generalHelpers = $this->getMockForTrait('Lasallesoftware\Library\Helpers\GeneralHelpers');
+        $generalHelpers = $this->getMockForTrait('Lasallesoftware\Librarybackend\Helpers\GeneralHelpers');
 
         // Act
         $result = $generalHelpers->isValueInArray($needle, $haystack);

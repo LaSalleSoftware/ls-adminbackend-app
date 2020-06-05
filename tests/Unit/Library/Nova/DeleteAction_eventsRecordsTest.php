@@ -3,7 +3,7 @@
 namespace Tests\Unit\Library\Nova;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Nova\DeleteActioneventsRecords;
+use Lasallesoftware\Librarybackend\Nova\DeleteActioneventsRecords;
 
 // Laravel classes
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class DeleteAction_eventsRecordsTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -41,7 +41,7 @@ class DeleteAction_eventsRecordsTest extends TestCase
         echo "\n**Now testing Tests\Unit\Library\Nova\DeleteAction_eventsRecordsTest**";
 
         // Arrange
-        config(['lasallesoftware-library.actionevents_number_of_days_until_deletion' => 7]);
+        config(['lasallesoftware-librarybackend.actionevents_number_of_days_until_deletion' => 7]);
 
         $this->insertRecord(0);
         $this->insertRecord(9);
@@ -68,14 +68,14 @@ class DeleteAction_eventsRecordsTest extends TestCase
     public function testIsDeletedSuccessfullyUsingArtisanCommand()
     {
         // Arrange
-        config(['lasallesoftware-library.actionevents_number_of_days_until_deletion' => 7]);
+        config(['lasallesoftware-librarybackend.actionevents_number_of_days_until_deletion' => 7]);
 
         $this->insertRecord(0);
         $this->insertRecord(9);
 
         // Act
         $deleteactioneventsrecords = new DeleteActioneventsRecords;
-        $this->artisan('lslibrary:deleteactioneventsrecords');
+        $this->artisan('lslibrarybackend:deleteactioneventsrecords');
 
         // Assert
         $countAfterDeletion = DB::table('action_events')->count();

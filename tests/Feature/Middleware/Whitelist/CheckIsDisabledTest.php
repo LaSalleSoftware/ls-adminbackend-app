@@ -3,7 +3,7 @@
 namespace Tests\Feature\Middleware\Whitelist;
 
 // LaSalle Software
-use Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist;
+use Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist;
 
 // TestCase
 use Tests\TestCase;
@@ -30,14 +30,14 @@ class CheckIsDisabledTest extends TestCase
         echo "\n**Now testing Tests\Feature\Middleware\Whitelist\CheckIsDisabledTest**";
 
         // Set the config parameter to "no" (FYI: every value equals "no", except for one single value: "yes"!)
-        Config::set('lasallesoftware-library.web_middleware_do_whitelist_check', 'no');
+        Config::set('lasallesoftware-librarybackend.web_middleware_do_whitelist_check', 'no');
 
         // Create request
         $url = env('APP_URL') . '/login';
         $request = Request::create($url, 'GET');
 
         // Pass the request to the middleware
-        $middleware = new \Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist();
+        $middleware = new \Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist();
         try {
             $response = $middleware->handle($request, function () {});
         } catch (\Throwable $e)  {

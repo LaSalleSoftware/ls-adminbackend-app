@@ -42,7 +42,7 @@ class UserIsBannedCannotLoginTest extends DuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',

@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\Lookup_roles\Attach;
 
 // LaSalle Software
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -40,7 +40,7 @@ class AttachAnyWhenARoleExistsTest extends PersonbydomainsTableBaseDuskTest
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

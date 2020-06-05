@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\JWTValidation;
 
 // LaSalle Software
-use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Librarybackend\JWT\Validation\JWTValidation;
 
 // Laravel classes
 use Tests\TestCase;

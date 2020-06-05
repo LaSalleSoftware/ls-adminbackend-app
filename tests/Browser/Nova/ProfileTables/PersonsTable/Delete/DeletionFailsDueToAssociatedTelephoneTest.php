@@ -23,9 +23,9 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Delete;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
 use Tests\LaSalleDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class DeletionFailsDueToAssociatedTelephoneTest extends LaSalleDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',
@@ -52,7 +52,7 @@ class DeletionFailsDueToAssociatedTelephoneTest extends LaSalleDuskTestCase
     /**
      * Test that a deletion fails because a telephone is associated with the person.
      * Actually, we cannot delete the person because there is a telephone associated with this person. So,
-     * we should not even see the delete icon (suppressed by the policy at Lasallesoftware\Library\Policies\PersonPolicy).
+     * we should not even see the delete icon (suppressed by the policy at Lasallesoftware\Librarybackend\Policies\PersonPolicy).
      *
      * @group nova
      * @group novaprofiletables
@@ -66,10 +66,10 @@ class DeletionFailsDueToAssociatedTelephoneTest extends LaSalleDuskTestCase
 
         // create a new person in the database, and at the same time create a new telephone in the database that is
         // associated (in Nova's parlance, "attached") to this person
-        $people = factory(\Lasallesoftware\Library\Profiles\Models\Person::class, 1)
+        $people = factory(\Lasallesoftware\Librarybackend\Profiles\Models\Person::class, 1)
             ->create()
             ->each(function($person){
-                $person->telephone()->save(factory(\Lasallesoftware\Library\Profiles\Models\Telephone::class)->make());
+                $person->telephone()->save(factory(\Lasallesoftware\Librarybackend\Profiles\Models\Telephone::class)->make());
             })
         ;
 

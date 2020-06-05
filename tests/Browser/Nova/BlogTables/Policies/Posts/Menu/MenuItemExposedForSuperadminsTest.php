@@ -28,7 +28,7 @@ namespace Tests\Browser\Nova\BlogTables\Policies\Posts\Menu;
 
 // LaSalle Software
 use Tests\Browser\Nova\BlogTables\BlogTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class MenuItemExposedForSuperadminsTest extends BlogTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

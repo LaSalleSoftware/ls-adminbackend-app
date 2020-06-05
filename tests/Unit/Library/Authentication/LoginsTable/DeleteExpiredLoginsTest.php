@@ -3,7 +3,7 @@
 namespace Tests\Unit\Library\Authentication\LoginsTable;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
 
 // Laravel classes
 use Tests\TestCase;
@@ -22,13 +22,13 @@ class DeleteExpiredLoginsTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
      * Test that a new login record is inserted into the database.
      *
-     * Assuming that the config value of lasallesoftware-library.lasalle_number_of_minutes_allowed_before_deleting_the_logins_record
+     * Assuming that the config value of lasallesoftware-librarybackend.lasalle_number_of_minutes_allowed_before_deleting_the_logins_record
      * is its default value, which is 60 minutes.
      *
      * @group Library

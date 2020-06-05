@@ -28,7 +28,7 @@ namespace Tests\Browser\Nova\InstalledDomainsTable\Policies\Menu;
 
 // LaSalle Software
 use Tests\Browser\Nova\InstalledDomainsTable\InstalledDomainsTableBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,8 +41,8 @@ class MenuItemSuppressedForSuperadminsTest extends InstalledDomainsTableBaseDusk
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
-        $this->artisan('lslibrary:installeddomainseed');
+        $this->artisan('lslibrarybackend:customseed');
+        $this->artisan('lslibrarybackend:installeddomainseed');
 
     }
 

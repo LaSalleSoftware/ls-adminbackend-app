@@ -23,9 +23,9 @@
 namespace Tests\Browser\Nova\ProfileTables\PersonsTable\Delete;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
 use Tests\LaSalleDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',
@@ -52,7 +52,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
     /**
      * Test that a deletion succeeds because there is no address or email or social or telephone or website.
      * associated with this person. So, we should see the delete icon!
-     * (person policy at Lasallesoftware\Library\Policies\PersonPolicy)
+     * (person policy at Lasallesoftware\Librarybackend\Policies\PersonPolicy)
      *
      * @group nova
      * @group novaprofiletables
@@ -66,7 +66,7 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
 
         // create a new person in the database, with *no* address or email or social or telephone or social
         // associated (in Nova's parlance, "attached") to this person
-        $people = factory(\Lasallesoftware\Library\Profiles\Models\Person::class, 1)
+        $people = factory(\Lasallesoftware\Librarybackend\Profiles\Models\Person::class, 1)
             ->create()
         ;
 

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\JWTValidation;
 
 // LaSalle Software
-use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Librarybackend\JWT\Validation\JWTValidation;
 
 // Laravel classes
 use Tests\TestCase;
@@ -39,16 +39,16 @@ class AudClaimTest extends TestCase
         // Arrange
         $time  = time();
 
-        config::set('lasallesoftware-library.lasalle_app_domain_name', 'hackintosh.lsv2-adminbackend-app.com');
+        config::set('lasallesoftware-librarybackend.lasalle_app_domain_name', 'hackintosh.lsv2-adminbackend-app.com');
 
         $token = (new Builder())
-            ->issuedBy('https://lasallesoftware.ca')         // Configures the issuer (iss claim) (frontend.com)
+            ->issuedBy('https://lasallesoftware.ca')                // Configures the issuer (iss claim) (frontend.com)
             ->permittedFor('hackintosh.lsv2-adminbackend-app.com')  // *** Configures the audience (aud claim) (backend.com) ***
-            ->identifiedBy('4f1g23a12aa', true) // Configures the id (jti claim), replicating as a header item
+            ->identifiedBy('4f1g23a12aa', true)                     // Configures the id (jti claim), replicating as a header item
             ->issuedAt($time)                                       // Configures the time that the token was issue (iat claim)
-            ->canOnlyBeUsedAfter($time + 60)              // Configures the time that the token can be used (nbf claim)
-            ->expiresAt($time + 3600)                     // Configures the expiration time of the token (exp claim)
-            ->withClaim('uid', 1)                      // Configures a new claim, called "uid"
+            ->canOnlyBeUsedAfter($time + 60)                        // Configures the time that the token can be used (nbf claim)
+            ->expiresAt($time + 3600)                               // Configures the expiration time of the token (exp claim)
+            ->withClaim('uid', 1)                                   // Configures a new claim, called "uid"
             ->getToken()                                            // Retrieves the generated token
         ;
 
@@ -78,7 +78,7 @@ class AudClaimTest extends TestCase
         // Arrange
         $time  = time();
 
-        config::set('lasallesoftware-library.lasalle_app_domain_name', 'hackintosh.lsv2-adminbackend-app.com');
+        config::set('lasallesoftware-librarybackend.lasalle_app_domain_name', 'hackintosh.lsv2-adminbackend-app.com');
 
         $token = (new Builder())
             ->issuedBy('https://LaSalleSoftware.ca')        // Configures the issuer (iss claim) (frontend.com)

@@ -23,8 +23,8 @@
 namespace Tests\Browser\Authentication;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-use Lasallesoftware\Library\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
 
 // Laravel Dusk
 use Tests\DuskTestCase;
@@ -46,7 +46,7 @@ class LoggingInTest extends DuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email'    => 'bob.bloom@lasallesoftware.ca',

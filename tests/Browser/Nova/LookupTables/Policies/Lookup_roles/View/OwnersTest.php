@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\View;
 
 // LaSalle Software
 use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -38,7 +38,7 @@ class OwnersTest extends LookupTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

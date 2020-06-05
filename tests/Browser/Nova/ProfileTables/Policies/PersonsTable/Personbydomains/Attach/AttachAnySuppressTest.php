@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\ProfileTables\Policies\PersonsTable\Personbydomains
 
 // LaSalle Software
 use Tests\Browser\Nova\ProfileTables\ProfileTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -38,7 +38,7 @@ class AttachAnySuppressTest extends ProfileTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

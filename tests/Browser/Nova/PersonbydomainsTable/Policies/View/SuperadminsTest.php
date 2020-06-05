@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\PersonbydomainsTable\Policies\View;
 
 // LaSalle Software
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -37,7 +37,7 @@ class SuperadminsTest extends PersonbydomainsTableBaseDuskTest
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

@@ -25,7 +25,7 @@ namespace Tests\Browser\Nova\BlogTables\AdminForms\Categories\Creation;
 // LaSalle Software
 use Tests\Browser\Nova\BlogTables\BlogTablesBaseDuskTestCase;
 use Lasallesoftware\Blogbackend\Models\Category;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -38,7 +38,7 @@ class RequiredTitleValidationFailsTest extends BlogTablesBaseDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

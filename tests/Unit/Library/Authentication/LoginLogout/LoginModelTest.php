@@ -23,9 +23,9 @@
 namespace Tests\Unit\Library\Authentication\LoginLogout;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Login;
-use Lasallesoftware\Library\Authentication\CustomGuards\LasalleGuard;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\Authentication\CustomGuards\LasalleGuard;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel classes
 use Tests\TestCase;
@@ -41,7 +41,7 @@ class LoginModelTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -91,7 +91,7 @@ class LoginModelTest extends TestCase
         $resultId = $login->createNewLoginsRecord($data);
 
         // Assert
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::find($resultId);
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::find($resultId);
         // The following gives a message for each failing test, which is handier than the above's message when a test(s) fail
         $this->assertTrue($record->personbydomain_id == 1,'***The login personbydomain_id should be 1***');
         $this->assertTrue($record->token == $logintoken,'***The login token is wrong***');

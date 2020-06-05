@@ -3,7 +3,7 @@
 namespace Tests\Unit\Library\Authentication\JWT;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\Models\Json_web_token;
+use Lasallesoftware\Librarybackend\Authentication\Models\Json_web_token;
 
 // Laravel classes
 use Tests\TestCase;
@@ -22,7 +22,7 @@ class DeleteExpiredJWTTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -122,7 +122,7 @@ class DeleteExpiredJWTTest extends TestCase
         $this->assertDatabaseHas('json_web_tokens', ['id' => '3']);
 
         // Act
-        $this->artisan('lslibrary:deleteexpiredjwt');
+        $this->artisan('lslibrarybackend:deleteexpiredjwt');
 
 
         // Assert

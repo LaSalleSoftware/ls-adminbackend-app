@@ -3,8 +3,8 @@
 namespace Tests\Feature\Authentication\LoginLogout;
 
 // LaSalle Software
-use Lasallesoftware\Library\Testing\Concerns\Auth\InteractsWithAuthentication;
-use Lasallesoftware\Library\Testing\Concerns\Uuid\InteractsWithUuid;
+use Lasallesoftware\Librarybackend\Testing\Concerns\Auth\InteractsWithAuthentication;
+use Lasallesoftware\Librarybackend\Testing\Concerns\Uuid\InteractsWithUuid;
 
 // Laravel
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class LoggingOutTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->makeUuidgenerator();
     }
 
@@ -61,7 +61,7 @@ class LoggingOutTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         // The logins table should not have a record:
-        $record = \Lasallesoftware\Library\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
+        $record = \Lasallesoftware\Librarybackend\Authentication\Models\Login::orderBy('created_at', 'desc')->first();
         $this->assertTrue(is_null($record));
     }
 }

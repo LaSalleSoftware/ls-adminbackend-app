@@ -23,8 +23,8 @@
 namespace Tests\Unit\Library\Uuid;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid as UuidModel;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid as UuidModel;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel classes
 use Tests\TestCase;
@@ -40,7 +40,7 @@ class UuidTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -96,7 +96,7 @@ class UuidTest extends TestCase
             ->getMock()
         ;
 
-        $uuid = factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class)->make([
+        $uuid = factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class)->make([
             'comments' => null,
         ]);
 
@@ -110,7 +110,7 @@ class UuidTest extends TestCase
         );
 
         // Assert
-        $record = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
+        $record = \Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
         // The following gives a message for each failing test, which is handier than the above's message when a test(s) fail
         $this->assertTrue($record->lasallesoftware_event_id == 1,'***The uuid lasallesoftware_event_id from factory is 1***');
         $this->assertTrue($record->comments === null,'***The uuid comment should be null***');
@@ -137,7 +137,7 @@ class UuidTest extends TestCase
             //->disableOriginalConstructor()
             ->getMock()
         ;
-        $uuid = factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class)->make();
+        $uuid = factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class)->make();
 
         // Act
         $uuidGenerator->insertUuidIntoDatabase(
@@ -149,7 +149,7 @@ class UuidTest extends TestCase
         );
 
         // Assert
-        $record = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
+        $record = \Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
         $this->assertTrue($record->comments <> null, '***The uuid comment should be not-null***');
     }
 
@@ -198,7 +198,7 @@ class UuidTest extends TestCase
 
 
         // Act
-        $uuid = factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class)->make();
+        $uuid = factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class)->make();
 
         $newUuid = $uuidGenerator->createUuid(
             $uuid['lasallesoftware_event_id'],
@@ -210,7 +210,7 @@ class UuidTest extends TestCase
         // Assert
 
         // Asserts for the most recent record inserted into the database table
-        $record = \Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
+        $record = \Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::find(DB::getPdo()->lastInsertId());
 
         $this->assertTrue($record->lasallesoftware_event_id == 1,'***The uuid lasallesoftware_event_id from factory is 1***');
         $this->assertTrue($record->comments <> null,'***The uuid comment factory should not be null***');

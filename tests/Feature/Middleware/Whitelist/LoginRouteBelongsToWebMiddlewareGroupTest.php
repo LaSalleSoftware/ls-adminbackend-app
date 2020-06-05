@@ -3,7 +3,7 @@
 namespace Tests\Feature\Middleware\Whitelist;
 
 // LaSalle Software
-use Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist;
+use Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist;
 
 // TestCase
 use Tests\TestCase;

@@ -25,7 +25,7 @@ class CheckIsEnabledAndFailsTest extends TestCase
         echo "\n**Now testing Tests\Feature\Middleware\Whitelist\CheckIsEnabledAndFailsTest**";
 
         // Set the config parameter to "yes" (FYI: every value equals "no", except for one single value: "yes"!)
-        Config::set('lasallesoftware-library.web_middleware_do_whitelist_check', 'yes');
+        Config::set('lasallesoftware-librarybackend.web_middleware_do_whitelist_check', 'yes');
 
         // Create the request
         $url = env('APP_URL') . '/login';
@@ -33,7 +33,7 @@ class CheckIsEnabledAndFailsTest extends TestCase
 
         // Mock the middleware so we can use custom values for some methods.
         // The methods listed in setMethods() will return NULL. The methods not listed will run original code.
-        $middleware = $this->getMockBuilder(\Lasallesoftware\Library\Firewall\Http\Middleware\Whitelist::class)
+        $middleware = $this->getMockBuilder(\Lasallesoftware\Librarybackend\Firewall\Http\Middleware\Whitelist::class)
             ->setMethods(['getWhitelistedIpAddresses', 'getRemoteIpAddress'])
             ->getMock()
         ;

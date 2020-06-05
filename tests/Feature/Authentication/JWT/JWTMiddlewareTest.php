@@ -3,7 +3,7 @@
 namespace Tests\Feature\Authentication\JWT;
 
 // LaSalle Software
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel classes
 use Tests\TestCase;
@@ -26,7 +26,7 @@ class JWTMiddlewareTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
         // Insert the key the JWT uses. This insert represents the API domain.
@@ -143,11 +143,12 @@ class JWTMiddlewareTest extends TestCase
      *
      * Fails due to bad UUID in the JTI claim.
      *
-     * @group authentication
-     * @group authenticationJwt
-     * @group authenticationJwtJWTMiddleware
-     * @group authenticationJwtJWTMiddlewareNotvalidatesduetobaduuid
+     * @group authentication--SKIP
+     * @group authenticationJwt--SKIP
+     * @group authenticationJwtJWTMiddleware--SKIP
+     * @group authenticationJwtJWTMiddlewareNotvalidatesduetobaduuid--SKIP
      */
+    /*  ==> NOW THA THE JTI CLAIM IS A RANDOM STRING, AND NOT A FRONT-END GENERATED UUID, THIS TEST CAN BE SKIPPED <==
     public function testNotValidatesDueToBadUuid()
     {
         // Arrange
@@ -185,4 +186,5 @@ class JWTMiddlewareTest extends TestCase
         // Assert
         $response->assertStatus(403);
     }
+    */
 }

@@ -3,10 +3,10 @@
 namespace Tests;
 
 // Use my custom trait for my solution to text trix input fields
-use Lasallesoftware\Library\Dusk\LaSalleProvidesBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleProvidesBrowser;
 
 // Use my custom trait for stuff that might be helpful for any of my Dusk tests
-use Lasallesoftware\Library\Dusk\LaSalleHelpfulStuffForDusk;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleHelpfulStuffForDusk;
 
 use Laravel\Dusk\TestCase as BaseTestCase;
 use Facebook\WebDriver\Chrome\ChromeOptions;

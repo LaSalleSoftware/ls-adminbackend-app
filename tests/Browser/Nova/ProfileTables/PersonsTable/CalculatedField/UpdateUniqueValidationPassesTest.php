@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\ProfileTables\PersonsTable\CalculatedField;
 
 // LaSalle Software classes
 use Tests\LaSalleDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -41,7 +41,7 @@ class UpdateUniqueValidationPassesTest extends LaSalleDuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToLogin = [
             'email' => 'bob.bloom@lasallesoftware.ca',

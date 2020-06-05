@@ -24,9 +24,9 @@ namespace Tests\Browser\Nova\LookupTables\Policies\Lookup_roles\Delete;
 
 
 // LaSalle Software
-use Lasallesoftware\Library\Authentication\Models\Lookup_role;
+use Lasallesoftware\Librarybackend\Authentication\Models\Lookup_role;
 use Tests\Browser\Nova\LookupTables\LookupTablesBaseDuskTestCase;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel classes
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -43,7 +43,7 @@ class OwnersDeleteIsAvailableBecauseNotUsedInTheProfileTableTest extends LookupT
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
     }

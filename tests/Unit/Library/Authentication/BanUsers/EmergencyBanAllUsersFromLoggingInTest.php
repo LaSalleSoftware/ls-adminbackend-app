@@ -40,9 +40,9 @@
 namespace Tests\Unit\Library\Authentication\BanUsers;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\Authentication\CustomGuards\LasalleGuard;
-use Lasallesoftware\Library\Authentication\Models\Login;
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\UuidGenerator;
+use Lasallesoftware\Librarybackend\Authentication\CustomGuards\LasalleGuard;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\UuidGenerator;
 
 // Laravel classes
 use Tests\TestCase;
@@ -57,7 +57,7 @@ class EmergencyBanAllUsersFromLoggingInTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -82,7 +82,7 @@ class EmergencyBanAllUsersFromLoggingInTest extends TestCase
             ->getMock()
         ;
 
-        config(['lasallesoftware-library.ban_all_users_from_logging_into_the_admin_backend' => true]);
+        config(['lasallesoftware-librarybackend.ban_all_users_from_logging_into_the_admin_backend' => true]);
 
         // Act
         $ban = $lasalleguard->emergencyBanAllUsersFromLoggingIn();
@@ -111,7 +111,7 @@ class EmergencyBanAllUsersFromLoggingInTest extends TestCase
             ->getMock()
         ;
 
-        config(['lasallesoftware-library.ban_all_users_from_logging_into_the_admin_backend' => false]);
+        config(['lasallesoftware-librarybackend.ban_all_users_from_logging_into_the_admin_backend' => false]);
 
         // Act
         $ban = $lasalleguard->emergencyBanAllUsersFromLoggingIn();

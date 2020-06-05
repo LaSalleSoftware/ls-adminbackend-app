@@ -3,7 +3,7 @@
 namespace Tests\Unit\Library\Uuid;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid;
 
 // Laravel classes
 use Tests\TestCase;
@@ -22,7 +22,7 @@ class DeleteExpiredUUIDTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
     }
 
     /**
@@ -40,15 +40,15 @@ class DeleteExpiredUUIDTest extends TestCase
         echo "\n**Now testing Tests\Unit\Library\Uuidt\DeleteExpiredUUIDTest**";
 
         // Arrange
-        config(['lasallesoftware-library.uuid_number_of_days_until_expiration' => 7]);
+        config(['lasallesoftware-librarybackend.uuid_number_of_days_until_expiration' => 7]);
 
         $now = CarbonImmutable::now('America/New_York');
 
-        factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class, 50)->create([
+        factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class, 50)->create([
             'created_at' =>  $now->subDays(3),
         ]);
 
-        factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class, 100)->create([
+        factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class, 100)->create([
             'created_at' =>  $now->subDays(8),
         ]);
 
@@ -80,15 +80,15 @@ class DeleteExpiredUUIDTest extends TestCase
     public function testIsDeletedSuccessfullyUsingArtisanCommand()
     {
         // Arrange
-        config(['lasallesoftware-library.uuid_number_of_days_until_expiration' => 7]);
+        config(['lasallesoftware-librarybackend.uuid_number_of_days_until_expiration' => 7]);
 
         $now = CarbonImmutable::now('America/New_York');
 
-        factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class, 50)->create([
+        factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class, 50)->create([
             'created_at' =>  $now->subDays(3),
         ]);
 
-        factory(\Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid::class, 100)->create([
+        factory(\Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid::class, 100)->create([
             'created_at' =>  $now->subDays(8),
         ]);
 
@@ -96,7 +96,7 @@ class DeleteExpiredUUIDTest extends TestCase
 
 
         // Act
-        $this->artisan('lslibrary:deleteexpireduuid');
+        $this->artisan('lslibrarybackend:deleteexpireduuid');
 
         $countAfterDeletion = DB::table('uuids')->count();
 

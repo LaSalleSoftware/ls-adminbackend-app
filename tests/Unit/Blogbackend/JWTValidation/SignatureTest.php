@@ -3,7 +3,7 @@
 namespace Tests\Unit\Blogbackend\JWTValidation;
 
 // LaSalle Software
-use Lasallesoftware\Blogbackend\JWT\Validation\JWTValidation;
+use Lasallesoftware\Librarybackend\JWT\Validation\JWTValidation;
 
 // Laravel classes
 use Tests\TestCase;
@@ -25,7 +25,7 @@ class SignatureTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
         $this->artisan('lsblogbackend:blogcustomseed');
 
         DB::table('installed_domains_jwt_keys')->insert([

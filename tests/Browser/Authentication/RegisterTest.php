@@ -23,13 +23,13 @@
 namespace Tests\Browser\Authentication;
 
 // LaSalle Software classes
-use Lasallesoftware\Library\UniversallyUniqueIDentifiers\Models\Uuid;
-use Lasallesoftware\Library\Profiles\Models\Person;
-use Lasallesoftware\Library\Profiles\Models\Email;
-use Lasallesoftware\Library\Profiles\Models\Person_email;
-use Lasallesoftware\Library\Authentication\Models\Personbydomain;
-use Lasallesoftware\Library\Profiles\Models\Installed_domain;
-use Lasallesoftware\Library\Authentication\Models\Login;
+use Lasallesoftware\Librarybackend\UniversallyUniqueIDentifiers\Models\Uuid;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person;
+use Lasallesoftware\Librarybackend\Profiles\Models\Email;
+use Lasallesoftware\Librarybackend\Profiles\Models\Person_email;
+use Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain;
+use Lasallesoftware\Librarybackend\Profiles\Models\Installed_domain;
+use Lasallesoftware\Librarybackend\Authentication\Models\Login;
 
 // Laravel Dusk
 use Tests\DuskTestCase;
@@ -53,7 +53,7 @@ class RegisterTest extends DuskTestCase
     {
         parent::setUp();
 
-        $this->artisan('lslibrary:customseed');
+        $this->artisan('lslibrarybackend:customseed');
 
         $this->personTryingToRegister = [
             'first_name' => 'Richard',
@@ -92,7 +92,7 @@ class RegisterTest extends DuskTestCase
                 ->press('Register')
                 ->pause(4500)
                 //->assertPathIs('/home')                // Getting a 403 error, but running manually it is fine. The redirection from the new
-                //->assertSee('You are logged in!')      // Lasallesoftware\Library\Authentication\Http\Middleware\RedirectSomeRoutes is not the culprit, so far as I can tell
+                //->assertSee('You are logged in!')      // Lasallesoftware\Librarybackend\Authentication\Http\Middleware\RedirectSomeRoutes is not the culprit, so far as I can tell
             ;
         });
 

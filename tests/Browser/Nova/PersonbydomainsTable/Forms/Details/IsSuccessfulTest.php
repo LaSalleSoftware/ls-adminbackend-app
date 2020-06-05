@@ -24,7 +24,7 @@ namespace Tests\Browser\Nova\PersonbydomainsTable\Forms\Details;
 
 // LaSalle Software classes
 use Tests\Browser\Nova\PersonbydomainsTable\PersonbydomainsTableBaseDuskTest;
-use Lasallesoftware\Library\Dusk\LaSalleBrowser;
+use Lasallesoftware\Librarybackend\Dusk\LaSalleBrowser;
 
 // Laravel class
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -39,8 +39,8 @@ class IsSuccessfulTest extends PersonbydomainsTableBaseDuskTest
         parent::setUp();
 
         // Yes, I am using the blog seeds!
-        $this->artisan('lslibrary:customseed');
-        $this->artisan('lslibrary:installeddomainseed');
+        $this->artisan('lslibrarybackend:customseed');
+        $this->artisan('lslibrarybackend:installeddomainseed');
     }
 
     /**

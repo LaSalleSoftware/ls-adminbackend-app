@@ -20,14 +20,14 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../packages/lsv2-library-pkg",
+            "url": "../packages/lsv2-librarybackend-pkg",
             "options": {
                 "symlink": true
             }
         },
         {
             "type": "path",
-            "url": "../packages/lsv2-librarybackend-pkg",
+            "url": "../packages/lsv2-lasalleuibackend-pkg",
             "options": {
                 "symlink": true
             }
@@ -74,6 +74,7 @@
         "lcobucci/jwt": "^3.3",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
+        "lasallesoftware/ls-lasalleuibackend-pkg": "dev-master",
         "lasallesoftware/ls-librarybackend-pkg": "dev-master",
         "lasallesoftware/ls-novabackend-pkg": "dev-master",
         "lasallesoftware/ls-blogbackend-pkg": "dev-master",

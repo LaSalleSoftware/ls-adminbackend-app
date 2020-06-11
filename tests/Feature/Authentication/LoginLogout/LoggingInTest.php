@@ -44,12 +44,12 @@ class LoggingInTest extends TestCase
         $response = $this
             ->createUuid()                  // The first thing the login controller does is create the UUID
             ->loginBobWithLoginMethod()     // Log me in! Go straight to the heart of the matter and log me via LasalleGuard::login()
-            ->get('/home')                  // Redirected to "home" when successfully logged in
+            ->get(config('lasallesoftware-librarybackend.web_middleware_default_path'))   // Redirected to default path when successfully logged in
         ;
 
         // Was I redirected to "home" when I logged in?
         $response->assertStatus(200);
-        $response->assertSee('You are logged in!');
+        $response->assertSee('Personbydomain');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken
@@ -102,12 +102,12 @@ class LoggingInTest extends TestCase
         $response = $this
             ->createUuid()                                // The first thing the login controller does is create the UUID
             ->loginBobWithAttemptMethod($credentials)     // Log me in! Go straight to the heart of the matter and log me via LasalleGuard::login()
-            ->get('/home')                                // Redirected to "home" when successfully logged in
+            ->get(config('lasallesoftware-librarybackend.web_middleware_default_path')) // Redirected to the default path when successfully logged in
         ;
 
         // Was I redirected to "home" when I logged in?
         $response->assertStatus(200);
-        $response->assertSee('You are logged in!');
+        $response->assertSee('Personbydomain');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken

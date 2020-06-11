@@ -129,12 +129,12 @@ class LasalleGuardTest extends TestCase
         $response = $this
             ->createUuid()
             ->seeWhatLoginusingidMethodReturns($id)
-            ->get('/home')
+            ->get(config('lasallesoftware-librarybackend.web_middleware_default_path'))
         ;
 
         // Was I redirected to "home" when I logged in?
         $response->assertStatus(200);
-        $response->assertSee('You are logged in!');
+        $response->assertSee('Personbydomain');
 
         // When I am successfully logged in, there are two variables "put" to the session:
         // the loginToken

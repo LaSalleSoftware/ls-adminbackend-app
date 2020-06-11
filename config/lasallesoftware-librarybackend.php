@@ -201,6 +201,50 @@ return [
 	*/
     'lasalle_path_to_front_end_view_path' => 'lasallesoftwarelasalleui::base',
 
+
+
+    /*
+    | ========================================================================
+    | START: TWO FACTOR AUTHENTICATION
+    | ========================================================================
+    */
+
+    /*
+	|--------------------------------------------------------------------------
+	| Enable Two Factor Authentication
+	|--------------------------------------------------------------------------
+	| 
+	*/
+    'enable_two_factor_authentication' => env('LASALLE_ENABLE_TWO_FACTOR_AUTHENTICATION', false),
+
+    /*
+	|--------------------------------------------------------------------------
+	| Number of Validation Attempts Allowed for 2FA Code
+	|--------------------------------------------------------------------------
+    | 
+    | How many times will you let the same two factor authentication code to be 
+    | validated? 
+    | 
+	*/
+    'number_of_attempts_allowed_to_validate_a_two_factor_code' => 3,
+
+    /*
+	|--------------------------------------------------------------------------
+	| How many minutes is a 2FA code is live?
+	|--------------------------------------------------------------------------
+    | 
+    | How many minutes until a 2FA has expired?
+    | 
+	*/
+    'number_of_minutes_until_a_two_factor_code_expires' => 5,
+
+    /*
+    | ========================================================================
+    | END: TWO FACTOR AUTHENTICATION
+    | ========================================================================
+
+
+
     
 
     /*

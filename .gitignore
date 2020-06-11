@@ -19,8 +19,8 @@ yarn-error.log
 
 .env.dusk.local
 .env.dusk.local.backup
-.env.dusk.emergencybanuser
-.env.dusk.twofactorauth
+.env.dusk.banallusers
+.env.dusk.twofactorauthentication
 
 .phpunit.result.cache
 

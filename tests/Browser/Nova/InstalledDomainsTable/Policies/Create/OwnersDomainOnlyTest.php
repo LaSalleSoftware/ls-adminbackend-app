@@ -99,7 +99,7 @@ class OwnersDomainOnlyTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->assertSee('Installed Domains')
                 ->visit('nova/resources/installed_domains/new?viaResource=&viaResourceId=&viaRelationship')

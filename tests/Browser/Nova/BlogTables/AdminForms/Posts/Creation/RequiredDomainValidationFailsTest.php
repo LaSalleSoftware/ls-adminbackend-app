@@ -67,7 +67,7 @@ class RequiredDomainValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->clickLink('Posts')
                 ->pause($pause['long'])

@@ -78,7 +78,7 @@ class LoginsTableTest extends DuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause(5000)
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->pause(5000)  // THIS PAUSE IS ACTUALLY FOR THE TEST ITSELF! TO PURPOSELY CREATE ENOUGH OF
                                           //  TIME GAP THAT WE CAN OBSERVE THE TIME GAP BETWEEN created_at and UPDATED_AT

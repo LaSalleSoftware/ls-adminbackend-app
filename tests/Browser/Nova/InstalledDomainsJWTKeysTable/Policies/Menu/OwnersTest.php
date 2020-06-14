@@ -66,7 +66,7 @@ class OwnersTest extends InstalledDomainsTableBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->assertSee('JWT Keys')
             ;

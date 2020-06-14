@@ -70,7 +70,6 @@ class AdminsTest extends ProfileTablesBaseDuskTestCase
                 ->press('Login')
                 ->pause($pause['long'])
                 ->assertSee('Personbydomains')
-                ->assertDontSee('Websites')
                 ->visit('/nova/resources/websites')
                 ->pause($pause['long'])
                 ->assertDontSee('Create Website')

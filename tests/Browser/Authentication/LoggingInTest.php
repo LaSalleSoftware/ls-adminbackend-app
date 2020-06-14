@@ -73,7 +73,7 @@ class LoggingInTest extends DuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause(5000)
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
              ;
         });
@@ -162,7 +162,7 @@ class LoggingInTest extends DuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause(5000)
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
              ;
         });

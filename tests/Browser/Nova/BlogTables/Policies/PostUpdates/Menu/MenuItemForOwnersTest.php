@@ -75,7 +75,7 @@ class MenuItemForOwnersTest extends BlogTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->assertSee('Post Updates')
             ;
@@ -108,7 +108,7 @@ class MenuItemForOwnersTest extends BlogTablesBaseDuskTestCase
                 ->type('password', $login['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Post Updates')
             ;

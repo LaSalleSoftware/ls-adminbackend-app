@@ -69,6 +69,8 @@ class AdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
+                ->visit('/nova/resources/personbydomains')
+                ->pause($pause['long'])
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Lookup User Roles')  // just an added assert that this menu item is not visible in the sidebar
                 ->pause($pause['long'])

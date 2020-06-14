@@ -68,6 +68,8 @@ class IsSuccessfulTest extends LaSalleDuskTestCase
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
+                ->visit(config('lasallesoftware-librarybackend.web_middleware_default_path'))
+                ->pause($pause['long'])
                 ->assertSee('Personbydomains')
                 ->clickLink('Websites')
                 ->pause($pause['long'])

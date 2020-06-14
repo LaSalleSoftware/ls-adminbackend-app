@@ -47,7 +47,7 @@ class MenuItemSuppressedForAdminsTest extends ProfileTablesBaseDuskTestCase
     }
 
     /**
-     * Test that the creation is successful
+     * Test the the website menu item is suppressed
      *
      * @group nova
      * @group novaprofiletables
@@ -69,6 +69,8 @@ class MenuItemSuppressedForAdminsTest extends ProfileTablesBaseDuskTestCase
                 ->type('email', $login['email'])
                 ->type('password', $login['password'])
                 ->press('Login')
+                ->pause($pause['long'])
+                ->visit('/nova/resources/personbydomains')  // This may not be the default path upon login, so let's go to it specifically
                 ->pause($pause['long'])
                 ->assertSee('Personbydomains')
                 ->assertDontSee('Websites')

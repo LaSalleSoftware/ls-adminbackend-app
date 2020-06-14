@@ -65,7 +65,7 @@ class MenuItemSuppressedForAdminsTest extends PersonbydomainsTableBaseDuskTest
                 ->type('password', $personTryingToLogin['password'])
                 ->press('Login')
                 ->pause($pause['long'])
-                ->assertPathIs('/nova/resources/personbydomains')
+                ->assertPathIs(config('lasallesoftware-librarybackend.web_middleware_default_path'))
                 ->assertDontSee('Lookup User Roles')
             ;
         });

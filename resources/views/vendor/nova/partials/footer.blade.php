@@ -28,7 +28,7 @@
     <br /><br />
     {{ App\Version::PACKAGE }}, v{{ App\Version::VERSION }} ({{ App\Version::RELEASEDATE }})
     @if (class_exists('Lasallesoftware\Librarybackend\Version'))
-        <br />{{ Lasallesoftware\Librarybackend\Version::PACKAGE }}, v{{ Lasallesoftware\Librarybackend\Version::VERSION }} ({{ Lasallesoftware\LibLibrarybackendrary\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Librarybackend\Version::PACKAGE }}, v{{ Lasallesoftware\Librarybackend\Version::VERSION }} ({{ Lasallesoftware\Librarybackend\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Novabackend\Version'))

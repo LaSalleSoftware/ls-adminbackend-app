@@ -27,8 +27,8 @@
 
     <br /><br />
     {{ App\Version::PACKAGE }}, v{{ App\Version::VERSION }} ({{ App\Version::RELEASEDATE }})
-    @if (class_exists('Lasallesoftware\Library\Version'))
-        <br />{{ Lasallesoftware\Library\Version::PACKAGE }}, v{{ Lasallesoftware\Library\Version::VERSION }} ({{ Lasallesoftware\Library\Version::RELEASEDATE }})
+    @if (class_exists('Lasallesoftware\Librarybackend\Version'))
+        <br />{{ Lasallesoftware\Librarybackend\Version::PACKAGE }}, v{{ Lasallesoftware\Librarybackend\Version::VERSION }} ({{ Lasallesoftware\LibLibrarybackendrary\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Novabackend\Version'))
@@ -43,8 +43,8 @@
         <br />{{ Lasallesoftware\Backup\Version::PACKAGE }}, v{{ Lasallesoftware\Backup\Version::VERSION }} ({{ Lasallesoftware\Backup\Version::RELEASEDATE }})
     @endif
 
-    @if (class_exists('Lasallesoftware\Lasalleui\Version'))
-        <br />{{ Lasallesoftware\Lasalleui\Version::PACKAGE }}, v{{ Lasallesoftware\Lasalleui\Version::VERSION }} ({{ Lasallesoftware\Lasalleui\Version::RELEASEDATE }})
+    @if (class_exists('Lasallesoftware\Lasalleuibackend\Version'))
+        <br />{{ Lasallesoftware\Lasalleuibackend\Version::PACKAGE }}, v{{ Lasallesoftware\Lasalleuibackend\Version::VERSION }} ({{ Lasallesoftware\Lasalleuibackend\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Contactformbackend\Version'))

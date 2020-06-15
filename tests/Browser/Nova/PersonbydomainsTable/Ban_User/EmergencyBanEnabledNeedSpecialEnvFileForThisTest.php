@@ -55,12 +55,11 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
      * @group novaPersonbydomainBanuserEmergencybanIsenabled
      */
 
-     /*****************************************************************************************************************
-      **   To set the env var to true -- "LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN=true",                **
-      **   you must run this test with a separate environment file:                                                  **
-      **                                                                                                             **
-      **   "php artisan dusk --group novaPersonbydomainBanuserEmergencybanIsenabled --env=dusk.emergencybanuser"     **
-      *****************************************************************************************************************/
+     /**************************************************************************************************************************
+      **   SEE https://lasallesoftware.ca/docs/v2/gettingstarted_tests#runningdusktests                                       **
+      **                                                                                                                      **
+      **   "php artisan dusk --group novaPersonbydomainBanuserEmergencybanIsenabled --env=dusk.banallusers"  does not work!!  **
+      **************************************************************************************************************************/
 
     public function testIsEnabled()
     {
@@ -69,12 +68,7 @@ class EmergencyBanEnabledNeedSpecialEnvFileForThisTest extends PersonbydomainsTa
 
         echo "\n\n";
         echo "\n *****************************************************************************************************************************************";
-        echo "\n * PLEASE NOTE THAT IF THIS TEST FAILS, THEN PLEASE ENSURE THAT YOU ARE RUNNING IT WITH THE .env.dusk.emergencybanuser env file.         *";
-        echo "\n *                                                                                                                                       *";
-        echo "\n * The full artisan command is:                                                                                                          *";
-        echo "\n *                                                                                                                                       *";
-        echo "\n * php artisan dusk --group novaPersonbydomainBanuserEmergencybanIsenabled --env=dusk.emergencybanuser                                   *";
-        echo "\n *                                                                                                                                       *";
+        echo "\n *       PLEASE NOTE THAT IF THIS TEST FAILS, SEE https://lasallesoftware.ca/docs/v2/gettingstarted_tests#runningdusktests               *";
         echo "\n *****************************************************************************************************************************************";
         echo "\n\n";
 

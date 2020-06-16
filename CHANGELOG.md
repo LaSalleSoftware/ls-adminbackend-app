@@ -1,6 +1,9 @@
 # CHANGE LOG
 
-## VERSION 2.3.1 (coming!)
+## VERSION 2.3.2 (coming!)
+
+## VERSION 2.3.1 (June 16, 2020)
+* [v2.3.1 issues](https://github.com/LaSalleSoftware/ls-adminbackend-app/milestone/19?closed=1)
 
 ## VERSION 2.3.0 (June 15, 2020)
 * [v2.3.0 issues](https://github.com/LaSalleSoftware/ls-adminbackend-app/milestone/18?closed=1)

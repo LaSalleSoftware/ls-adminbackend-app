@@ -20,14 +20,14 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../packages/lsv2-librarybackend-pkg",
+            "url": "../packages/lsv2-lasalleuibackend-pkg",
             "options": {
                 "symlink": true
             }
         },
         {
             "type": "path",
-            "url": "../packages/lsv2-lasalleuibackend-pkg",
+            "url": "../packages/lsv2-librarybackend-pkg",
             "options": {
                 "symlink": true
             }

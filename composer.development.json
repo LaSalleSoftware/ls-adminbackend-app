@@ -80,7 +80,7 @@
         "lasallesoftware/ls-blogbackend-pkg": "dev-master",
         "lasallesoftware/ls-backup-pkg": "dev-master",
         "lasallesoftware/ls-contactformbackend-pkg": "dev-master",
-        "laravel/nova": "~3.0",
+        "laravel/nova": "~3.7",
         "laravel/ui": "^2.0"
     },
     "require-dev": {

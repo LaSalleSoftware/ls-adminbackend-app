@@ -73,6 +73,18 @@ return [
     */
     'seed_database_with_test_data' => env('LASALLE_POPULATE_DATABASE_WITH_TEST_DATA', false),
 
+    /*
+	|--------------------------------------------------------------------------
+	| Previous APP_KEY
+	|--------------------------------------------------------------------------
+	|
+    | Before you enter the a new APP_KEY, copy the existing APP_KEY environment 
+    | variable to the LASALLE_PREVIOUS_APP_KEY so that you can re-encrypt the existing 
+    | encrypted fields with the new APP_KEY.
+    | 
+    */
+    'lasalle_previous_app_key' => env('LASALLE_PREVIOUS_APP_KEY'),
+
      /*
     | ========================================================================
     | END: SET-UP

@@ -28,11 +28,8 @@ use Lasallesoftware\Librarybackend\APP_KEY_rotation\ReEncryption;
 // Laravel classes
 use Tests\TestCase;
 
-// Laravel facades
-use Illuminate\Support\Facades\Crypt;
 
-
-class AppKeyRotationTest extends TestCase
+class ReEncryptValueTest extends TestCase
 {
     public function setUp(): void
     {
@@ -48,8 +45,8 @@ class AppKeyRotationTest extends TestCase
     *
     * @group Library
     * @group LibraryAPP_KEY_rotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotationCurrentappkeyvalue
+    * @group LibraryAPP_KEY_rotationReencryptvalue
+    * @group LibraryAPP_KEY_rotationReencryptvalueCurrentappkeyvalue
     *
     * @return void
     */
@@ -57,10 +54,10 @@ class AppKeyRotationTest extends TestCase
    {
        echo "\n**Now testing Tests\Unit\Library\APP_KEY_rotation\AppKeyRotationTest**";
 
-       // new AppKeyRotation object
+       // new ReEncryption object
        $reencryption = new ReEncryption;
 
-       // get the config value of 'app.key' returned by the AppKeyRotation class
+       // get the config value of 'app.key' returned by the ReEncryption class
        $result = $reencryption->getCurrent_APP_KEY();
 
        // assert!
@@ -73,17 +70,17 @@ class AppKeyRotationTest extends TestCase
     *
     * @group Library
     * @group LibraryAPP_KEY_rotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotationPreviousappkeyvalue
+    * @group LibraryAPP_KEY_rotationReencryptvalue
+    * @group LibraryAPP_KEY_rotationReencryptvaluePreviousappkeyvalue
     *
     * @return void
     */
    public function testPreviousAppKeyValue()
    {
-       // new AppKeyRotation object
+       // new ReEncryption object
        $reencryption = new ReEncryption;
 
-       // get the config value of 'lasallesoftware-librarybackend.lasalle_previous_app_key' returned by the AppKeyRotation class
+       // get the config value of 'lasallesoftware-librarybackend.lasalle_previous_app_key' returned by the ReEncryption class
        $result = $reencryption->getPrevious_APP_KEY();
 
        // assert!
@@ -96,8 +93,8 @@ class AppKeyRotationTest extends TestCase
     *
     * @group Library
     * @group LibraryAPP_KEY_rotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotation
-    * @group LibraryAPP_KEY_rotationAppKeyRotationTestreencryptionvalue
+    * @group LibraryAPP_KEY_rotationReencryptvalue
+    * @group LibraryAPP_KEY_rotationReencryptvalueTestreencryptionvalue
     *
     * @return void
     */

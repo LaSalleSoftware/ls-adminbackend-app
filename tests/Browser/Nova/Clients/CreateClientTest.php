@@ -58,7 +58,6 @@ class CreateClientsTest extends BlogTablesBaseDuskTestCase
         $pause = $this->pause();
 
         $data = [
-            'personbydomain_id'   => 1,
             'company_id'          => 1,
             'name'                => 'The Client Name',
             'comments'            => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -77,7 +76,6 @@ class CreateClientsTest extends BlogTablesBaseDuskTestCase
                 ->assertSee('Create Client')
                 ->clickLink('Create Client')
                 ->pause($pause['short'])
-                ->select('@personbydomain',   $data['personbydomain_id'])
                 ->select('@company',          $data['company_id'])
                 ->type('@name',               $data['name'])
                 ->type('@comments',           $data['comments'])
@@ -87,14 +85,12 @@ class CreateClientsTest extends BlogTablesBaseDuskTestCase
             ;
         });
 
-        $this->assertDatabaseHas('clients', ['personbydomain_id' => $data['personbydomain_id']]);
         $this->assertDatabaseHas('clients', ['company_id'        => $data['company_id']]);
         $this->assertDatabaseHas('clients', ['name'              => $data['name']]);
         $this->assertDatabaseHas('clients', ['comments'          => $data['comments']]);
 
 
         $client = Client::find(1);
-        $this->assertEquals($data['personbydomain_id'], $client->personbydomain_id, 'personbydomain_id');
         $this->assertEquals($data['company_id'],        $client->company_id, 'company_id');
         $this->assertEquals($data['name'],              $client->name, 'name');
         $this->assertEquals($data['comments'],          $client->comments, 'comments');

@@ -52,7 +52,7 @@ class CreateClientsTest extends BlogTablesBaseDuskTestCase
      */
     public function testCreateClient()
     {
-        echo "\n**Now testing Tests\Browser\Nova\Clients\CreateClientsTest**";  
+        echo "\n**Now testing Tests\Browser\Nova\Clients\CreateClientTest**";  
 
         $login = $this->loginOwnerBobBloom;
         $pause = $this->pause();

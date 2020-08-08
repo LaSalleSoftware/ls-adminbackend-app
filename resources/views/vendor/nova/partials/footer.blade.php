@@ -36,18 +36,30 @@
     @endif
 
     @if (class_exists('Lasallesoftware\Blogbackend\Version'))
-        <br />{{ Lasallesoftware\Blogbackend\Version::PACKAGE }}v, {{ Lasallesoftware\Blogbackend\Version::VERSION }} ({{ Lasallesoftware\Blogbackend\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Blogbackend\Version::PACKAGE }}, {{ Lasallesoftware\Blogbackend\Version::VERSION }} ({{ Lasallesoftware\Blogbackend\Version::RELEASEDATE }})
+    @endif
+
+    @if (class_exists('Lasallesoftware\Podcastbackend\Version'))
+        <br />{{ Lasallesoftware\Podcastbackend\Version::PACKAGE }}, {{ Lasallesoftware\Podcastbackend\Version::VERSION }} ({{ Lasallesoftware\Podcastbackend\Version::RELEASEDATE }})
+    @endif
+
+    @if (class_exists('Lasallesoftware\Podcastnovabackend\Version'))
+        <br />{{ Lasallesoftware\Podcastnovabackend\Version::PACKAGE }}, {{ Lasallesoftware\Podcastnovabackend\Version::VERSION }} ({{ Lasallesoftware\Podcastnovabackend\Version::RELEASEDATE }})
+    @endif
+
+    @if (class_exists('Lasallesoftware\Podcastrssfeedbackend\Version'))
+        <br />{{ Lasallesoftware\Podcastrssfeedbackend\Version::PACKAGE }}, {{ Lasallesoftware\Podcastrssfeedbackend\Version::VERSION }} ({{ Lasallesoftware\Podcastrssfeedbackend\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Backup\Version'))
-        <br />{{ Lasallesoftware\Backup\Version::PACKAGE }}, v{{ Lasallesoftware\Backup\Version::VERSION }} ({{ Lasallesoftware\Backup\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Backup\Version::PACKAGE }}, {{ Lasallesoftware\Backup\Version::VERSION }} ({{ Lasallesoftware\Backup\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Lasalleuibackend\Version'))
-        <br />{{ Lasallesoftware\Lasalleuibackend\Version::PACKAGE }}, v{{ Lasallesoftware\Lasalleuibackend\Version::VERSION }} ({{ Lasallesoftware\Lasalleuibackend\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Lasalleuibackend\Version::PACKAGE }}, {{ Lasallesoftware\Lasalleuibackend\Version::VERSION }} ({{ Lasallesoftware\Lasalleuibackend\Version::RELEASEDATE }})
     @endif
 
     @if (class_exists('Lasallesoftware\Contactformbackend\Version'))
-        <br />{{ Lasallesoftware\Contactformbackend\Version::PACKAGE }}, v{{ Lasallesoftware\Contactformbackend\Version::VERSION }} ({{ Lasallesoftware\Contactformbackend\Version::RELEASEDATE }})
+        <br />{{ Lasallesoftware\Contactformbackend\Version::PACKAGE }}, {{ Lasallesoftware\Contactformbackend\Version::VERSION }} ({{ Lasallesoftware\Contactformbackend\Version::RELEASEDATE }})
     @endif
 </p>

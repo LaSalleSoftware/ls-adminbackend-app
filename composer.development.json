@@ -74,7 +74,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "lasallesoftware/ls-laravelapp-pkg": "~1.0",
+        "lasallesoftware/ls-laravelapp-pkg": "dev-master",
         "laravel/legacy-factories": "~1.0",
         "lcobucci/jwt": "^3.3",
         "league/flysystem-aws-s3-v3": "~1.0",

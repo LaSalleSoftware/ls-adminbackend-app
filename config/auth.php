@@ -71,7 +71,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            //'model'  => App\User::class,
+            //'model' => App\Models\User::class,
             'model'  => \Lasallesoftware\Librarybackend\Authentication\Models\Personbydomain::class,
         ],
 

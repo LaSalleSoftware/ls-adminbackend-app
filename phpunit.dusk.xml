@@ -15,14 +15,16 @@
             <directory suffix="Test.php">./tests/Browser</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+    <coverage processUncoveredFiles="true">
+        <include>
             <directory suffix=".php">./app</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </coverage>
     <php>
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
+        <!-- <server name="DB_CONNECTION" value="sqlite"/> -->
+        <!-- <server name="DB_DATABASE" value=":memory:"/> -->
         <server name="DB_DATABASE" value="lsv2adminbackendapptest"/>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
@@ -30,6 +32,7 @@
         <server name="MAIL_MAILER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
+        <server name="TELESCOPE_ENABLED" value="false"/>
         <server name="LASALLE_ENABLE_TWO_FACTOR_AUTHENTICATION" value="false"/>
         <server name="LASALLE_EMERGENCY_BAN_ALL_USERS_FROM_ADMIN_APP_LOGIN" value="false"/>
     </php>

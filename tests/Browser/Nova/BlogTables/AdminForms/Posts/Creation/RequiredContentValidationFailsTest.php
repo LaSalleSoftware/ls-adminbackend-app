@@ -81,7 +81,7 @@ class RequiredContentValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->select('@category',         $newPostData['category_id'])
                 ->click('@create-button')
                 ->pause($pause['long'])
-                ->assertSee('The content field is required')
+                ->assertSee('The Content field is required')
             ;
         });
     }

@@ -60,6 +60,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
      *
      * @group nova
      * @group novalookuptables
+     * @group novaLookuptablesCreationlookuptable
      */
     public function testInsertNewRecordToLookupTableSuccessful()
     {
@@ -105,6 +106,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
      *
      * @group nova
      * @group novalookuptables
+     * @group novaLookuptablesCreationlookuptable
      * @group novalookuptablesInsertNewRecordToLookupTableExpectRequireValidationToFail
      */
     public function testInsertNewRecordToLookupTableExpectRequireValidationToFail()
@@ -128,7 +130,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->pause($pause['short'])
                 ->click('@create-button')
                 ->pause($pause['short'])
-                ->assertSee('The title field is required.')
+                ->assertSee('The Title field is required.')
             ;
         });
     }
@@ -138,6 +140,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
      *
      * @group nova
      * @group novalookuptables
+     * @group novaLookuptablesCreationlookuptable
      */
     public function testInsertNewRecordToLookupTableExpectDescriptionValidationToFail()
     {
@@ -162,7 +165,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
                 ->type('@description', $newLookupTableData['toolongdescription'])
                 ->click('@create-button')
                 ->pause($pause['long'])
-                ->assertSee('The description may not be greater than 255 characters.')
+                ->assertSee('The Description may not be greater than 255 characters.')
             ;
         });
     }
@@ -173,6 +176,7 @@ class CreationLookupTableTest extends LaSalleDuskTestCase
      *
      * @group nova
      * @group novalookuptables
+     * @group novaLookuptablesCreationlookuptable
      */
     public function testInsertNewRecordToLookupTableExpectNoCreationButtonDueToNotHavingOwnerRole()
     {

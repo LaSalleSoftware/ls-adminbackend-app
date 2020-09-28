@@ -80,7 +80,7 @@ class RequiredTitleValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->select('@category',         $newPostData['category_id'])
                 ->click('@create-button')
                 ->pause($pause['long'])
-                ->assertSee('The title field is required')
+                ->assertSee('The Title field is required')
             ;
         });
     }

@@ -78,7 +78,7 @@ class RequiredContentValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->clearTrix('trix-content')
                 ->click('@update-button')
                 ->pause($pause['long'])
-                ->assertSee('The content field is required')
+                ->assertSee('The Content field is required')
             ;
         });
     }

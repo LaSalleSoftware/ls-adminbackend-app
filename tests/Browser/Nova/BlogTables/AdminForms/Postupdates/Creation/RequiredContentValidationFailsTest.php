@@ -93,7 +93,7 @@ class RequiredContentValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->type('@publish_on',  $newPostupdateData['publish_on'])
                 ->click('@create-button')
                 ->pause($pause['long'])
-                ->assertSee('The content field is required')
+                ->assertSee('The Content field is required')
             ;
         });
     }

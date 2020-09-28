@@ -81,7 +81,7 @@ class RequiredDomainValidationFailsTest extends BlogTablesBaseDuskTestCase
                 ->select('@category',      $newPostData['category_id'])
                 ->click('@create-button')
                 ->pause($pause['long'])
-                ->assertSee('The installed domain field is required')
+                ->assertSee('The Installed domain field is required')
             ;
         });
     }

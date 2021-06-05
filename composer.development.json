@@ -68,6 +68,13 @@
             }
         },
         {
+            "type": "path",
+            "url": "../packages/lsv2-responseheaders-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
@@ -85,6 +92,7 @@
         "lasallesoftware/ls-blogbackend-pkg": "dev-master",
         "lasallesoftware/ls-backup-pkg": "dev-master",
         "lasallesoftware/ls-contactformbackend-pkg": "dev-master",
+        "lasallesoftware/ls-responseheaders-pkg": "dev-master",
         "laravel/nova": "~3.20"
     },
     "require-dev": {

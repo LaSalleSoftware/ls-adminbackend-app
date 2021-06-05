@@ -19,26 +19,91 @@
     ],
     "repositories": [
         {
+            "type": "path",
+            "url": "../packages/lsv2-laravelapp-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-lasalleuibackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-librarybackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-novabackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-blogbackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-backup-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-contactformbackend-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../packages/lsv2-responseheaders-pkg",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
             "type": "composer",
             "url": "https://nova.laravel.com"
         }
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "lasallesoftware/ls-laravelapp-pkg": "~1.0",
+        "lasallesoftware/ls-laravelapp-pkg": "dev-master",
         "laravel/legacy-factories": "~1.0",
         "lcobucci/jwt": "3.3.3",
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
-        "lasallesoftware/ls-lasalleuibackend-pkg": "^2.0",
-        "lasallesoftware/ls-librarybackend-pkg": "^2.0",
-        "lasallesoftware/ls-novabackend-pkg": "^2.3",
-        "lasallesoftware/ls-blogbackend-pkg": "^2.2",
-        "lasallesoftware/ls-backup-pkg": "^2.2",
-        "lasallesoftware/ls-contactformbackend-pkg": "^2.2",
-        "laravel/nova": "~3.20",
+        "lasallesoftware/ls-lasalleuibackend-pkg": "dev-master",
+        "lasallesoftware/ls-librarybackend-pkg": "dev-master",
+        "lasallesoftware/ls-novabackend-pkg": "dev-master",
+        "lasallesoftware/ls-blogbackend-pkg": "dev-master",
+        "lasallesoftware/ls-backup-pkg": "dev-master",
+        "lasallesoftware/ls-contactformbackend-pkg": "dev-master",
+        "lasallesoftware/ls-responseheaders-pkg": "dev-master",
+        "laravel/nova": "~3.20"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5",
         "fzaninotto/faker": "^1.9.1",
-        "fakerphp/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3",
+        "laravel/dusk": "^6.6",
+        "barryvdh/laravel-debugbar": "^3.5"
     },
     "config": {
         "optimize-autoloader": true,

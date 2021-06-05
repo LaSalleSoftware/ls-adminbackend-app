@@ -36,6 +36,7 @@
         "lasallesoftware/ls-blogbackend-pkg": "^2.2",
         "lasallesoftware/ls-backup-pkg": "^2.2",
         "lasallesoftware/ls-contactformbackend-pkg": "^2.2",
+        "lasallesoftware/ls-responseheaders-pkg": "~1.0",
         "laravel/nova": "~3.20"
     },
     "require-dev": {
